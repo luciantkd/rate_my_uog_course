@@ -1,0 +1,85 @@
+html, body {
+    height: 100%; /* Make sure the html and body cover the full height */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column; /* Stack the elements vertically */
+  }
+  .header {
+    background: #002663;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .header img {
+    height: 50px;
+  }
+  .header nav {
+    display: flex; /* Aligns the links in a row */
+    gap: 10px; /* Spacing between each link */
+  }
+  .header nav a {
+    color: white !important; /* Force white color and override other styles */
+    text-decoration: none;
+    font-weight: bold;
+    position: relative; /* Position relative to allow absolute positioning of pseudo-elements */
+    padding-left: 20px; /* Add space for the arrow icon */
+  }
+  .header nav a:before {
+    content: '→'; /* Arrow icon */
+    position: absolute;
+    left: 0; /* Position the arrow to the left of the text */
+    color: white !important; /* Force white color for the arrow icon */
+  }
+  .container {
+    flex: 1; /* This will make the container take up all available space */
+    width: 80%;
+    margin: 20px auto;
+    background: white;
+    padding: 20px;
+    display: flex; /* Flex layout for the container */
+    flex-direction: column; /* Stack the elements vertically */
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  th {
+    background-color: #0C4B93; 
+    color: white;
+    padding: 10px;
+  }
+  td {
+    padding: 10px;
+    border: 1px solid #ddd;
+  }
+  tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  .search-bar {
+    display: flex; /* Aligns children inline */
+    padding: 20px;
+    background: #e9e9e9;
+    margin-bottom: 20px;
+    gap: 10px; /* Adds space between the input and select */
+  }
+  .search-bar input[type="text"], .search-bar select {
+    flex: 1; /* Both children will take up equal space */
+    padding: 10px;
+    border: 1px solid #ddd;
+    margin-bottom: 0; /* Remove margin to align properly with select */
+  }
+  .footer {
+    background: #002663; /* Dark blue color */
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    width: 100%;
+  }
+  .footer a {
+    color: white;
+    text-decoration: none;
+  }
+  
