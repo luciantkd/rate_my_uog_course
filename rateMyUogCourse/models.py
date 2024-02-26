@@ -11,6 +11,7 @@ class CourseSearchTable(models.Model):
     workload = models.IntegerField()
     reviews = models.IntegerField()
     wouldRecommend = models.FloatField()
+    professorRating = models.IntegerField()
     
 
 class WebsiteFeedback(models.Model):

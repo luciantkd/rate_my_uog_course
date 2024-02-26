@@ -13,8 +13,8 @@
     <nav>
       <a href="/">Home</a>
       <a href="#">Courses</a>
-      <a href="/rateMyUogCourse/signup">Sign Up</a>
-      <a href="/rateMyUogCourse/login">Login</a>
+      <a href="{% url 'rateMyUogCourse:signup' %}">Sign Up</a>
+      <a href="{% url 'rateMyUogCourse:login' %}">Login</a>
     </nav>
   </header>
   <div class="container">
@@ -52,7 +52,7 @@
   </div>
   <footer class="footer">
     <p>RateMyUofGCourse © 2024. All rights reserved.</p>
-    <p>Have concerns about our website? <a href="/rateMyUogCourse/feedback">Give your feedback here!</a></p>
+    <p>Have concerns about our website? <a href="{% url 'rateMyUogCourse:feedback' %}">Give your feedback here!</a></p>
   </footer>
 </body>
 </html>

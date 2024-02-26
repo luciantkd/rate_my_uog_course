@@ -39,3 +39,11 @@ def search(request, course_name, program_type):
     context_dict['search_results'] = search_results
 
     return  render(request, 'rateMyUogCourse/course_rating_overview.html', context=context_dict)
+
+
+
+def get_feedback(request):
+   return HttpResponse()
+
+
+

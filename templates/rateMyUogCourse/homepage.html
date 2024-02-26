@@ -18,9 +18,9 @@
             <nav>
                 <ul>
                     <li><a href="">Home</a></li>
-                    <li><a href="/rateMyUogCourse/searchCourses/None/None">Courses</a></li>
-                    <li><a href="/rateMyUogCourse/login">Login</a></li>
-                    <li><a href="/rateMyUogCourse/signup">Sign Up</a></li>
+                    <li><a href="{% url 'rateMyUogCourse:search' None None %}">Courses</a></li>
+                    <li><a href="{% url 'rateMyUogCourse:login' %}">Login</a></li>
+                    <li><a href="{% url 'rateMyUogCourse:signup' %}">Sign Up</a></li>
                 </ul>
             </nav>
         </header>
@@ -30,7 +30,7 @@
                 <div>
                     <h1>RateMyUofGCourse</h1>
                     <input type="text" placeholder="Find a course you're looking for:">
-                    <p>Can't find a course? See all courses <a href="rateMyUogCourse/searchCourses/None/None">here</a></p>
+                    <p>Can't find a course? See all courses <a href="{% url 'rateMyUogCourse:search' None None %}">here</a></p>
                 </div>
             </section>
 
@@ -63,7 +63,7 @@
 
         <footer>
             <p>&copy; 2024 RateMyUofGCourse. All rights reserved.</p>
-            <p class="footer-subtitle">Have concerns about our website? Give your feedback <a href="/rateMyUogCourse/feedback">here</a>!</p>
+            <p class="footer-subtitle">Have concerns about our website? Give your feedback <a href="{% url 'rateMyUogCourse:feedback' %}">here</a>!</p>
         </footer>
     </content>
 </body>
