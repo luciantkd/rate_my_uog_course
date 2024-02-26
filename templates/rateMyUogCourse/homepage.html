@@ -1,3 +1,5 @@
+{% load staticfiles %}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rate My UofG Course</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="styles-homepage.css">
+    <link rel="stylesheet" href="{% static 'css/rateMyUogCourse/styles-homepage.css' %}">
 </head>
 
 <body>
@@ -15,10 +17,10 @@
             <img src="UofG_logo.png" alt="UofG Logo" id="logo">
             <nav>
                 <ul>
-                    <li><a href="./mainpage.html">Home</a></li>
-                    <li><a href="#">Courses</a></li>
-                    <li><a href="./login.html">Login</a></li>
-                    <li><a href="./signup.html">Sign Up</a></li>
+                    <li><a href="">Home</a></li>
+                    <li><a href="/rateMyUogCourse/searchCourses/None/None">Courses</a></li>
+                    <li><a href="/rateMyUogCourse/login">Login</a></li>
+                    <li><a href="/rateMyUogCourse/signup">Sign Up</a></li>
                 </ul>
             </nav>
         </header>
@@ -28,7 +30,7 @@
                 <div>
                     <h1>RateMyUofGCourse</h1>
                     <input type="text" placeholder="Find a course you're looking for:">
-                    <p>Can't find a course? See all courses <a href="#">here</a></p>
+                    <p>Can't find a course? See all courses <a href="rateMyUogCourse/searchCourses/None/None">here</a></p>
                 </div>
             </section>
 
@@ -61,7 +63,7 @@
 
         <footer>
             <p>&copy; 2024 RateMyUofGCourse. All rights reserved.</p>
-            <p class="footer-subtitle">Have concerns about our website? Give your feedback <a href="#">here</a>!</p>
+            <p class="footer-subtitle">Have concerns about our website? Give your feedback <a href="/rateMyUogCourse/feedback">here</a>!</p>
         </footer>
     </content>
 </body>

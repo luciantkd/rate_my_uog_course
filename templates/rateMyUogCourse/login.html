@@ -1,3 +1,5 @@
+{% load staticfiles %}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,7 +9,7 @@
     <title>Login Page</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
-    <link rel="stylesheet" href="styles-login.css">
+    <link rel="stylesheet" href="{% static 'css/rateMyUogCourse/styles-login.css' %}">
 </head>
 
 <body>
@@ -27,7 +29,7 @@
             <button type="submit">Log In</button>
         </form>
         <div class="signup-link">
-            <p>Are you a UofG student with no account yet? <a href="signup.html">Sign Up</a></p>
+            <p>Are you a UofG student with no account yet? <a href="/rateMyUogCourse/signup">Sign Up</a></p>
         </div>
     </div>
 

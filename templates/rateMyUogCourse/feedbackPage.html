@@ -1,17 +1,19 @@
+{% load staticfiles %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Leave a Feedback</title>
-<link rel="stylesheet" type="text/css" href="feedbackStyle.css">
+<link rel="stylesheet" type="text/css" href="{% static 'css/rateMyUogCourse/feedbackStyle.css' %}">
 </head>
 <body>
     <header class="header">
         <img src="{}" alt="UofG Logo" class="logo">
         <nav>
-          <a href="#">Home</a>
-          <a href="#">Courses</a>
+          <a href="/">Home</a>
+          <a href="/rateMyUogCourse/searchCourses/None/None">Courses</a>
           <a href="#">Logout</a>
         </nav>
       </header>
