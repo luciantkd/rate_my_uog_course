@@ -2,6 +2,7 @@ from django.shortcuts import render
 from rateMyUogCourse.models import CourseSearchTable
 
 from lecturer.models import Course
+from rateMyUogCourse.forms import WebsiteFeedback
 
 # Create your views here.
 from django.http import HttpResponse
@@ -53,6 +54,15 @@ def search(request, course_name, program_type):
 #For testing base.html
 def basePage(request):
     return render(request,'base.html')
+
+
+def save_website_feedback(request):
+    if request.method == 'POST':
+        form = WebsiteFeedback(request.POST)
+        if form.is_valid():
+            form.save()
+
+    print('Website feedback saved successfully.')
 
 
    

@@ -86,9 +86,12 @@ def show_detailed_rating(request, course_Id, guId):
 
     feedback_ids = [feedback.feedbackId for feedback in detailed_feedback]
 
-    student_feedback_like_list = StudentFeedbackLikes.objects.filter(guid = guId, feedbackId__in = feedback_ids)
+    if(guId != 'None'):
+         student_feedback_like_list = StudentFeedbackLikes.objects.filter(guid = guId, feedbackId__in = feedback_ids)
 
-    context_dict['studentFeedbackLike'] = student_feedback_like_list
+         context_dict['studentFeedbackLike'] = student_feedback_like_list
+
+         context_dict['is_lecturer'] = True
 
     return render(request, "" , context = context_dict)
 

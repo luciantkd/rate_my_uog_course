@@ -24,6 +24,8 @@ def lecturer_course_overview(request, lecturer_id):
 
  context_dict['search_results'] = lecturer_courses_overview
 
+ context_dict['is_lecturer'] = True
+
  return  render(request, 'rateMyUogCourse/course_rating_overview.html', context=context_dict)
 
 
