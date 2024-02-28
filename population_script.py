@@ -59,12 +59,38 @@ def populate():
          'lecturerRating': 5,
          'gradeReceived': 'A3',
          'recommendCourse': True,
+         'textFeedback': 'dummy data for course feedback...'},
+         {'courseId': 'COMPSCI4084',
+         'guid': '1234567',
+         'overall': 7,
+         'difficulty': 6,
+         'usefulness': 6,
+         'workload': 5,
+         'examFormat': 'test',
+         'evaluationMethod': 'some text here',
+         'lecturerRating': 5,
+         'gradeReceived': 'A3',
+         'recommendCourse': True,
+         'textFeedback': 'dummy data for course feedback...'},
+         {'courseId': 'COMPSCI5004',
+         'guid': '1234567',
+         'overall': 7,
+         'difficulty': 6,
+         'usefulness': 6,
+         'workload': 5,
+         'examFormat': 'test',
+         'evaluationMethod': 'some text here',
+         'lecturerRating': 5,
+         'gradeReceived': 'A3',
+         'recommendCourse': True,
          'textFeedback': 'dummy data for course feedback...'}
     ]
     f = add_courseFeedback(courseFeedbacks[0])
     
     # calculate for courseSearchTable
     cal_courseSearchTable(courseFeedbacks[0]['courseId'])
+    cal_courseSearchTable(courseFeedbacks[1]['courseId'])
+    cal_courseSearchTable(courseFeedbacks[2]['courseId'])
     
     # dummy data for Lecturer
 
@@ -134,11 +160,11 @@ def cal_courseSearchTable(cid):
         reviews+=1
         if row.recommendCourse == True:
             wouldRecommend+=1 
-    overall = overall/course_data.count()
-    difficulty = difficulty/course_data.count()
-    usefulness = usefulness/course_data.count()
-    workload = workload/course_data.count()
-    wouldRecommend = round(wouldRecommend/course_data.count(),2)
+    overall = overall/(course_data.count()+1)
+    difficulty = difficulty/(course_data.count()+1)
+    usefulness = usefulness/(course_data.count()+1)
+    workload = workload/(course_data.count()+1)
+    wouldRecommend = 90
     
     r = CourseSearchTable.objects.create(courseId = Course.objects.get(courseId = cid), courseName = Course.objects.get(courseId = cid).courseName, 
     overall = overall, difficulty = difficulty, usefulness = usefulness, workload = workload, reviews = reviews, wouldRecommend = wouldRecommend, professorRating = professorRating)

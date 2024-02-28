@@ -36,8 +36,6 @@ def search(request, course_name, program_type):
                 course_of_program_type = Course.objects.filter(programType = program_type)
                 course_name = [course.courseName for course in course_of_program_type]
                 if course_name != 'None':
-                    print(course_of_program_type[0])
-                    print(CourseSearchTable.objects.filter(courseName__in = course_name))
                     search_results = CourseSearchTable.objects.filter(courseName__in = course_name)
 
                 else:

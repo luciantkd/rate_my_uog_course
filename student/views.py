@@ -6,7 +6,7 @@ from student.models import CourseFeedback as Course_Feedback_Model, StudentFeedb
 from rateMyUogCourse.models import CourseSearchTable
 from lecturer.models import Course
 
-def get_feedback(request):
+def save_feedback(request):
     if request.method == 'POST':
         form = CourseFeedback(request.POST)
         if form.is_valid():
@@ -90,7 +90,7 @@ def show_detailed_rating(request, course_Id, guId):
 
     context_dict['studentFeedbackLike'] = student_feedback_like_list
 
-    return render(request, "", context = context_dict)
+    return render(request, "" , context = context_dict)
 
 def mainPage(request):
  return HttpResponse("Main Page")
