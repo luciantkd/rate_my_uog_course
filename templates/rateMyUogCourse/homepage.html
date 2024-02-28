@@ -1,71 +1,42 @@
-{% load staticfiles %}
+{% extends "base.html" %}
+{% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
+{% block title %}Home - Rage My UofG Course{% endblock %}
+{% block additional_styles %}<link rel="stylesheet" href="{% static 'css/rateMyUogCourse/styles-homepage.css' %}">{% endblock %}
+{% block content %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rate My UofG Course</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{% static 'css/rateMyUogCourse/styles-homepage.css' %}">
-</head>
+<section id="search">
+    <div>
+        <h1>RateMyUofGCourse</h1>
+        <input type="text" placeholder="Find a course you're looking for:">
+        <p>Can't find a course? See all courses <a href="{% url 'rateMyUogCourse:search' None None %}">here</a></p>
+    </div>
+</section>
 
-<body>
-    <content>
-        <header>
-            <img src="UofG_logo.png" alt="UofG Logo" id="logo">
-            <nav>
-                <ul>
-                    <li><a href="">Home</a></li>
-                    <li><a href="{% url 'rateMyUogCourse:search' None None %}">Courses</a></li>
-                    <li><a href="{% url 'rateMyUogCourse:login' %}">Login</a></li>
-                    <li><a href="{% url 'rateMyUogCourse:signup' %}">Sign Up</a></li>
-                </ul>
-            </nav>
-        </header>
+<section id="community">
+    <h2>Join The Community!</h2>
+    <p>Welcome to RateMyUofGCourse, the ultimate platform for current and prospective students to navigate
+        the University of Glasgow's academic landscape through peer insights. Dive into honest,
+        student-generated reviews of courses and lecturers, and contribute your own experiences to guide
+        others.</p>
+    <div class="features">
+        <div class="feature">
+            <span class="icon">👍</span>
+            <p>Rate a course</p>
+        </div>
+        <div class="feature">
+            <span class="icon">✍️</span>
+            <p>Leave anonymous reviews</p>
+        </div>
+        <div class="feature">
+            <span class="icon">💡</span>
+            <p>Make more informed choices</p>
+        </div>
+        <div class="feature">
+            <span class="icon">🎓</span>
+            <p>Enjoy your classes more!</p>
+        </div>
+    </div>
+</section>
 
-        <main>
-            <section id="search">
-                <div>
-                    <h1>RateMyUofGCourse</h1>
-                    <input type="text" placeholder="Find a course you're looking for:">
-                    <p>Can't find a course? See all courses <a href="{% url 'rateMyUogCourse:search' None None %}">here</a></p>
-                </div>
-            </section>
-
-            <section id="community">
-                <h2>Join The Community!</h2>
-                <p>Welcome to RateMyUofGCourse, the ultimate platform for current and prospective students to navigate
-                    the University of Glasgow's academic landscape through peer insights. Dive into honest,
-                    student-generated reviews of courses and lecturers, and contribute your own experiences to guide
-                    others.</p>
-                <div class="features">
-                    <div class="feature">
-                        <span class="icon">👍</span>
-                        <p>Rate a course</p>
-                    </div>
-                    <div class="feature">
-                        <span class="icon">✍️</span>
-                        <p>Leave anonymous reviews</p>
-                    </div>
-                    <div class="feature">
-                        <span class="icon">💡</span>
-                        <p>Make more informed choices</p>
-                    </div>
-                    <div class="feature">
-                        <span class="icon">🎓</span>
-                        <p>Enjoy your classes more!</p>
-                    </div>
-                </div>
-            </section>
-        </main>
-
-        <footer>
-            <p>&copy; 2024 RateMyUofGCourse. All rights reserved.</p>
-            <p class="footer-subtitle">Have concerns about our website? Give your feedback <a href="{% url 'rateMyUogCourse:feedback' %}">here</a>!</p>
-        </footer>
-    </content>
-</body>
-
-</html>
+{% endblock %}

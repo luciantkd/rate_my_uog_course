@@ -1,38 +1,5 @@
-html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-}
-.header {
-    background: #002663;
-    color: white;
-    padding: 10px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.header img {
-    height: 50px;
-}
-.header nav {
-    display: flex;
-    gap: 10px;
-}
-.header nav a {
-    color: white !important;
-    text-decoration: none;
-    font-weight: bold;
-    position: relative;
-    padding-left: 20px;
-}
-.header nav a:before {
-    content: '→';
-    position: absolute;
-    left: 0;
-    color: white !important;
-}
+
+
 .container {
     flex: 1;
     width: 80%;
@@ -42,17 +9,7 @@ html, body {
     display: flex;
     flex-direction: column;
 }
-.footer {
-    background: #002663;
-    color: white;
-    text-align: center;
-    padding: 20px 0;
-    width: 100%;
-}
-.footer a {
-    color: white;
-    text-decoration: none;
-}
+
 .feedback-item:not(:last-child) {
     margin-bottom: 20px;
 }

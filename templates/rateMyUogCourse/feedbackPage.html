@@ -1,82 +1,69 @@
-{% load staticfiles %}
+{% extends "base.html" %}
+{% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Leave a Feedback</title>
-<link rel="stylesheet" type="text/css" href="{% static 'css/rateMyUogCourse/feedbackStyle.css' %}">
-</head>
-<body>
-    <header class="header">
-        <img src="{}" alt="UofG Logo" class="logo">
-        <nav>
-          <a href="/">Home</a>
-          <a href="{% url 'rateMyUogCourse:login' %}">Courses</a>
-          <a href="#">Logout</a>
-        </nav>
-      </header>
-  <div class="container">
-    <h2>Your Feedback is Valuable</h2>
-    <p>We are always looking for ways to improve the user experience of our website. We welcome any constructive form of feedback from the people who we made this website for, you our visitors!</p>
-    <h3>Rate Our Website and Leave Your Feedback!</h3>
-    <p>If you think there’s anything to be improved from the website, please input your feedback.</p>
-        <!-- Feedback form starts here -->
-        <form id="feedbackForm">
-            <!-- Overall website rating -->
-            <div class="feedback-item">
-              <label for="overallWebsite">Overall website*:</label>
-              <div class="star-rating">
-                <input id="overall5" type="radio" name="overall" value="5"><label for="overall5">☆</label>
-                <input id="overall4" type="radio" name="overall" value="4"><label for="overall4">☆</label>
-                <input id="overall3" type="radio" name="overall" value="3"><label for="overall3">☆</label>
-                <input id="overall2" type="radio" name="overall" value="2"><label for="overall2">☆</label>
-                <input id="overall1" type="radio" name="overall" value="1"><label for="overall1">☆</label>
-              </div>
-              
-            </div>
-            <!-- User-friendly rating -->
-            <div class="feedback-item">
-              <label for="userFriendly">User-friendly*:</label>
-              <div class="star-rating">
-                <input id="user5" type="radio" name="userFriendly" value="5"><label for="user5">☆</label>
-                <input id="user4" type="radio" name="userFriendly" value="4"><label for="user4">☆</label>
-                <input id="user3" type="radio" name="userFriendly" value="3"><label for="user3">☆</label>
-                <input id="user2" type="radio" name="userFriendly" value="2"><label for="user2">☆</label>
-                <input id="user1" type="radio" name="userFriendly" value="1"><label for="user1">☆</label>
-              </div>
-              
-            </div>
-            
-            <!-- Website Aesthetics rating -->
-            <div class="feedback-item">
-              <label for="websiteAesthetics">Website Aesthetics*:</label>
-              <div class="star-rating">
-                <input id="aes5" type="radio" name="websiteAesthetics" value="5"><label for="aes5">☆</label>
-                <input id="aes4" type="radio" name="websiteAesthetics" value="4"><label for="aes4">☆</label>
-                <input id="aes3" type="radio" name="websiteAesthetics" value="3"><label for="aes3">☆</label>
-                <input id="aes2" type="radio" name="websiteAesthetics" value="2"><label for="aes2">☆</label>
-                <input id="aes1" type="radio" name="websiteAesthetics" value="1"><label for="aes1">☆</label>
-              </div>
-              
-            </div>
-      
-            <!-- Explanation text area -->
-            <div class="feedback-item">
-              <label for="explanation">Explanation:</label>
-              <textarea id="explanation" name="explanation" rows="4" placeholder="Please elaborate your feedback here..." maxlength="500"></textarea>
-            </div>
-      
-            <!-- Submit button -->
-            <div class="feedback-item submit-button">
-                <input type="submit" value="Submit">
-            </div>
-          </form>
-        </div> <!-- Container ends here -->
-      
-        <footer class="footer">
-          <p>RateMyUofGCourse © 2024. All rights reserved.</p>
-        </footer>
-      </body>
-      </html>
+{% block title %}Leave a Feedback - Rage My UofG Course{% endblock %}
+{% block additional_styles %}<link rel="stylesheet" type="text/css" href="{% static 'css/rateMyUogCourse/feedbackStyle.css' %}">{% endblock %}
+
+{% block content %}
+
+<div class="container">
+  <h2>Your Feedback is Valuable</h2>
+  <p>We are always looking for ways to improve the user experience of our website. We welcome any constructive form of
+    feedback from the people who we made this website for, you our visitors!</p>
+  <h3>Rate Our Website and Leave Your Feedback!</h3>
+  <p>If you think there’s anything to be improved from the website, please input your feedback.</p>
+  <!-- Feedback form starts here -->
+  <form id="feedbackForm">
+    <!-- Overall website rating -->
+    <div class="feedback-item">
+      <label for="overallWebsite">Overall website*:</label>
+      <div class="star-rating">
+        <input id="overall5" type="radio" name="overall" value="5"><label for="overall5">☆</label>
+        <input id="overall4" type="radio" name="overall" value="4"><label for="overall4">☆</label>
+        <input id="overall3" type="radio" name="overall" value="3"><label for="overall3">☆</label>
+        <input id="overall2" type="radio" name="overall" value="2"><label for="overall2">☆</label>
+        <input id="overall1" type="radio" name="overall" value="1"><label for="overall1">☆</label>
+      </div>
+
+    </div>
+    <!-- User-friendly rating -->
+    <div class="feedback-item">
+      <label for="userFriendly">User-friendly*:</label>
+      <div class="star-rating">
+        <input id="user5" type="radio" name="userFriendly" value="5"><label for="user5">☆</label>
+        <input id="user4" type="radio" name="userFriendly" value="4"><label for="user4">☆</label>
+        <input id="user3" type="radio" name="userFriendly" value="3"><label for="user3">☆</label>
+        <input id="user2" type="radio" name="userFriendly" value="2"><label for="user2">☆</label>
+        <input id="user1" type="radio" name="userFriendly" value="1"><label for="user1">☆</label>
+      </div>
+
+    </div>
+
+    <!-- Website Aesthetics rating -->
+    <div class="feedback-item">
+      <label for="websiteAesthetics">Website Aesthetics*:</label>
+      <div class="star-rating">
+        <input id="aes5" type="radio" name="websiteAesthetics" value="5"><label for="aes5">☆</label>
+        <input id="aes4" type="radio" name="websiteAesthetics" value="4"><label for="aes4">☆</label>
+        <input id="aes3" type="radio" name="websiteAesthetics" value="3"><label for="aes3">☆</label>
+        <input id="aes2" type="radio" name="websiteAesthetics" value="2"><label for="aes2">☆</label>
+        <input id="aes1" type="radio" name="websiteAesthetics" value="1"><label for="aes1">☆</label>
+      </div>
+
+    </div>
+
+    <!-- Explanation text area -->
+    <div class="feedback-item">
+      <label for="explanation">Explanation:</label>
+      <textarea id="explanation" name="explanation" rows="4" placeholder="Please elaborate your feedback here..."
+        maxlength="500"></textarea>
+    </div>
+
+    <!-- Submit button -->
+    <div class="feedback-item submit-button">
+      <input type="submit" value="Submit">
+    </div>
+  </form>
+</div> <!-- Container ends here -->
+
+{% endblock %}

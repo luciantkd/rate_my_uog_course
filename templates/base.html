@@ -1,0 +1,41 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Rate My UofG Course{% endblock %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    {% block additional_styles %}{% endblock %}
+</head>
+
+<body>
+    <header>
+        <img src="{% static 'images/UoGlogo.jpg' %}" alt="UofG Logo" id="logo">
+        <nav>
+            <ul>
+                <li><a href="{% url 'rateMyUogCourse:mainPage'%}">Home</a></li>
+                <li><a href="{% url 'rateMyUogCourse:search' None None %}">Courses</a></li>
+                <li><a href="{% url 'rateMyUogCourse:login' %}">Login</a></li>
+                <li><a href="{% url 'rateMyUogCourse:signup' %}">Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        <!-- Content overridden by child templates -->
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2024 RateMyUofGCourse. All rights reserved.</p>
+        <p class="footer-subtitle">Have concerns about our website? Give your feedback <a href="{% url 'rateMyUogCourse:feedback' %}">here</a>!</p>
+    </footer>
+
+</body>
+
+</html>
