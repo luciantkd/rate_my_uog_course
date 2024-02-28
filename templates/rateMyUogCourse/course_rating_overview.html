@@ -37,19 +37,22 @@
         <th>% Would Recommend</th>
       </tr>
       <!-- Repeat this block for each course -->
+      {% for value in search_results.values %}
       <tr>
-        <td>COMPSCI 5044</td>
-        <td>Basic Algorithms and Data Structures</td>
-        <td>*****</td>
-        <td>*</td>
-        <td>**</td>
-        <td>*****</td>
-        <td>54</td>
-        <td>60%</td>
+          <td>{{ value.courseId_id }}</td>
+          <td> {{ value.courseName }}</td>
+          <td> {{ value.overall }}</td>
+          <td> {{ value.difficulty }}</td>
+          <td> {{ value.usefulness }}</td>
+          <td> {{ value.workload }}</td>
+          <td> {{ value.reviews }}</td>
+          <td> {{ value.wouldRecommend }}</td>
       </tr>
+      {% endfor %}
       <!-- Add more course rows here -->
     </table>
   </div>
+
   <footer class="footer">
     <p>RateMyUofGCourse © 2024. All rights reserved.</p>
     <p>Have concerns about our website? <a href="{% url 'rateMyUogCourse:feedback' %}">Give your feedback here!</a></p>

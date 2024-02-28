@@ -125,7 +125,7 @@ def add_lecturer(lid, name, d, password):
     return l
 def cal_courseSearchTable(cid):
     course_data = CourseFeedback.objects.filter(courseId = cid)
-    overall, difficulty, usefulness, workload, reviews, wouldRecommend = 0,0,0,0,0,0
+    overall, difficulty, usefulness, workload, reviews, wouldRecommend, professorRating = 0,0,0,0,0,0,0
     for row in course_data:
         overall += row.overall
         difficulty += row.difficulty
@@ -141,7 +141,7 @@ def cal_courseSearchTable(cid):
     wouldRecommend = round(wouldRecommend/course_data.count(),2)
     
     r = CourseSearchTable.objects.create(courseId = Course.objects.get(courseId = cid), courseName = Course.objects.get(courseId = cid).courseName, 
-    overall = overall, difficulty = difficulty, usefulness = usefulness, workload = workload, reviews = reviews, wouldRecommend = wouldRecommend)
+    overall = overall, difficulty = difficulty, usefulness = usefulness, workload = workload, reviews = reviews, wouldRecommend = wouldRecommend, professorRating = professorRating)
        
 
 # Start execution here!
