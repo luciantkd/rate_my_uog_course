@@ -40,7 +40,9 @@ def search(request, course_name, program_type):
 
     return  render(request, 'rateMyUogCourse/course_rating_overview.html', context=context_dict)
 
-
+#For testing base.html
+def basePage(request):
+    return render(request,'base.html')
 
 
    

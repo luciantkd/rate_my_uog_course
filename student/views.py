@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from student.forms import StudentRegistrationForm
+# from student.forms import StudentRegistrationForm
 # Create your views here.
 from django.http import HttpResponse
 from student.forms import CourseFeedback

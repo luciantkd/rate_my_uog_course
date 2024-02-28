@@ -1,0 +1,103 @@
+/* Base CSS styles */
+
+body {
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background: #f4f4f4;
+}
+
+html {
+    box-sizing: border-box;
+  }
+  
+  *,
+  *::before,
+  *::after {
+    box-sizing: inherit;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
+footer {
+    width: 100%;
+}
+
+
+header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 10px;
+background-color: rgb(9, 36, 81);
+}
+
+#logo {
+    width: 100px; /* Adjust as per actual logo size */
+}
+
+header a {
+    color: #ffffff;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+header a:hover, footer a:hover {
+    color: #dddddd;
+}
+
+nav ul {
+    margin:0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 5px;
+}
+
+footer {
+    background-color: #092451;
+    color: #ffffff;
+    text-align: center;
+    padding: 1rem 0;
+}
+
+footer p {
+    margin: 8px;
+}
+
+footer .footer-subtitle {
+    font-size: 12px;
+}
+
+footer a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+}
+
+.main {
+    padding: 20px;
+}
+
+/* You can add more base styles as needed */
