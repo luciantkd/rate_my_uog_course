@@ -26,7 +26,7 @@ def search(request, course_name, program_type):
     context_dict={}
     search_results = None
 
-    if(course_name == '' and program_type == ''):
+    if(course_name == None and program_type == None):
         search_results =  CourseSearchTable.objects.all()
  
     try:
@@ -42,8 +42,7 @@ def search(request, course_name, program_type):
 
 
 
-def get_feedback(request):
-   return HttpResponse()
 
+   
 
 
