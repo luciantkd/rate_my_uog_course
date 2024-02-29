@@ -2,9 +2,11 @@ from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
 from django.http import HttpResponse
+
+from administrator.models import Admin
 from lecturer.models import Course
 from student.models import CourseFeedback
-from rateMyUogCourse.models import WebsiteFeedback
+from rateMyUogCourse.models import WebsiteFeedback, CourseSearchTable
 
 
 def mainPage(request):
@@ -112,9 +114,13 @@ def course_management(request):
 # @param course_id: the id of the course
 # @return: course
 def course_detail(request):
+    # print(request)
     course_id = request.GET.get('course_id')
-    course = get_object_or_404(Course, pk=course_id)
-    return render(request, 'course_edit.html', {'course': course})
+    # get all
+    course = get_object_or_404(Course, courseId=course_id)
+    # print("course_detail is here: ")
+    # print(course)
+    return render(request, 'course_detail.html', {'course': course})
 
 
 # Admin - Course Edit Post
