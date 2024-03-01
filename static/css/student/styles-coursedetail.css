@@ -1,6 +1,8 @@
 .main-container {
     padding: 24px 64px;
-    width: 80%;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
 }
 
 .course-code {
@@ -19,9 +21,8 @@
 .overall-average-container {
     margin-top: 16px;
     display: flex;
-    gap: 24px;
-    background-color: aqua;
     text-align: center;
+    align-items: left;
 }
 
 .overall-average-border {
@@ -32,7 +33,6 @@
 }
 
 .overall-average {
-    /* background-color: antiquewhite; */
     min-width: 180px;
 }
 
@@ -49,6 +49,8 @@
 .average-categories {
     flex-basis: 100px;
     flex: 1;
+    max-width: 60%;
+    text-align: left;
 }
 
 .average-score {
@@ -64,10 +66,39 @@
     font-size: 16px;
 }
 
-.rating-category {
-    display: flex;
+td .progress-container{
+    width: 100px !important;
 }
 
-.progress-container{
-    flex-basis: 200px;
+.rating-category-name {
+    padding-left: 24px;
+    width: 20%;
+}
+
+.progress {
+    background: darkgrey;
+}
+
+
+.reviews-list {
+    display: block;
+}
+
+.reviews-list-container {
+    margin-top: 24px;
+}
+
+.reviews-section-title {
+    font-size: 36px;
+    font-weight: 600;
+}
+
+.reviews-list-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btn {
+    padding: 8px;
 }
