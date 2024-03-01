@@ -64,7 +64,8 @@ def save_website_feedback(request):
 
     print('Website feedback saved successfully.')
 
-
+def courseDetailPage(request):
+   return render(request, 'student/coursedetail.html')
    
 
 

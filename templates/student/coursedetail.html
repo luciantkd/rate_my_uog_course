@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Course Detail - Rage My UofG Course{% endblock %}
+{% block additional_styles %}
+<link rel="stylesheet" href="{% static 'css/student/styles-coursedetail.css' %}">{% endblock %}
+{% block content %}
+<div class="main-container">
+    <button type="button" class="btn btn-outline-primary">← All Courses</button>
+
+    <h1 class="course-code">COMPSCI 5044</h1>
+    <h2 class="course-name">Basic Algorithms and Data Structures</h2>
+    <h4 class="lecturer-name-title">Lecturer: Hang Dai - Lecturer for Machine Learning</h3>
+
+    <div class="overall-average-container">
+        <div class="overall-average-border">
+            <div class="overall-average">
+                <div class="overall-average-title">Overall average</div>
+                <div class="average">
+                    <div class="average-score">4.2</div>
+                    <div class="average-outof">out of 5.0</div>
+                </div>
+                <div class="num-reviews">Total: 54 reviews</div>
+            </div>
+        </div>
+        <div class="average-categories">
+            <div class="rating-category">
+                <div class="rating-category-name">Difficulty</div>
+                <div class="progress-container">
+                    <div class="progress">
+                        <div class="progress-bar w-75" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="rating-category">
+                <div class="rating-category-name">Usefulness</div>
+                <div class="progress-container">
+                    <div class="progress">
+                        <div class="progress-bar w-75" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="rating-category">
+                <div class="rating-category-name">Workload</div>
+                <div class="progress-container">
+                    <div class="progress">
+                        <div class="progress-bar w-75" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="rating-category">
+                <div class="rating-category-name">Professor Rating</div>
+                <div class="progress-container">
+                    <div class="progress">
+                        <div class="progress-bar w-75" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
