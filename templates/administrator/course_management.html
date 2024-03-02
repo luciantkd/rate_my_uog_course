@@ -1,35 +1,15 @@
+{% extends 'administrator/base-admin.html' %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
+{% block title %} Course Management {% endblock %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Course Management</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+{% block additional_styles %}
     <link rel="stylesheet" href="{% static 'css/administrator/styles-admin-course-management.css' %}">
-</head>
+{% endblock %}
 
-<body>
-    <div class="sidebar">
-        <div class="sidebar-header">
-            <h1>RateMyUofGCourse</h1>
-            <p>Admin Dashboard</p>
-        </div>
-        <nav class="nav flex-column card list-group" id="pills-tab" role="tablist">
-            <li class="nav-item list-group-item"><a class="nav-link active" href="#">🏠 Course Management</a></li>
-            <li class="nav-item list-group-item"><a class="nav-link" href="#">🗂️ Feedback Management</a></li>
-            <li class="nav-item list-group-item"><a class="nav-link" href="#">🔖 Review Reports Management</a></li>
-            <li class="nav-item list-group-item"><a class="nav-link" href="#">👨‍🏫 Lecturer Management</a></li>
-        </nav>
-    </div>
-    <!-- Page content goes here -->
-    <main>
-        <div class="logout-container">
-            <button type="button" class="btn btn-secondary logout">Log out</button>
-        </div>
-        <h1 class="main-title">Course Management</h1>
+{% block pagetitle %} Course Management {% endblock %}
+
+{% block content %}
         <div>
             <div class="search">
                 <input class="form-control" id="myInput" type="text" placeholder="Search a course here..">
@@ -284,9 +264,5 @@
                       </tbody>
                 </table>
             </div>
-        </div>
-    </main>
-
-</body>
-
-</html>
+        </div> <!-- end of the main div content-->
+{% endblock %}

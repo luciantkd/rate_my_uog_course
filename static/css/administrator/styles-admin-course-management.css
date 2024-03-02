@@ -1,87 +1,16 @@
+/* Table template */
 
-body {
-  line-height: 1.6;
-  margin: 0;
-  padding: 0;
+.table-scroll {
+  max-height: 60vh; /* Set the max-height to the full viewport height */
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+
+/* Sticky table header */
+.table thead tr th {
+  position: sticky;
+  top: 0;
   background: white;
-  display: flex;
-}
-
-html {
-  box-sizing: border-box;
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: inherit;
-}
-
-html, body {
-  height: 100%;
-  margin: 0;
-}
-
-/* Sidebar */
-
-.sidebar {
-  background-color: whitesmoke;
-  padding: 16px;
-  flex-basis: max-content;
-  max-width: max-content;
-  flex: 1;
-}
-
-.sidebar h1 {
-  font-size: 30px;
-  margin-bottom: 0;
-}
-
-.sidebar p {
-  font-size: 12px;
-  text-align: right;
-  margin-bottom: 0;
-}
-
-.sidebar-header {
-  margin-bottom: 16px;
-  background-color: rgb(255, 255, 255);
-  padding: 8px;
-}
-
-.sidebar .list-group-item {
-  padding: 8px;
-  padding-left: 0;
-}
-
-.container {
-  flex: 4;
-}
-
-a {
-  text-decoration: none;
-  color: black;
-}
-
-/* Main part */
-
-main {
-  padding: 16px;
-  padding-left: 30px;
-  flex: 1;
-}
-
-main h1 {
-  margin-bottom: 32px;
-}
-
-.logout-container {
-  text-align: right;
-  margin-bottom: 16px;
-}
-
-.main-title {
-  font-size: 48px;
+  z-index: 10;
 }
 
 /* Custom part */
@@ -100,17 +29,4 @@ select {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-}
-
-.table-scroll {
-  max-height: 60vh; /* Set the max-height to the full viewport height */
-  overflow-y: auto; /* Enable vertical scrolling */
-}
-
-/* Sticky table header */
-.table thead tr th, .table thead tr {
-  position: sticky;
-  top: 0;
-  background: white;
-  z-index: 10;
 }
