@@ -60,6 +60,9 @@ def feedback_management(request):
 def reported_reviews_management(request):
     return render(request, 'administrator/reported_reviews_management.html')
 
+def lecturer_management(request):
+    return render(request, 'administrator/lecturer_management.html')
+
 # def lecturer_management(request):
 
 

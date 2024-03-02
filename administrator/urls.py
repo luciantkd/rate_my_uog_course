@@ -10,4 +10,5 @@ path('course_management/', views.course_management, name='course_management'),
 path('base/', views.base, name='base'),
 path('feedback_management/', views.feedback_management, name='feedback_management'),
 path('reported_reviews_management/', views.reported_reviews_management, name='reported_reviews_management'),
+path('lecturer_management/', views.lecturer_management, name='lecturer_management'),
 ]
