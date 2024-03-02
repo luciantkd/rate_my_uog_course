@@ -224,11 +224,12 @@ td .progress-container{
 .review-form-ratings {
     background-color: var(--text-background);
     flex: 1;
+    min-width: 185px;
+    flex-shrink: 0;
     display: flex;
     flex-direction: column;
     padding: 16px;
 }
-
 
 .star-rating {
     direction: rtl;
