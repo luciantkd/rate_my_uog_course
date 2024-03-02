@@ -1,88 +1,295 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Course Management</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="styles-admin-course-management.css">
+    <link rel="stylesheet" href="{% static 'css/administrator/styles-admin-course-management.css' %}">
     <style>
         /* Custom styles */
     </style>
 </head>
+
 <body>
     <div class="sidebar">
         <div class="sidebar-header">
             <h1>RateMyUofGCourse</h1>
             <p>Admin Dashboard</p>
         </div>
-        <ul>
-          <li><a href="#">🏠 Course Management</a></li>
-          <li><a href="#">🗂️ Feedback Management</a></li>
-          <li><a href="#">🔖 Review Reports Management</a></li>
-          <li><a href="#">👨‍🏫 Lecturer Management</a></li>
-        </ul>
-      </div>
+        <nav class="nav flex-column card list-group" id="pills-tab" role="tablist">
+            <li class="nav-item list-group-item"><a class="nav-link active" href="#">🏠 Course Management</a></li>
+            <li class="nav-item list-group-item"><a class="nav-link" href="#">🗂️ Feedback Management</a></li>
+            <li class="nav-item list-group-item"><a class="nav-link" href="#">🔖 Review Reports Management</a></li>
+            <li class="nav-item list-group-item"><a class="nav-link" href="#">👨‍🏫 Lecturer Management</a></li>
+        </nav>
+    </div>
     <!-- Page content goes here -->
-    <div class="container">
-        <header>
-            <nav>
-                <button class="btn btn-outline-secondary">Log out</button>
-            </nav>
-        </header>
-        <div class="row">
-            <div class="col-12">
-                <h1 class="my-4">Course Management</h1>
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Search a course here..." aria-label="Search a course">
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="button">Search</button>
-                    </div>
-                </div>
-                <div class="dropdown my-4">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Dropdown button
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                      <a class="dropdown-item" href="#">Action</a>
-                      <a class="dropdown-item" href="#">Another action</a>
-                      <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                  </div>
-                <table class="table">
+    <main>
+        <div class="logout-container">
+            <button type="button" class="btn btn-secondary logout">Log out</button>
+        </div>
+        <h1 class="main-title">Course Management</h1>
+        <div>
+            <div class="search">
+                <input class="form-control" id="myInput" type="text" placeholder="Search a course here..">
+                <!-- Dropdown for filtering -->
+            </div>
+            <div class="filter-add-section">
+                <select class="form-control btn-secondary" id="tableFilter" placeholder="Course:">
+                    <option value="" selected disabled>Filter by Course</option>
+                    <option class="dropdown-item" value="">All</a>
+                    <option class="dropdown-item" value="IT+">IT+</a>
+                    <option class="dropdown-item" value="CS+">CS+</a>
+                    <!-- more options as needed -->
+                </select>
+                <button type="button" class="btn btn-primary add-a-course">+ Add a Course</button>
+            </div>
+            <div class="table-scroll">
+                <!-- Table to filter -->
+                <table class="table" id="dataTable">
                     <thead>
                         <tr>
-                            <th scope="col">Course ID</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Professor Teaching</th>
-                            <th scope="col">Program Type</th>
-                            <th scope="col">Reviews</th>
-                            <th scope="col">Action</th>
+                          <th>Course ID</th>
+                          <th>Name</th>
+                          <th>Lecturer</th>
+                          <th>Program Type</th>
+                          <th>Reviews</th>
+                          <th>Action</th>
                         </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Repeat this part for each course -->
+                      </thead>
+                      <tbody>
                         <tr>
-                            <th scope="row">COMPSCI 5044</th>
-                            <td>Basic Algorithms and Data Structures</td>
-                            <td>Prof. John Doe</td>
+                          <td>COMPSCI 5044</td>
+                          <td>Basic Algorithms and Data Structures</td>
+                          <td>Prof. John Doe</td>
+                          <td>IT+</td>
+                          <td>54</td>
+                          <td>
+                            <button class="btn btn-primary">Edit</button>
+                            <button class="btn btn-danger">Delete</button>
+                          </td>
+                        </tr>
+                        <tr>
+                            <td>COMPSCI 5025</td>
+                            <td>Genetics, Evolution, and Ecology</td>
+                            <td>Dr. Hang Dai</td>
                             <td>IT+</td>
-                            <td>54</td>
+                            <td>101</td>
                             <td>
-                                <a href="#" class="btn btn-primary btn-sm">Edit</a>
-                                <a href="#" class="btn btn-danger btn-sm">Delete</a>
+                                <button class="btn btn-primary">Edit</button>
+                                <button class="btn btn-danger">Delete</button>
                             </td>
                         </tr>
-                        <!-- End of repeated part -->
-                    </tbody>
+                        <tr>
+                            <td>COMPSCI 5025</td>
+                            <td>Genetics, Evolution, and Ecology</td>
+                            <td>Dr. Hang Dai</td>
+                            <td>IT+</td>
+                            <td>101</td>
+                            <td>
+                                <button class="btn btn-primary">Edit</button>
+                                <button class="btn btn-danger">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>COMPSCI 5025</td>
+                            <td>Genetics, Evolution, and Ecology</td>
+                            <td>Dr. Hang Dai</td>
+                            <td>IT+</td>
+                            <td>101</td>
+                            <td>
+                                <button class="btn btn-primary">Edit</button>
+                                <button class="btn btn-danger">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>COMPSCI 5025</td>
+                            <td>Genetics, Evolution, and Ecology</td>
+                            <td>Dr. Hang Dai</td>
+                            <td>IT+</td>
+                            <td>101</td>
+                            <td>
+                                <button class="btn btn-primary">Edit</button>
+                                <button class="btn btn-danger">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>COMPSCI 5025</td>
+                            <td>Genetics, Evolution, and Ecology</td>
+                            <td>Dr. Hang Dai</td>
+                            <td>IT+</td>
+                            <td>101</td>
+                            <td>
+                                <button class="btn btn-primary">Edit</button>
+                                <button class="btn btn-danger">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>COMPSCI 5025</td>
+                            <td>Genetics, Evolution, and Ecology</td>
+                            <td>Dr. Hang Dai</td>
+                            <td>IT+</td>
+                            <td>101</td>
+                            <td>
+                                <button class="btn btn-primary">Edit</button>
+                                <button class="btn btn-danger">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>COMPSCI 5025</td>
+                            <td>Genetics, Evolution, and Ecology</td>
+                            <td>Dr. Hang Dai</td>
+                            <td>IT+</td>
+                            <td>101</td>
+                            <td>
+                                <button class="btn btn-primary">Edit</button>
+                                <button class="btn btn-danger">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>COMPSCI 5025</td>
+                            <td>Genetics, Evolution, and Ecology</td>
+                            <td>Dr. Hang Dai</td>
+                            <td>IT+</td>
+                            <td>101</td>
+                            <td>
+                                <button class="btn btn-primary">Edit</button>
+                                <button class="btn btn-danger">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>COMPSCI 5025</td>
+                            <td>Genetics, Evolution, and Ecology</td>
+                            <td>Dr. Hang Dai</td>
+                            <td>IT+</td>
+                            <td>101</td>
+                            <td>
+                                <button class="btn btn-primary">Edit</button>
+                                <button class="btn btn-danger">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>COMPSCI 5025</td>
+                            <td>Genetics, Evolution, and Ecology</td>
+                            <td>Dr. Hang Dai</td>
+                            <td>IT+</td>
+                            <td>101</td>
+                            <td>
+                                <button class="btn btn-primary">Edit</button>
+                                <button class="btn btn-danger">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>COMPSCI 5025</td>
+                            <td>Genetics, Evolution, and Ecology</td>
+                            <td>Dr. Hang Dai</td>
+                            <td>IT+</td>
+                            <td>101</td>
+                            <td>
+                                <button class="btn btn-primary">Edit</button>
+                                <button class="btn btn-danger">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>COMPSCI 5025</td>
+                            <td>Genetics, Evolution, and Ecology</td>
+                            <td>Dr. Hang Dai</td>
+                            <td>IT+</td>
+                            <td>101</td>
+                            <td>
+                                <button class="btn btn-primary">Edit</button>
+                                <button class="btn btn-danger">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>COMPSCI 5025</td>
+                            <td>Genetics, Evolution, and Ecology</td>
+                            <td>Dr. Hang Dai</td>
+                            <td>IT+</td>
+                            <td>101</td>
+                            <td>
+                                <button class="btn btn-primary">Edit</button>
+                                <button class="btn btn-danger">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>COMPSCI 5025</td>
+                            <td>Genetics, Evolution, and Ecology</td>
+                            <td>Dr. Hang Dai</td>
+                            <td>IT+</td>
+                            <td>101</td>
+                            <td>
+                                <button class="btn btn-primary">Edit</button>
+                                <button class="btn btn-danger">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>COMPSCI 5025</td>
+                            <td>Genetics, Evolution, and Ecology</td>
+                            <td>Dr. Hang Dai</td>
+                            <td>IT+</td>
+                            <td>101</td>
+                            <td>
+                                <button class="btn btn-primary">Edit</button>
+                                <button class="btn btn-danger">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>COMPSCI 5025</td>
+                            <td>Genetics, Evolution, and Ecology</td>
+                            <td>Dr. Hang Dai</td>
+                            <td>IT+</td>
+                            <td>101</td>
+                            <td>
+                                <button class="btn btn-primary">Edit</button>
+                                <button class="btn btn-danger">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>COMPSCI 5025</td>
+                            <td>Genetics, Evolution, and Ecology</td>
+                            <td>Dr. Hang Dai</td>
+                            <td>IT+</td>
+                            <td>101</td>
+                            <td>
+                                <button class="btn btn-primary">Edit</button>
+                                <button class="btn btn-danger">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>COMPSCI 5025</td>
+                            <td>Genetics, Evolution, and Ecology</td>
+                            <td>Dr. Hang Dai</td>
+                            <td>IT+</td>
+                            <td>101</td>
+                            <td>
+                                <button class="btn btn-primary">Edit</button>
+                                <button class="btn btn-danger">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>COMPSCI 5025</td>
+                            <td>Genetics, Evolution, and Ecology</td>
+                            <td>Dr. Hang Dai</td>
+                            <td>IT+</td>
+                            <td>101</td>
+                            <td>
+                                <button class="btn btn-primary">Edit</button>
+                                <button class="btn btn-danger">Delete</button>
+                            </td>
+                        </tr>
+                        <!-- Repeat the pattern for each course -->
+                        <!-- ... -->
+                      </tbody>
                 </table>
             </div>
         </div>
-    </div>
-    
+    </main>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
+
 </html>

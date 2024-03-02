@@ -1,4 +1,12 @@
 /* Login page */
+body {
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  background: white;
+  display: flex;
+}
+
 html {
   box-sizing: border-box;
 }
@@ -8,92 +16,101 @@ html {
 *::after {
   box-sizing: inherit;
 }
-  
 
-h1, p{
-    margin: 0;
+html, body {
+  height: 100%;
+  margin: 0;
 }
 
+/* Sidebar */
+
 .sidebar {
-  padding: 12px;
-  min-width: max-content;
+  background-color: whitesmoke;
+  padding: 16px;
+  flex-basis: max-content;
+  max-width: max-content;
+  flex: 1;
+}
+
+.sidebar h1 {
+  font-size: 30px;
+  margin-bottom: 0;
+}
+
+.sidebar p {
+  font-size: 12px;
+  text-align: right;
+  margin-bottom: 0;
 }
 
 .sidebar-header {
-  margin-bottom: 8px;
+  margin-bottom: 16px;
+  background-color: rgb(255, 255, 255);
+  padding: 8px;
 }
 
-.sidebar-header h1 {
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.sidebar-header p {
-  font-size: 12px;
-  text-align: right;
-}
-
-header {
-  text-align: right;
-}
-
-header button {
-  display: block;
-  width: max-content;
-}
-
-
-body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    min-height: 100vh;
-    display: flex;
-}
-
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-
-.sidebar li {
-  border-style: solid;
-  border-color: #8a898937;
-  border-bottom: none;
-}
-
-li:nth-child(4) {
-  border-bottom: solid;
-  border-color: #8a898937;
-}
-
-li > a {
-  display: inline-block;
-  position: relative;
-  z-index: 1;
-  padding: 3em;
-  margin: -2em;
-}
-
-a {
-  color: black;
-  text-decoration: none;
-  font-size: 14px;
-}
-
-a:hover {
-  text-decoration: none;
-  color:#333;
+.sidebar .list-group-item {
+  padding: 8px;
+  padding-left: 0;
 }
 
 .container {
-    background: #fff;
-    padding: 2rem;
-    border-radius: 0.5rem;
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  flex: 4;
 }
 
-h1 {
-    color: #333;
+a {
+  text-decoration: none;
+  color: black;
 }
 
-/* Add any additional custom styles here */
+/* Main part */
+
+main {
+  padding: 16px;
+  padding-left: 30px;
+  flex: 1;
+}
+
+main h1 {
+  margin-bottom: 32px;
+}
+
+.logout-container {
+  text-align: right;
+  margin-bottom: 16px;
+}
+
+.main-title {
+  font-size: 48px;
+}
+
+/* Custom part */
+
+input {
+  max-width: 50%;
+  margin-bottom: 8px;
+}
+
+select {
+  max-width: 180px;
+  margin-bottom: 8px;
+}
+
+.filter-add-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.table-scroll {
+  max-height: 60vh; /* Set the max-height to the full viewport height */
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+
+/* Sticky table header */
+.table thead tr th, .table thead tr {
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 10;
+}
