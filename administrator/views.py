@@ -48,6 +48,9 @@ def report_review_detail(request, feedback_id):
     course_name = Course.objects.get(courseId=feedback_entity.courseId).courseName
     return render(request, 'report_review_detail.html', {'feedback_entity': feedback_entity, 'course_name': course_name})
 
+def course_management(request):
+    return render(request, 'administrator/course_management.html')
+
 # def lecturer_management(request):
 
 
