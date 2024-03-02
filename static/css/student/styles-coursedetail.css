@@ -303,3 +303,24 @@ select.row2{
     font-weight: normal;
     font-style: italic;
 }
+
+/* Test colors for rating */
+.red {
+    background-color: red;
+}
+
+.orange {
+    background-color: orange;
+}
+
+.yellow {
+    background-color: yellow;
+}
+
+.yellow-green {
+    background-color: yellowgreen;
+}
+
+.green {
+    background-color: green;
+}
