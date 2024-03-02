@@ -51,6 +51,9 @@ def report_review_detail(request, feedback_id):
 def course_management(request):
     return render(request, 'administrator/course_management.html')
 
+def base(request):
+    return render(request, 'administrator/base-admin.html')
+
 # def lecturer_management(request):
 
 

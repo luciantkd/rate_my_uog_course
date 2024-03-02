@@ -1,0 +1,43 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Rate My UofG Course{% endblock %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/administrator/base-admin.css' %}">
+    {% block additional_styles %}{% endblock %}
+</head>
+
+<body>
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h1>RateMyUofGCourse</h1>
+            <p>Admin Dashboard</p>
+        </div>
+        <nav class="nav flex-column card list-group" id="pills-tab" role="tablist">
+            <li class="nav-item list-group-item"><a class="nav-link active" href="#">🏠 Course Management</a></li>
+            <li class="nav-item list-group-item"><a class="nav-link" href="#">🗂️ Feedback Management</a></li>
+            <li class="nav-item list-group-item"><a class="nav-link" href="#">🔖 Review Reports Management</a></li>
+            <li class="nav-item list-group-item"><a class="nav-link" href="#">👨‍🏫 Lecturer Management</a></li>
+        </nav>
+    </div>
+    <!-- Page content goes here -->
+    <main>
+        <div class="logout-container">
+            <button type="button" class="btn btn-secondary logout">Log out</button>
+        </div>
+        <h1 class="main-title">{% block pagetitle %}Default{% endblock %}</h1>
+        <div>
+            {% block content %}
+            <!-- Content overridden by child templates -->
+            {% endblock %}
+        </div> <!-- end of the main div block -->
+    </main>
+
+</body>
+
+</html>
