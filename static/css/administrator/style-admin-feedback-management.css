@@ -1,17 +1,16 @@
-/* Table template */
-
 :root {
     --text-background: lightgrey;
 }
 
+/* Table template */
 .table-scroll {
-    max-height: 50vh; /* Set the max-height to the full viewport height */
+    max-height: 60vh; /* Set the max-height to the full viewport height */
     overflow-y: auto; /* Enable vertical scrolling */
   }
 
-  tr:hover {
+tbody > tr:hover {
     cursor: pointer;
-  }
+}
   
   /* Sticky table header */
   .table thead tr th {

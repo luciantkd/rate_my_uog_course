@@ -4,7 +4,7 @@
 {% block title %} Course Management {% endblock %}
 
 {% block additional_styles %}
-    <link rel="stylesheet" href="{% static 'css/administrator/styles-admin-course-management.css' %}">
+    <link rel="stylesheet" href="{% static 'css/administrator/style-admin-course-management.css' %}">
 {% endblock %}
 
 {% block pagetitle %} Course Management {% endblock %}
@@ -17,7 +17,7 @@
             </div>
             <div class="filter-add-section">
                 <select class="form-control btn-secondary" id="tableFilter" placeholder="Course:">
-                    <option value="" selected disabled>Filter by Course</option>
+                    <option value="" selected disabled>Select a Program</option>
                     <option class="dropdown-item" value="">All</a>
                     <option class="dropdown-item" value="IT+">IT+</a>
                     <option class="dropdown-item" value="CS+">CS+</a>
@@ -29,7 +29,7 @@
                 <!-- Table to filter -->
                 <table class="table" id="dataTable">
                     <thead>
-                        <tr>
+                        <tr onclick="window.location='#';">
                           <th>Course ID</th>
                           <th>Name</th>
                           <th>Lecturer</th>
@@ -39,8 +39,8 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td><a href="#">COMPSCI 5044</a></td>
+                        <tr onclick="window.location='#';">
+                          <td>COMPSCI 5044</td>
                           <td>Basic Algorithms and Data Structures</td>
                           <td>Prof. John Doe</td>
                           <td>IT+</td>
@@ -50,215 +50,270 @@
                             <button class="btn btn-danger">Delete</button>
                           </td>
                         </tr>
-                        <tr>
-                            <td><a href="#">COMPSCI 5044</a></td>
-                            <td>Genetics, Evolution, and Ecology</td>
-                            <td>Dr. Hang Dai</td>
-                            <td>IT+</td>
-                            <td>101</td>
-                            <td>
-                                <button class="btn btn-primary">Edit</button>
-                                <button class="btn btn-danger">Delete</button>
-                            </td>
+                        <tr onclick="window.location='#';">
+                          <td>COMPSCI 5044</td>
+                          <td>Basic Algorithms and Data Structures</td>
+                          <td>Prof. John Doe</td>
+                          <td>IT+</td>
+                          <td>54</td>
+                          <td>
+                            <button class="btn btn-primary">Edit</button>
+                            <button class="btn btn-danger">Delete</button>
+                          </td>
                         </tr>
-                        <tr>
-                            <td><a href="#">COMPSCI 5044</a></td>
-                            <td>Genetics, Evolution, and Ecology</td>
-                            <td>Dr. Hang Dai</td>
+                        <tr onclick="window.location='#';">
+                            <td>COMPSCI 5044</td>
+                            <td>Basic Algorithms and Data Structures</td>
+                            <td>Prof. John Doe</td>
                             <td>IT+</td>
-                            <td>101</td>
+                            <td>54</td>
                             <td>
-                                <button class="btn btn-primary">Edit</button>
-                                <button class="btn btn-danger">Delete</button>
+                              <button class="btn btn-primary">Edit</button>
+                              <button class="btn btn-danger">Delete</button>
                             </td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">COMPSCI 5044</a></td>
-                            <td>Genetics, Evolution, and Ecology</td>
-                            <td>Dr. Hang Dai</td>
+                          </tr>
+                          <tr onclick="window.location='#';">
+                            <td>COMPSCI 5044</td>
+                            <td>Basic Algorithms and Data Structures</td>
+                            <td>Prof. John Doe</td>
                             <td>IT+</td>
-                            <td>101</td>
+                            <td>54</td>
                             <td>
-                                <button class="btn btn-primary">Edit</button>
-                                <button class="btn btn-danger">Delete</button>
+                              <button class="btn btn-primary">Edit</button>
+                              <button class="btn btn-danger">Delete</button>
                             </td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">COMPSCI 5044</a></td>
-                            <td>Genetics, Evolution, and Ecology</td>
-                            <td>Dr. Hang Dai</td>
+                          </tr>
+                          <tr onclick="window.location='#';">
+                            <td>COMPSCI 5044</td>
+                            <td>Basic Algorithms and Data Structures</td>
+                            <td>Prof. John Doe</td>
                             <td>IT+</td>
-                            <td>101</td>
+                            <td>54</td>
                             <td>
-                                <button class="btn btn-primary">Edit</button>
-                                <button class="btn btn-danger">Delete</button>
+                              <button class="btn btn-primary">Edit</button>
+                              <button class="btn btn-danger">Delete</button>
                             </td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">COMPSCI 5044</a></td>
-                            <td>Genetics, Evolution, and Ecology</td>
-                            <td>Dr. Hang Dai</td>
+                          </tr>
+                          <tr onclick="window.location='#';">
+                            <td>COMPSCI 5044</td>
+                            <td>Basic Algorithms and Data Structures</td>
+                            <td>Prof. John Doe</td>
                             <td>IT+</td>
-                            <td>101</td>
+                            <td>54</td>
                             <td>
-                                <button class="btn btn-primary">Edit</button>
-                                <button class="btn btn-danger">Delete</button>
+                              <button class="btn btn-primary">Edit</button>
+                              <button class="btn btn-danger">Delete</button>
                             </td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">COMPSCI 5044</a></td>
-                            <td>Genetics, Evolution, and Ecology</td>
-                            <td>Dr. Hang Dai</td>
+                          </tr>
+                          <tr onclick="window.location='#';">
+                            <td>COMPSCI 5044</td>
+                            <td>Basic Algorithms and Data Structures</td>
+                            <td>Prof. John Doe</td>
                             <td>IT+</td>
-                            <td>101</td>
+                            <td>54</td>
                             <td>
-                                <button class="btn btn-primary">Edit</button>
-                                <button class="btn btn-danger">Delete</button>
+                              <button class="btn btn-primary">Edit</button>
+                              <button class="btn btn-danger">Delete</button>
                             </td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">COMPSCI 5044</a></td>
-                            <td>Genetics, Evolution, and Ecology</td>
-                            <td>Dr. Hang Dai</td>
+                          </tr>
+                          <tr onclick="window.location='#';">
+                            <td>COMPSCI 5044</td>
+                            <td>Basic Algorithms and Data Structures</td>
+                            <td>Prof. John Doe</td>
                             <td>IT+</td>
-                            <td>101</td>
+                            <td>54</td>
                             <td>
-                                <button class="btn btn-primary">Edit</button>
-                                <button class="btn btn-danger">Delete</button>
+                              <button class="btn btn-primary">Edit</button>
+                              <button class="btn btn-danger">Delete</button>
                             </td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">COMPSCI 5044</a></td>
-                            <td>Genetics, Evolution, and Ecology</td>
-                            <td>Dr. Hang Dai</td>
+                          </tr>
+                          <tr onclick="window.location='#';">
+                            <td>COMPSCI 5044</td>
+                            <td>Basic Algorithms and Data Structures</td>
+                            <td>Prof. John Doe</td>
                             <td>IT+</td>
-                            <td>101</td>
+                            <td>54</td>
                             <td>
-                                <button class="btn btn-primary">Edit</button>
-                                <button class="btn btn-danger">Delete</button>
+                              <button class="btn btn-primary">Edit</button>
+                              <button class="btn btn-danger">Delete</button>
                             </td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">COMPSCI 5044</a></td>
-                            <td>Genetics, Evolution, and Ecology</td>
-                            <td>Dr. Hang Dai</td>
+                          </tr>
+                          <tr onclick="window.location='#';">
+                            <td>COMPSCI 5044</td>
+                            <td>Basic Algorithms and Data Structures</td>
+                            <td>Prof. John Doe</td>
                             <td>IT+</td>
-                            <td>101</td>
+                            <td>54</td>
                             <td>
-                                <button class="btn btn-primary">Edit</button>
-                                <button class="btn btn-danger">Delete</button>
+                              <button class="btn btn-primary">Edit</button>
+                              <button class="btn btn-danger">Delete</button>
                             </td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">COMPSCI 5044</a></td>
-                            <td>Genetics, Evolution, and Ecology</td>
-                            <td>Dr. Hang Dai</td>
+                          </tr>
+                          <tr onclick="window.location='#';">
+                            <td>COMPSCI 5044</td>
+                            <td>Basic Algorithms and Data Structures</td>
+                            <td>Prof. John Doe</td>
                             <td>IT+</td>
-                            <td>101</td>
+                            <td>54</td>
                             <td>
-                                <button class="btn btn-primary">Edit</button>
-                                <button class="btn btn-danger">Delete</button>
+                              <button class="btn btn-primary">Edit</button>
+                              <button class="btn btn-danger">Delete</button>
                             </td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">COMPSCI 5044</a></td>
-                            <td>Genetics, Evolution, and Ecology</td>
-                            <td>Dr. Hang Dai</td>
+                          </tr>
+                          <tr onclick="window.location='#';">
+                            <td>COMPSCI 5044</td>
+                            <td>Basic Algorithms and Data Structures</td>
+                            <td>Prof. John Doe</td>
                             <td>IT+</td>
-                            <td>101</td>
+                            <td>54</td>
                             <td>
-                                <button class="btn btn-primary">Edit</button>
-                                <button class="btn btn-danger">Delete</button>
+                              <button class="btn btn-primary">Edit</button>
+                              <button class="btn btn-danger">Delete</button>
                             </td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">COMPSCI 5044</a></td>
-                            <td>Genetics, Evolution, and Ecology</td>
-                            <td>Dr. Hang Dai</td>
+                          </tr>
+                          <tr onclick="window.location='#';">
+                            <td>COMPSCI 5044</td>
+                            <td>Basic Algorithms and Data Structures</td>
+                            <td>Prof. John Doe</td>
                             <td>IT+</td>
-                            <td>101</td>
+                            <td>54</td>
                             <td>
-                                <button class="btn btn-primary">Edit</button>
-                                <button class="btn btn-danger">Delete</button>
+                              <button class="btn btn-primary">Edit</button>
+                              <button class="btn btn-danger">Delete</button>
                             </td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">COMPSCI 5044</a></td>
-                            <td>Genetics, Evolution, and Ecology</td>
-                            <td>Dr. Hang Dai</td>
+                          </tr>
+                          <tr onclick="window.location='#';">
+                            <td>COMPSCI 5044</td>
+                            <td>Basic Algorithms and Data Structures</td>
+                            <td>Prof. John Doe</td>
                             <td>IT+</td>
-                            <td>101</td>
+                            <td>54</td>
                             <td>
-                                <button class="btn btn-primary">Edit</button>
-                                <button class="btn btn-danger">Delete</button>
+                              <button class="btn btn-primary">Edit</button>
+                              <button class="btn btn-danger">Delete</button>
                             </td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">COMPSCI 5044</a></td>
-                            <td>Genetics, Evolution, and Ecology</td>
-                            <td>Dr. Hang Dai</td>
+                          </tr>
+                          <tr onclick="window.location='#';">
+                            <td>COMPSCI 5044</td>
+                            <td>Basic Algorithms and Data Structures</td>
+                            <td>Prof. John Doe</td>
                             <td>IT+</td>
-                            <td>101</td>
+                            <td>54</td>
                             <td>
-                                <button class="btn btn-primary">Edit</button>
-                                <button class="btn btn-danger">Delete</button>
+                              <button class="btn btn-primary">Edit</button>
+                              <button class="btn btn-danger">Delete</button>
                             </td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">COMPSCI 5044</a></td>
-                            <td>Genetics, Evolution, and Ecology</td>
-                            <td>Dr. Hang Dai</td>
+                          </tr>
+                          <tr onclick="window.location='#';">
+                            <td>COMPSCI 5044</td>
+                            <td>Basic Algorithms and Data Structures</td>
+                            <td>Prof. John Doe</td>
                             <td>IT+</td>
-                            <td>101</td>
+                            <td>54</td>
                             <td>
-                                <button class="btn btn-primary">Edit</button>
-                                <button class="btn btn-danger">Delete</button>
+                              <button class="btn btn-primary">Edit</button>
+                              <button class="btn btn-danger">Delete</button>
                             </td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">COMPSCI 5044</a></td>
-                            <td>Genetics, Evolution, and Ecology</td>
-                            <td>Dr. Hang Dai</td>
+                          </tr>
+                          <tr onclick="window.location='#';">
+                            <td>COMPSCI 5044</td>
+                            <td>Basic Algorithms and Data Structures</td>
+                            <td>Prof. John Doe</td>
                             <td>IT+</td>
-                            <td>101</td>
+                            <td>54</td>
                             <td>
-                                <button class="btn btn-primary">Edit</button>
-                                <button class="btn btn-danger">Delete</button>
+                              <button class="btn btn-primary">Edit</button>
+                              <button class="btn btn-danger">Delete</button>
                             </td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">COMPSCI 5044</a></td>
-                            <td>Genetics, Evolution, and Ecology</td>
-                            <td>Dr. Hang Dai</td>
+                          </tr>
+                          <tr onclick="window.location='#';">
+                            <td>COMPSCI 5044</td>
+                            <td>Basic Algorithms and Data Structures</td>
+                            <td>Prof. John Doe</td>
                             <td>IT+</td>
-                            <td>101</td>
+                            <td>54</td>
                             <td>
-                                <button class="btn btn-primary">Edit</button>
-                                <button class="btn btn-danger">Delete</button>
+                              <button class="btn btn-primary">Edit</button>
+                              <button class="btn btn-danger">Delete</button>
                             </td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">COMPSCI 5044</a></td>
-                            <td>Genetics, Evolution, and Ecology</td>
-                            <td>Dr. Hang Dai</td>
+                          </tr>
+                          <tr onclick="window.location='#';">
+                            <td>COMPSCI 5044</td>
+                            <td>Basic Algorithms and Data Structures</td>
+                            <td>Prof. John Doe</td>
                             <td>IT+</td>
-                            <td>101</td>
+                            <td>54</td>
                             <td>
-                                <button class="btn btn-primary">Edit</button>
-                                <button class="btn btn-danger">Delete</button>
+                              <button class="btn btn-primary">Edit</button>
+                              <button class="btn btn-danger">Delete</button>
                             </td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">COMPSCI 5044</a></td>
-                            <td>Genetics, Evolution, and Ecology</td>
-                            <td>Dr. Hang Dai</td>
+                          </tr>
+                          <tr onclick="window.location='#';">
+                            <td>COMPSCI 5044</td>
+                            <td>Basic Algorithms and Data Structures</td>
+                            <td>Prof. John Doe</td>
                             <td>IT+</td>
-                            <td>101</td>
+                            <td>54</td>
                             <td>
-                                <button class="btn btn-primary">Edit</button>
-                                <button class="btn btn-danger">Delete</button>
+                              <button class="btn btn-primary">Edit</button>
+                              <button class="btn btn-danger">Delete</button>
                             </td>
-                        </tr>
+                          </tr>
+                          <tr onclick="window.location='#';">
+                            <td>COMPSCI 5044</td>
+                            <td>Basic Algorithms and Data Structures</td>
+                            <td>Prof. John Doe</td>
+                            <td>IT+</td>
+                            <td>54</td>
+                            <td>
+                              <button class="btn btn-primary">Edit</button>
+                              <button class="btn btn-danger">Delete</button>
+                            </td>
+                          </tr>
+                          <tr onclick="window.location='#';">
+                            <td>COMPSCI 5044</td>
+                            <td>Basic Algorithms and Data Structures</td>
+                            <td>Prof. John Doe</td>
+                            <td>IT+</td>
+                            <td>54</td>
+                            <td>
+                              <button class="btn btn-primary">Edit</button>
+                              <button class="btn btn-danger">Delete</button>
+                            </td>
+                          </tr>
+                          <tr onclick="window.location='#';">
+                            <td>COMPSCI 5044</td>
+                            <td>Basic Algorithms and Data Structures</td>
+                            <td>Prof. John Doe</td>
+                            <td>IT+</td>
+                            <td>54</td>
+                            <td>
+                              <button class="btn btn-primary">Edit</button>
+                              <button class="btn btn-danger">Delete</button>
+                            </td>
+                          </tr>
+                          <tr onclick="window.location='#';">
+                            <td>COMPSCI 5044</td>
+                            <td>Basic Algorithms and Data Structures</td>
+                            <td>Prof. John Doe</td>
+                            <td>IT+</td>
+                            <td>54</td>
+                            <td>
+                              <button class="btn btn-primary">Edit</button>
+                              <button class="btn btn-danger">Delete</button>
+                            </td>
+                          </tr>
+                          <tr onclick="window.location='#';">
+                            <td>COMPSCI 5044</td>
+                            <td>Basic Algorithms and Data Structures</td>
+                            <td>Prof. John Doe</td>
+                            <td>IT+</td>
+                            <td>54</td>
+                            <td>
+                              <button class="btn btn-primary">Edit</button>
+                              <button class="btn btn-danger">Delete</button>
+                            </td>
+                          </tr>
                         <!-- Repeat the pattern for each course -->
                         <!-- ... -->
                       </tbody>

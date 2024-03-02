@@ -57,6 +57,9 @@ def base(request):
 def feedback_management(request):
     return render(request, 'administrator/feedback_management.html')
 
+def reported_reviews_management(request):
+    return render(request, 'administrator/reported_reviews_management.html')
+
 # def lecturer_management(request):
 
 
