@@ -52,7 +52,10 @@ def course_management(request):
     return render(request, 'administrator/course_management.html')
 
 def base(request):
-    return render(request, 'administrator/base-admin.html')
+    return render(request, 'administrator/base_admin.html')
+
+def feedback_management(request):
+    return render(request, 'administrator/feedback_management.html')
 
 # def lecturer_management(request):
 
