@@ -1,7 +1,8 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 
 # Create your views here.
 from django.http import HttpResponse
+from django.urls import reverse
 
 from administrator.models import Admin
 from lecturer.models import Course
@@ -146,16 +147,17 @@ def course_edit_post(request):
 # @param course_id: the id of the course
 # @return: boolean success
 def course_delete(request):
-    course_id = request.GET.get('course_id')
-    course = get_object_or_404(Course, pk=course_id)
-    if course is not None:
+    if request.method == "POST":
+        course_id = request.POST.get('course_id')
+        course = get_object_or_404(Course, pk=course_id)
         course.delete()
-        return render(request, 'course_edit.html', {'success': True})
+        return redirect(reverse('administrator:course_management'))  # Redirect to the course management page
     else:
-        return render(request, 'course_edit.html', {'success': False})
+        # Optionally handle the case for non-POST requests if necessary
+        return redirect(reverse('administrator:course_management'))
 
 def base(request):
-    return render(request, 'administrator/base_admin.html')
+    return render(request, 'administrator:course_management')
 
 # View for testing viewing the Feedback Management page
 # def feedback_management(request):

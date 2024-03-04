@@ -1,4 +1,5 @@
 {% extends 'administrator/base_admin.html' %}
+
 {% load static %}
 
 {% block title %} Course Management {% endblock %}
@@ -10,316 +11,53 @@
 {% block pagetitle %} Course Management {% endblock %}
 
 {% block content %}
-        <div>
-            <div class="search">
-                <input class="form-control" id="myInput" type="text" placeholder="Search a course here..">
-                <!-- Dropdown for filtering -->
-            </div>
-            <div class="filter-add-section">
-                <select class="form-control btn-secondary" id="tableFilter" placeholder="Course:">
-                    <option value="" selected disabled>Select a Program</option>
-                    <option class="dropdown-item" value="">All</a>
-                    <option class="dropdown-item" value="IT+">IT+</a>
-                    <option class="dropdown-item" value="CS+">CS+</a>
-                    <!-- more options as needed -->
-                </select>
-                <button type="button" class="btn btn-primary add-a-course">+ Add a Course</button>
-            </div>
-            <div class="table-scroll">
-                <!-- Table to filter -->
-                <table class="table" id="dataTable">
-                    <thead>
-                        <tr onclick="window.location='#';">
-                          <th>Course ID</th>
-                          <th>Name</th>
-                          <th>Lecturer</th>
-                          <th>Program Type</th>
-                          <th>Reviews</th>
-                          <th>Action</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr onclick="window.location='#';">
-                          <td>COMPSCI 5044</td>
-                          <td>Basic Algorithms and Data Structures</td>
-                          <td>Prof. John Doe</td>
-                          <td>IT+</td>
-                          <td>54</td>
-                          <td>
-                            <button class="btn btn-primary">Edit</button>
-                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
-                              Delete
-                            </button>
-                          </td>
-                        </tr>
-                        <tr onclick="window.location='#';">
-                          <td>COMPSCI 5044</td>
-                          <td>Basic Algorithms and Data Structures</td>
-                          <td>Prof. John Doe</td>
-                          <td>IT+</td>
-                          <td>54</td>
-                          <td>
-                            <button class="btn btn-primary">Edit</button>
-                            <button class="btn btn-danger">Delete</button>
-                          </td>
-                        </tr>
-                        <tr onclick="window.location='#';">
-                            <td>COMPSCI 5044</td>
-                            <td>Basic Algorithms and Data Structures</td>
-                            <td>Prof. John Doe</td>
-                            <td>IT+</td>
-                            <td>54</td>
-                            <td>
-                              <button class="btn btn-primary">Edit</button>
-                              <button class="btn btn-danger">Delete</button>
-                            </td>
-                          </tr>
-                          <tr onclick="window.location='#';">
-                            <td>COMPSCI 5044</td>
-                            <td>Basic Algorithms and Data Structures</td>
-                            <td>Prof. John Doe</td>
-                            <td>IT+</td>
-                            <td>54</td>
-                            <td>
-                              <button class="btn btn-primary">Edit</button>
-                              <button class="btn btn-danger">Delete</button>
-                            </td>
-                          </tr>
-                          <tr onclick="window.location='#';">
-                            <td>COMPSCI 5044</td>
-                            <td>Basic Algorithms and Data Structures</td>
-                            <td>Prof. John Doe</td>
-                            <td>IT+</td>
-                            <td>54</td>
-                            <td>
-                              <button class="btn btn-primary">Edit</button>
-                              <button class="btn btn-danger">Delete</button>
-                            </td>
-                          </tr>
-                          <tr onclick="window.location='#';">
-                            <td>COMPSCI 5044</td>
-                            <td>Basic Algorithms and Data Structures</td>
-                            <td>Prof. John Doe</td>
-                            <td>IT+</td>
-                            <td>54</td>
-                            <td>
-                              <button class="btn btn-primary">Edit</button>
-                              <button class="btn btn-danger">Delete</button>
-                            </td>
-                          </tr>
-                          <tr onclick="window.location='#';">
-                            <td>COMPSCI 5044</td>
-                            <td>Basic Algorithms and Data Structures</td>
-                            <td>Prof. John Doe</td>
-                            <td>IT+</td>
-                            <td>54</td>
-                            <td>
-                              <button class="btn btn-primary">Edit</button>
-                              <button class="btn btn-danger">Delete</button>
-                            </td>
-                          </tr>
-                          <tr onclick="window.location='#';">
-                            <td>COMPSCI 5044</td>
-                            <td>Basic Algorithms and Data Structures</td>
-                            <td>Prof. John Doe</td>
-                            <td>IT+</td>
-                            <td>54</td>
-                            <td>
-                              <button class="btn btn-primary">Edit</button>
-                              <button class="btn btn-danger">Delete</button>
-                            </td>
-                          </tr>
-                          <tr onclick="window.location='#';">
-                            <td>COMPSCI 5044</td>
-                            <td>Basic Algorithms and Data Structures</td>
-                            <td>Prof. John Doe</td>
-                            <td>IT+</td>
-                            <td>54</td>
-                            <td>
-                              <button class="btn btn-primary">Edit</button>
-                              <button class="btn btn-danger">Delete</button>
-                            </td>
-                          </tr>
-                          <tr onclick="window.location='#';">
-                            <td>COMPSCI 5044</td>
-                            <td>Basic Algorithms and Data Structures</td>
-                            <td>Prof. John Doe</td>
-                            <td>IT+</td>
-                            <td>54</td>
-                            <td>
-                              <button class="btn btn-primary">Edit</button>
-                              <button class="btn btn-danger">Delete</button>
-                            </td>
-                          </tr>
-                          <tr onclick="window.location='#';">
-                            <td>COMPSCI 5044</td>
-                            <td>Basic Algorithms and Data Structures</td>
-                            <td>Prof. John Doe</td>
-                            <td>IT+</td>
-                            <td>54</td>
-                            <td>
-                              <button class="btn btn-primary">Edit</button>
-                              <button class="btn btn-danger">Delete</button>
-                            </td>
-                          </tr>
-                          <tr onclick="window.location='#';">
-                            <td>COMPSCI 5044</td>
-                            <td>Basic Algorithms and Data Structures</td>
-                            <td>Prof. John Doe</td>
-                            <td>IT+</td>
-                            <td>54</td>
-                            <td>
-                              <button class="btn btn-primary">Edit</button>
-                              <button class="btn btn-danger">Delete</button>
-                            </td>
-                          </tr>
-                          <tr onclick="window.location='#';">
-                            <td>COMPSCI 5044</td>
-                            <td>Basic Algorithms and Data Structures</td>
-                            <td>Prof. John Doe</td>
-                            <td>IT+</td>
-                            <td>54</td>
-                            <td>
-                              <button class="btn btn-primary">Edit</button>
-                              <button class="btn btn-danger">Delete</button>
-                            </td>
-                          </tr>
-                          <tr onclick="window.location='#';">
-                            <td>COMPSCI 5044</td>
-                            <td>Basic Algorithms and Data Structures</td>
-                            <td>Prof. John Doe</td>
-                            <td>IT+</td>
-                            <td>54</td>
-                            <td>
-                              <button class="btn btn-primary">Edit</button>
-                              <button class="btn btn-danger">Delete</button>
-                            </td>
-                          </tr>
-                          <tr onclick="window.location='#';">
-                            <td>COMPSCI 5044</td>
-                            <td>Basic Algorithms and Data Structures</td>
-                            <td>Prof. John Doe</td>
-                            <td>IT+</td>
-                            <td>54</td>
-                            <td>
-                              <button class="btn btn-primary">Edit</button>
-                              <button class="btn btn-danger">Delete</button>
-                            </td>
-                          </tr>
-                          <tr onclick="window.location='#';">
-                            <td>COMPSCI 5044</td>
-                            <td>Basic Algorithms and Data Structures</td>
-                            <td>Prof. John Doe</td>
-                            <td>IT+</td>
-                            <td>54</td>
-                            <td>
-                              <button class="btn btn-primary">Edit</button>
-                              <button class="btn btn-danger">Delete</button>
-                            </td>
-                          </tr>
-                          <tr onclick="window.location='#';">
-                            <td>COMPSCI 5044</td>
-                            <td>Basic Algorithms and Data Structures</td>
-                            <td>Prof. John Doe</td>
-                            <td>IT+</td>
-                            <td>54</td>
-                            <td>
-                              <button class="btn btn-primary">Edit</button>
-                              <button class="btn btn-danger">Delete</button>
-                            </td>
-                          </tr>
-                          <tr onclick="window.location='#';">
-                            <td>COMPSCI 5044</td>
-                            <td>Basic Algorithms and Data Structures</td>
-                            <td>Prof. John Doe</td>
-                            <td>IT+</td>
-                            <td>54</td>
-                            <td>
-                              <button class="btn btn-primary">Edit</button>
-                              <button class="btn btn-danger">Delete</button>
-                            </td>
-                          </tr>
-                          <tr onclick="window.location='#';">
-                            <td>COMPSCI 5044</td>
-                            <td>Basic Algorithms and Data Structures</td>
-                            <td>Prof. John Doe</td>
-                            <td>IT+</td>
-                            <td>54</td>
-                            <td>
-                              <button class="btn btn-primary">Edit</button>
-                              <button class="btn btn-danger">Delete</button>
-                            </td>
-                          </tr>
-                          <tr onclick="window.location='#';">
-                            <td>COMPSCI 5044</td>
-                            <td>Basic Algorithms and Data Structures</td>
-                            <td>Prof. John Doe</td>
-                            <td>IT+</td>
-                            <td>54</td>
-                            <td>
-                              <button class="btn btn-primary">Edit</button>
-                              <button class="btn btn-danger">Delete</button>
-                            </td>
-                          </tr>
-                          <tr onclick="window.location='#';">
-                            <td>COMPSCI 5044</td>
-                            <td>Basic Algorithms and Data Structures</td>
-                            <td>Prof. John Doe</td>
-                            <td>IT+</td>
-                            <td>54</td>
-                            <td>
-                              <button class="btn btn-primary">Edit</button>
-                              <button class="btn btn-danger">Delete</button>
-                            </td>
-                          </tr>
-                          <tr onclick="window.location='#';">
-                            <td>COMPSCI 5044</td>
-                            <td>Basic Algorithms and Data Structures</td>
-                            <td>Prof. John Doe</td>
-                            <td>IT+</td>
-                            <td>54</td>
-                            <td>
-                              <button class="btn btn-primary">Edit</button>
-                              <button class="btn btn-danger">Delete</button>
-                            </td>
-                          </tr>
-                          <tr onclick="window.location='#';">
-                            <td>COMPSCI 5044</td>
-                            <td>Basic Algorithms and Data Structures</td>
-                            <td>Prof. John Doe</td>
-                            <td>IT+</td>
-                            <td>54</td>
-                            <td>
-                              <button class="btn btn-primary">Edit</button>
-                              <button class="btn btn-danger">Delete</button>
-                            </td>
-                          </tr>
-                          <tr onclick="window.location='#';">
-                            <td>COMPSCI 5044</td>
-                            <td>Basic Algorithms and Data Structures</td>
-                            <td>Prof. John Doe</td>
-                            <td>IT+</td>
-                            <td>54</td>
-                            <td>
-                              <button class="btn btn-primary">Edit</button>
-                              <button class="btn btn-danger">Delete</button>
-                            </td>
-                          </tr>
-                          <tr onclick="window.location='#';">
-                            <td>COMPSCI 5044</td>
-                            <td>Basic Algorithms and Data Structures</td>
-                            <td>Prof. John Doe</td>
-                            <td>IT+</td>
-                            <td>54</td>
-                            <td>
-                              <button class="btn btn-primary">Edit</button>
-                              <button class="btn btn-danger">Delete</button>
-                            </td>
-                          </tr>
-                        <!-- Repeat the pattern for each course -->
-                        <!-- ... -->
-                      </tbody>
-                </table>
-            </div>
-        </div> <!-- end of the main div content-->
+<div>
+    <div class="search">
+        <input class="form-control" id="myInput" type="text" placeholder="Search a course here..">
+        <!-- Dropdown for filtering -->
+    </div>
+    <div class="filter-add-section">
+        <select class="form-control btn-secondary" id="tableFilter" placeholder="Course:">
+            <option value="" selected disabled>Select a Program</option>
+            <option class="dropdown-item" value="">All</option>
+            <option class="dropdown-item" value="IT+">IT+</option>
+            <option class="dropdown-item" value="CS+">CS+</option>
+            <!-- more options as needed -->
+        </select>
+        <button type="button" class="btn btn-primary add-a-course">+ Add a Course</button>
+    </div>
+    <div class="table-scroll">
+        <!-- Table to filter -->
+        <table class="table" id="dataTable">
+            <thead>
+                <tr>
+                  <th>Course ID</th>
+                  <th>Name</th>
+                  <th>Lecturer</th>
+                  <th>Program Type</th>
+                  <th>Reviews</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for course in courses %}
+                <tr onclick="window.location='#';">
+                  <td>{{ course.courseId }}</td>
+                  <td>{{ course.courseName }}</td>
+                  <td>Prof. John Doe</td> <!-- Assuming lecturer is not part of your model -->
+                  <td>{{ course.programType }}</td>
+                  <td>54</td> <!-- Assuming reviews are not part of your model -->
+                  <td>
+                    <form action="{% url 'administrator:course_delete' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="course_id" value="{{ course.courseId }}">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+        </table>
+    </div>
+</div> <!-- end of the main div content-->
 {% endblock %}

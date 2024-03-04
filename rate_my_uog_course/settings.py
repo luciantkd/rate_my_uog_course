@@ -19,6 +19,15 @@ TEMPLATE_DIR=os.path.join(BASE_DIR,'templates')
 
 STATIC_DIR=os.path.join(BASE_DIR,'static')
 
+# Google Recaptcha settings
+# pip install django-recaptcha before using this
+# You need to use the domain of "it.gla.elviss.me" to visit the website
+# "it.gla.elviss.me" has been referring to the localhost(127.0.0.1)
+# This public key is going to the template
+RECAPTCHA_PUBLIC_KEY = '6LfKh4gpAAAAAJadeylKAXMq3Tr_fIozgQseg_Vz'
+# This private key is going to the server
+RECAPTCHA_PRIVATE_KEY = '6LfKh4gpAAAAAPinMAzHigZGwMQg5g96IaQweJoh'
+
 
 
 # Quick-start development settings - unsuitable for production
