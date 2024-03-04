@@ -5,7 +5,7 @@ from django.http import HttpResponse
 from django.urls import reverse
 
 from administrator.models import Admin
-from lecturer.models import Course
+from lecturer.models import Course, Lecturer
 from student.models import CourseFeedback
 from rateMyUogCourse.models import WebsiteFeedback, CourseSearchTable
 
@@ -105,7 +105,9 @@ def website_feedback_delete(request):
 # This method is to show the course management page
 # @return: courses a list of courses
 def course_management(request):
-    courses = Course.objects.all()
+    # courses = Course.objects.all()
+    # course with lectrer name, and count of feedbacks
+    courses = Course.objects.all().values('courseId', 'courseName', 'programType', 'semester', 'feedbackNum', 'lecturercourseassignment__lecturerId__lecturerName').order_by('courseId')
     return render(request, 'administrator/course_management.html', {'courses': courses})
 
 
@@ -169,7 +171,9 @@ def base(request):
 
 # View for testing viewing the Lecturer Management page
 def lecturer_management(request):
-    return render(request, 'administrator/lecturer_management.html')
+    # get lecturer list except passwords
+    lecturers = Lecturer.objects.all().values('lecturerId', 'lecturerName', 'designation').order_by('lecturerId')
+    return render(request, 'administrator/lecturer_management.html', {'lecturers': lecturers})
 
 # def lecturer_management(request):
 
