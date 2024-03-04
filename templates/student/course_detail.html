@@ -75,7 +75,9 @@
     <div class="reviews-list-container">
         <div class="reviews-list-top">
             <h2 class="reviews-section title">Reviews</h2>
-            <button type="button" class="btn btn-primary leave-a-review">+ Leave a Review</button>
+            <button type="button" class="btn btn-primary" onclick="location.href='#reviewSection'">
+                + Leave a Review
+              </button>
         </div>
         <div class="reviews-list">
 
@@ -272,7 +274,7 @@
     </div> 
 
 
-    <div class="review-form-container">
+    <div class="review-form-container" id="reviewSection">      
         <h2 class="title">Leave a Review</h2>
         <div class="review-container">
             <form action="{% url 'rateMyUogCourse:detail'}" method="post" id="review" class="review-form">
