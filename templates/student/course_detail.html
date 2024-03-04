@@ -1,0 +1,407 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Course Detail - Rage My UofG Course{% endblock %}
+{% block additional_styles %}
+<link rel="stylesheet" href="{% static 'css/student/styles-coursedetail.css' %}">{% endblock %}
+{% block content %}
+<div class="main-container">
+    <div class="top">
+        <button type="button" class="btn btn-outline-primary">← All Courses</button>
+
+        <h1 class="course-code">COMPSCI 5044</h1>
+        <h2 class="course-name">Basic Algorithms and Data Structures</h2>
+        <h4 class="lecturer-name-title">Lecturer: Hang Dai - Lecturer for Machine Learning</h3>
+    </div>
+
+    <div class="overall-average-container">
+        <div class="overall-average-border">
+            <div class="overall-average">
+                <div class="overall-average-title">Overall average</div>
+                <div class="average">
+                    <div class="average-score">4.2</div>
+                    <div class="average-outof">out of 5.0</div>
+                </div>
+                <div class="num-reviews">Total: 54 reviews</div>
+            </div>
+        </div>
+
+        <table class="average-categories">
+            <tbody>
+                <tr class="rating-category">
+                    <td class="rating-category-name">Difficulty</td>
+                    <td class="progress-container w-75">
+                        <div class="progress">
+                            <div class="progress-bar w-75" role="progressbar" aria-valuenow="50" aria-valuemin="0"
+                                aria-valuemax="100"></div>
+                        </div>
+                    </td>
+                    <td class="rating-category-name">4.0/5.0</td>
+                </tr>
+                <tr class="rating-category">
+                    <td class="rating-category-name">Usefulness</td>
+                    <td class="progress-container w-25">
+                        <div class="progress">
+                            <div class="progress-bar w-50" role="progressbar" aria-valuenow="50" aria-valuemin="0"
+                                aria-valuemax="100"></div>
+                        </div>
+                    </td>
+                    <td class="rating-category-name">2.5/5.0</td>
+                </tr>
+                <tr class="rating-category">
+                    <td class="rating-category-name">Workload</td>
+                    <td class="progress-container w-50">
+                        <div class="progress">
+                            <div class="progress-bar w-75" role="progressbar" aria-valuenow="50" aria-valuemin="0"
+                                aria-valuemax="100"></div>
+                        </div>
+                    </td>
+                    <td class="rating-category-name">4.0/5.0</td>
+                </tr>
+                <tr class="rating-category">
+                    <td class="rating-category-name">Professor Rating</td>
+                    <td class="progress-container w-50">
+                        <div class="progress">
+                            <div class="progress-bar w-100" role="progressbar" aria-valuenow="50" aria-valuemin="0"
+                                aria-valuemax="100"></div>
+                        </div>
+                    </td>
+                    <td class="rating-category-name">5.0/5.0</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="reviews-list-container">
+        <div class="reviews-list-top">
+            <h2 class="reviews-section title">Reviews</h2>
+            <button type="button" class="btn btn-primary" onclick="location.href='#reviewSection'">
+                + Leave a Review
+              </button>
+        </div>
+        <div class="reviews-list">
+
+            <div class="review-container"> <!-- the first review, copy as many as needed -->
+
+                <div class="ratings">
+                    <div class="rating title">Ratings</div>
+                    <div class="rating-score">
+                        <div class="score red">1</div>
+                        <div>Difficulty</div>
+                    </div>
+                    <div class="rating-score">
+                        <div class="score orange">2</div>
+                        <div>Usefulness</div>
+                    </div>
+                    <div class="rating-score">
+                        <div class="score yellow">3</div>
+                        <div>Workload</div>
+                    </div>
+                    <div class="rating-score">
+                        <div class="score green">5</div>
+                        <div>Professor Rating</div>
+                    </div>
+                </div>
+
+                <div class="review-content">
+                    <div class="review-content-top title">
+                        <div class="course-when-taken">When Taken: Semester 2 2022</div>
+                        <div class="post-date">7 Sept 2022</div>
+                    </div>
+                    <div class="course-comment-container">
+                        <div class="course-comment title">Comments on Course</div>
+                        <div class="course-comment-content">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+                            Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis
+                            parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu,
+                            pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet
+                            nec, vulputate eget, arcu. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget
+                            condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam
+                            quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante
+                            tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam
+                            sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh.
+                            Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus
+                            nunc,</div>
+                    </div>
+                    <div class="miscellaneous-ratings">
+                        <div class="misc-rating title">Would recommend: <span class="answer">No</span></div>
+                        <div class="misc-rating title">Grade: <span class="answer">B3</span></div>
+                        <div class="misc-rating title">Exam Format: <span class="answer">Multiple Choice Questions,
+                                Short Answer Questions, Essay Questions</span></div>
+                        <div class="evaluation-methods-label title">Evaluation Methods:</div>
+                        <ul class="evaluation-methods">
+                            <li>Attendance Grade</li>
+                            <li>Class Participation Grade</li>
+                            <li>Individual Coursework</li>
+                            <li>Group Coursework</li>
+                            <li>Quiz</li>
+                            <li>Exam</li>
+                        </ul>
+                        <div class="review-bottom">
+                            <button class="like-button btn btn-primary">👍 105</button>
+                            <button class="report-button btn btn-primary">🚩 Report</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="review-container">
+
+                <div class="ratings">
+                    <div class="rating title">Ratings</div>
+                    <div class="rating-score">
+                        <div class="score yellow-green">4</div>
+                        <div>Difficulty</div>
+                    </div>
+                    <div class="rating-score">
+                        <div class="score orange">2</div>
+                        <div>Usefulness</div>
+                    </div>
+                    <div class="rating-score">
+                        <div class="score yellow">3</div>
+                        <div>Workload</div>
+                    </div>
+                    <div class="rating-score">
+                        <div class="score green">5</div>
+                        <div>Professor Rating</div>
+                    </div>
+                </div>
+
+                <div class="review-content">
+                    <div class="review-content-top title">
+                        <div class="course-when-taken">When Taken: Semester 2 2022</div>
+                        <div class="post-date">7 Sept 2022</div>
+                    </div>
+                    <div class="course-comment-container">
+                        <div class="course-comment title">Comments on Course</div>
+                        <div class="course-comment-content">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+                            Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis
+                            parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu,
+                            pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet
+                            nec, vulputate eget, arcu. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget
+                            condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam
+                            quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante
+                            tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam
+                            sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh.
+                            Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus
+                            nunc,</div>
+                    </div>
+                    <div class="miscellaneous-ratings">
+                        <div class="misc-rating title">Would recommend: <span class="answer">No</span></div>
+                        <div class="misc-rating title">Grade: <span class="answer">B3</span></div>
+                        <div class="misc-rating title">Exam Format: <span class="answer">Multiple Choice Questions,
+                                Short Answer Questions, Essay Questions</span></div>
+                        <div class="evaluation-methods-label title">Evaluation Methods:</div>
+                        <ul class="evaluation-methods">
+                            <li>Attendance Grade</li>
+                            <li>Class Participation Grade</li>
+                            <li>Individual Coursework</li>
+                            <li>Group Coursework</li>
+                            <li>Quiz</li>
+                            <li>Exam</li>
+                        </ul>
+                        <div class="review-bottom">
+                            <button class="like-button btn btn-primary">👍 105</button>
+                            <button class="report-button btn btn-primary">🚩 Report</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="review-container">
+
+                <div class="ratings">
+                    <div class="rating title">Ratings</div>
+                    <div class="rating-score">
+                        <div class="score yellow-green">4</div>
+                        <div>Difficulty</div>
+                    </div>
+                    <div class="rating-score">
+                        <div class="score orange">2</div>
+                        <div>Usefulness</div>
+                    </div>
+                    <div class="rating-score">
+                        <div class="score yellow">3</div>
+                        <div>Workload</div>
+                    </div>
+                    <div class="rating-score">
+                        <div class="score green">5</div>
+                        <div>Professor Rating</div>
+                    </div>
+                </div>
+
+                <div class="review-content">
+                    <div class="review-content-top title">
+                        <div class="course-when-taken">When Taken: Semester 2 2022</div>
+                        <div class="post-date">7 Sept 2022</div>
+                    </div>
+                    <div class="course-comment-container">
+                        <div class="course-comment title">Comments on Course</div>
+                        <div class="course-comment-content">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+                            Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis
+                            parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu,
+                            pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet
+                            nec, vulputate eget, arcu. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget
+                            condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam
+                            quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante
+                            tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam
+                            sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh.
+                            Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus
+                            nunc,</div>
+                    </div>
+                    <div class="miscellaneous-ratings">
+                        <div class="misc-rating title">Would recommend: <span class="answer">No</span></div>
+                        <div class="misc-rating title">Grade: <span class="answer">B3</span></div>
+                        <div class="misc-rating title">Exam Format: <span class="answer">Multiple Choice Questions,
+                                Short Answer Questions, Essay Questions</span></div>
+                        <div class="evaluation-methods-label title">Evaluation Methods:</div>
+                        <ul class="evaluation-methods">
+                            <li>Attendance Grade</li>
+                            <li>Class Participation Grade</li>
+                            <li>Individual Coursework</li>
+                            <li>Group Coursework</li>
+                            <li>Quiz</li>
+                            <li>Exam</li>
+                        </ul>
+                        <div class="review-bottom">
+                            <button class="like-button btn btn-primary">👍 105</button>
+                            <button class="report-button btn btn-primary">🚩 Report</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div> <!-- end of review list -->
+    </div> 
+
+
+    <div class="review-form-container" id="reviewSection">      
+        <h2 class="title">Leave a Review</h2>
+        <div class="review-container">
+            <form action="{% url 'rateMyUogCourse:detail'}" method="post" id="review" class="review-form">
+                <div class="review-form-ratings">
+                    <div class="rating-form-score">
+                        <h5 class="rating-form-category title">Rate the course:</h5>
+                        <label for="overall-rating" class="rating-form-category title">Overall Ratings<span class="required-star">*</span></label>
+                        <div class="star-rating">
+                            <input id="overall5" type="radio" name="overall-rating" value="5" required><label for="overall5">☆</label>
+                            <input id="overall4" type="radio" name="overall-rating" value="4"><label for="overall4">☆</label>
+                            <input id="overall3" type="radio" name="overall-rating" value="3"><label for="overall3">☆</label>
+                            <input id="overall2" type="radio" name="overall-rating" value="2"><label for="overall2">☆</label>
+                            <input id="overall1" type="radio" name="overall-rating" value="1"><label for="overall1">☆</label>
+                        </div>
+                    </div>
+
+                    <div class="rating-form-score">
+                        <label for="difficulty" class="rating-form-category title">Difficulty<span class="required-star">*</span></label>
+                        <div class="star-rating">
+                            <input id="difficulty5" type="radio" name="difficulty" value="5" required><label for="difficulty5">☆</label>
+                            <input id="difficulty4" type="radio" name="difficulty" value="4"><label for="difficulty4">☆</label>
+                            <input id="difficulty3" type="radio" name="difficulty" value="3"><label for="difficulty3">☆</label>
+                            <input id="difficulty2" type="radio" name="difficulty" value="2"><label for="difficulty2">☆</label>
+                            <input id="difficulty1" type="radio" name="difficulty" value="1"><label for="difficulty1">☆</label>
+                        </div>
+                    </div>
+
+                    <div class="rating-form-score">
+                        <label for="usefulness" class="rating-form-category title">Usefulness<span class="required-star">*</span></label>
+                        <div class="star-rating">
+                            <input id="usefulness5" type="radio" name="usefulness" value="5" required><label for="usefulness5">☆</label>
+                            <input id="usefulness4" type="radio" name="usefulness" value="4"><label for="usefulness4">☆</label>
+                            <input id="usefulness3" type="radio" name="usefulness" value="3"><label for="usefulness3">☆</label>
+                            <input id="usefulness2" type="radio" name="usefulness" value="2"><label for="usefulness2">☆</label>
+                            <input id="usefulness1" type="radio" name="usefulness" value="1"><label for="usefulness1">☆</label>
+                        </div>
+                    </div>
+
+                    <div class="rating-form-score">
+                        <label for="workload" class="rating-form-category title">Workload<span class="required-star">*</span></label>
+                        <div class="star-rating">
+                            <input id="workload5" type="radio" name="workload" value="5"><label for="workload5">☆</label>
+                            <input id="workload4" type="radio" name="workload" value="4"><label for="workload4">☆</label>
+                            <input id="workload3" type="radio" name="workload" value="3"><label for="workload3">☆</label>
+                            <input id="workload2" type="radio" name="workload" value="2"><label for="workload2">☆</label>
+                            <input id="workload1" type="radio" name="workload" value="1"><label for="workload1">☆</label>
+                        </div>
+                    </div>
+
+                    <div class="rating-form-score">
+                        <label for="professor" class="rating-form-category title">Professor Rating<span class="required-star">*</span></label>
+                        <div class="star-rating">
+                            <input id="professor5" type="radio" name="professor" value="5" required><label for="professor5">☆</label>
+                            <input id="professor4" type="radio" name="professor" value="4"><label for="professor4">☆</label>
+                            <input id="professor3" type="radio" name="professor" value="3"><label for="professor3">☆</label>
+                            <input id="professor2" type="radio" name="professor" value="2"><label for="professor2">☆</label>
+                            <input id="professor1" type="radio" name="professor" value="1"><label for="professor1">☆</label>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="form review-content">
+                    <div class="course-comment-container">
+                        <label class="course-comment form title">Course Comments <span class="required-star">*</span></label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Write your overall thoughts on the course here..." maxlength="500" required></textarea>
+                    </div>
+                    <div class="form-group row1">
+                        <div class="form-group would-recommend">
+                            <label class="misc-rating title" for="sel1">Would recommend? <span class="required-star">*</span></label>
+                            <select class="form-control" id="sel1"required >
+                                <option value="">--Select an option--</option>
+                                <option>Yes</option>
+                                <option>No</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="misc-rating title" for="sel1">Grade received: </label>
+                            <select class="form-control" id="sel1">
+                                <option value="">--Select an option--</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                                <option value="D">D</option>
+                                <option value="E">E</option>
+                                <option value="F">F</option>
+                                <option value="G">G</option>
+                                <option value="H">H</option>
+                                <option value="drop_withdrawal">Drop / withdrawal</option>
+                                <option value="rather_not_say">Rather not say</option>
+                                <option value="not_sure_yet">Not sure yet</option>
+                                <option value="audit_no_grade">Audit/No grade</option>                                
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row2">
+                            <div class="form-group">
+                              <label class="misc-rating title" for="exampleFormControlSelect2">Exam format: <span class="help-text">(hold ctrl or shift (or drag with the mouse) to select more than one)</span></label>
+                              <select multiple class="form-control row2" id="exampleFormControlSelect2">
+                                <option value="short_answer_questions">Short answer questions</option>
+                                <option value="long_essay_questions">Long essay questions</option>
+                                <option value="multiple_choice_questions">Multiple Choice Questions</option>
+                                <option value="online_at_campus">Online at Campus</option>
+                                <option value="online">Online</option>
+                                <option value="offline">Offline</option>
+                              </select>
+                            </div>                     
+                            <div class="form-group">
+                              <label class="misc-rating title" for="exampleFormControlSelect3">Evaluation Methods: <span class="help-text">(hold ctrl or shift (or drag with the mouse) to select more than one)</span></label>
+                              <select multiple class="form-control row2" id="exampleFormControlSelect3">
+                                <option value="attendance_grade">Attendance Grade</option>
+                                <option value="class_participation_grade">Class Participation Grade</option>
+                                <option value="individual_coursework_heavy">Individual Coursework Heavy</option>
+                                <option value="group_coursework_heavy">Group Coursework Heavy</option>
+                                <option value="quiz_heavy">Quiz Heavy</option>
+                                <option value="exam_heavy">Exam Heavy</option>
+                              </select>
+                            </div>
+                        </div> 
+                        <div class="submit-button-container">
+                            <button type="submit" form="review" class="btn btn-primary leave-a-review" value="Submit">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,35 @@
+/* Table template */
+.table-scroll {
+    max-height: 70vh; /* Set the max-height to the full viewport height */
+    overflow-y: auto; /* Enable vertical scrolling */
+  }
+  
+  tbody > tr:hover {
+    cursor: pointer;
+  }
+  
+  /* Sticky table header */
+  .table thead tr th {
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 10;
+  }
+  
+  /* Custom part */
+  
+  input {
+    max-width: 50%;
+    margin-bottom: 8px;
+  }
+  
+  select {
+    max-width: 180px;
+    margin-bottom: 8px;
+  }
+  
+  .filter-add-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }

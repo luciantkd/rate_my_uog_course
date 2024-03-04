@@ -10,5 +10,6 @@ path('login/', views.login, name='login'),
 path('signup/', views.signup, name='signup'),
 path('feedback/', views.feedback, name='feedback'),
 path('searchCourses/<str:course_name>/<str:program_type>', views.search, name = 'search'),
-path('test-base/', views.basePage, name='test_base'),
+path('test-base/', views.base_page, name='test_base'),
+path('detail/', views.course_detail_page, name='course_detail')
 ]

@@ -1,0 +1,328 @@
+:root {
+    --text-background: lightgrey;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    flex-wrap: nowrap;
+    overflow-y: auto;
+}
+
+/* Course Name and lecturer name */
+
+.course-code {
+    margin-top: 16px;
+    font-weight: bolder;
+}
+
+.course-name, .lecturer-name-title {
+    font-weight: 500;
+}
+
+.course-code, .course-name, .lecturer-name-title {
+    margin-bottom: 0;
+}
+
+
+/* Overall Average */
+
+.overall-average-container {
+    margin-top: 16px;
+    display: flex;
+    text-align: center;
+    align-items: left;
+}
+
+.overall-average-border {
+    flex-basis: 180px;
+    padding: 4px 0px;
+    padding-right: 64px;
+    border-right: solid black 1px;
+}
+
+.overall-average {
+    min-width: 180px;
+}
+
+.overall-average-title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.average {
+    background-color: var(--text-background);
+    padding: 24px;
+}
+
+.average-categories {
+    flex-basis: 100px;
+    flex: 1;
+    max-width: 60%;
+    text-align: left;
+}
+
+.average-score {
+    font-size: 40px;
+    font-weight: 700;
+}
+
+.average-outof {
+    font-size: 20px;
+}
+
+.num-reviews {
+    font-size: 16px;
+}
+
+td .progress-container{
+    width: 100px !important;
+}
+
+.rating-category-name {
+    padding-left: 24px;
+    width: 20%;
+}
+
+.progress {
+    background: darkgrey;
+}
+
+/* Revie list top */
+
+.reviews-list {
+    display: block;
+}
+
+.reviews-list-container {
+    margin-top: 24px;
+}
+
+.reviews-section.title {
+    font-size: 36px;
+}
+
+.reviews-list-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.btn.leave-a-review {
+    padding: 12px;
+}
+
+/* Reviews list */
+
+.review-container {
+    display: flex;
+    gap: 24px;
+    padding: 16px;
+    border: solid black 2px;
+    margin-bottom: 32px;
+    flex-wrap: nowrap;
+    overflow-y: auto;
+}
+
+.ratings {
+    background-color: var(--text-background);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    height: max-content
+}
+
+.rating.title {
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.rating-score {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding-left: 16px;
+    align-items: center;
+    justify-content: start;
+}
+
+.score {
+    background-color: yellow;
+    padding: 2px;
+    width: 32px;
+    height: auto;
+    text-align: center;
+}
+
+.review-content {
+    flex: 5;
+    background-color: var(--text-background);
+    padding: 16px;
+}
+
+.title {
+    font-weight: 700;
+}
+
+.review-content-top.title {
+    padding-bottom: 8px;
+}
+
+.review-content-top {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: solid black 1px;
+    padding-bottom: 8px;
+}
+
+.course-comment.title {
+    margin-top: 8px;
+}
+
+.course-comment-container {
+    margin-bottom: 16px;
+}
+
+.misc-rating {
+    margin-bottom: 5px;
+}
+
+.answer {
+    font-weight: normal;
+}
+
+.review-bottom {
+    display: flex;
+    justify-content: right;
+    gap: 16px;
+}
+
+.like-button, .report-button {
+    background: none;
+	color: inherit;
+	border: none;
+	padding: 8px;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+    font-weight: 700;
+}
+
+.like-button:focus, .report-button:focus {
+    outline: revert;
+}
+
+/* Leave a Review form */
+
+.review-form {
+    display: flex;
+    gap: 32px;
+}
+
+.review-form-ratings {
+    background-color: var(--text-background);
+    flex: 1;
+    min-width: 185px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+}
+
+.star-rating {
+    direction: rtl;
+    display: inline-block;
+}
+.star-rating input[type="radio"] {
+    display: none;
+}
+.star-rating label {
+    color: grey;
+    font-size: 20px;
+    padding: 0;
+    cursor: pointer;
+}
+.star-rating label:hover,
+.star-rating label:hover ~ label,
+.star-rating input[type="radio"]:checked ~ label {
+    color: #ffcc00; /* Star color when hovered or selected */
+}
+.mandatory {
+  color: red;
+}
+
+.course-comment.form.title {
+    margin-top: 0;
+}
+
+.review-form {
+    flex: 1;
+}
+
+.form.review-content {
+    flex: 5;
+}
+
+textarea.form-control {
+    min-height: 120px;
+}
+
+.required-star {
+    color: red;
+}
+
+.form-group.row1 {
+    display: flex;
+    gap: 48px;
+}
+
+.would-recommend .grade-received {
+    flex-grow: 1;
+    flex-basis: 200px;
+}
+
+select option {
+    margin-bottom: 6px;
+}
+
+select.row2{
+    min-height: 180px;
+}
+
+.submit-button-container {
+    text-align: right;
+}
+
+.submit-button-container .btn {
+    padding: 16px 40px;
+}
+  
+.help-text {
+    font-size: 14px;
+    font-weight: normal;
+    font-style: italic;
+}
+
+/* Test colors for rating */
+.red {
+    background-color: red;
+}
+
+.orange {
+    background-color: orange;
+}
+
+.yellow {
+    background-color: yellow;
+}
+
+.yellow-green {
+    background-color: yellowgreen;
+}
+
+.green {
+    background-color: green;
+}

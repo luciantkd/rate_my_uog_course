@@ -1,7 +1,8 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 
 # Create your views here.
 from django.http import HttpResponse
+from django.urls import reverse
 
 from administrator.models import Admin
 from lecturer.models import Course
@@ -18,7 +19,7 @@ def reported_reviews_management(request):
     course_feedbacks = CourseFeedback.objects.all().values('course_id', 'courseId__courseName', 'review',
                                                            'reported').filter(reported__gt=0).order_by('reported')
     print(course_feedbacks)
-    return render(request, 'reported_reviews_management.html', {'course_feedbacks': course_feedbacks})
+    return render(request, 'administrator/reported_reviews_management.html', {'course_feedbacks': course_feedbacks})
 
     # return render(request, 'report_review_management.html')
 
@@ -66,7 +67,7 @@ def website_feedback_management(request):
     friendly_avg = friendly_avg / count
     aesthetic_avg = aesthetic_avg / count
 
-    return render(request, 'feedback_management.html',
+    return render(request, 'administrator/feedback_management.html',
                   {'course_feedbacks': website_feedbacks, 'overall_avg': overall_avg, 'friendly_avg': friendly_avg,
                    'aesthetic_avg': aesthetic_avg})
 
@@ -105,7 +106,7 @@ def website_feedback_delete(request):
 # @return: courses a list of courses
 def course_management(request):
     courses = Course.objects.all()
-    return render(request, 'administrator/course-management.html', {'courses': courses})
+    return render(request, 'administrator/course_management.html', {'courses': courses})
 
 
 
@@ -146,13 +147,29 @@ def course_edit_post(request):
 # @param course_id: the id of the course
 # @return: boolean success
 def course_delete(request):
-    course_id = request.GET.get('course_id')
-    course = get_object_or_404(Course, pk=course_id)
-    if course is not None:
+    if request.method == "POST":
+        course_id = request.POST.get('course_id')
+        course = get_object_or_404(Course, pk=course_id)
         course.delete()
-        return render(request, 'course_edit.html', {'success': True})
+        return redirect(reverse('administrator:course_management'))  # Redirect to the course management page
     else:
-        return render(request, 'course_edit.html', {'success': False})
+        # Optionally handle the case for non-POST requests if necessary
+        return redirect(reverse('administrator:course_management'))
+
+def base(request):
+    return render(request, 'administrator:course_management')
+
+# View for testing viewing the Feedback Management page
+# def feedback_management(request):
+#     return render(request, 'administrator/feedback_management.html')
+
+# View for testing viewing the Reported Reviews Management page
+# def reported_reviews_management(request):
+#     return render(request, 'administrator/reported_reviews_management.html')
+
+# View for testing viewing the Lecturer Management page
+def lecturer_management(request):
+    return render(request, 'administrator/lecturer_management.html')
 
 # def lecturer_management(request):
 

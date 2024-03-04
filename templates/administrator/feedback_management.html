@@ -1,0 +1,178 @@
+{% extends 'administrator/base_admin.html' %}
+{% load static %}
+
+{% block title %} Feedback Management {% endblock %}
+
+{% block additional_styles %}
+    <link rel="stylesheet" href="{% static 'css/administrator/style-admin-feedback-management.css' %}">
+{% endblock %}
+
+{% block pagetitle %} Feedback Management {% endblock %}
+
+{% block content %}
+<div class="overall-average-container">
+        <div class="overall-average-border">
+            <div class="overall-average">
+                <div class="overall-average-title">Overall average</div>
+                <div class="average">
+                    <div class="average-score">4.2</div>
+                    <div class="average-outof">out of 5.0</div>
+                </div>
+                <div class="num-reviews">Total: 54 reviews</div>
+            </div>
+        </div>
+
+        <table class="average-categories">
+            <tbody>
+                <tr class="rating-category">
+                    <td class="rating-category-name">User-friendly</td>
+                    <td class="progress-container w-75">
+                        <div class="progress">
+                            <div class="progress-bar w-75" role="progressbar" aria-valuenow="50" aria-valuemin="0"
+                                aria-valuemax="100"></div>
+                        </div>
+                    </td>
+                    <td class="rating-category-name">4.0/5.0</td>
+                </tr>
+                <tr class="rating-category">
+                    <td class="rating-category-name">Website Aesthetics</td>
+                    <td class="progress-container w-25">
+                        <div class="progress">
+                            <div class="progress-bar w-50" role="progressbar" aria-valuenow="50" aria-valuemin="0"
+                                aria-valuemax="100"></div>
+                        </div>
+                    </td>
+                    <td class="rating-category-name">2.5/5.0</td>
+                </tr>
+        </table>
+    </div> <!-- end of average-->
+
+        <div>
+            <div class="table-scroll">
+                <!-- Table to filter -->
+                <table class="table" id="dataTable">
+                    <thead>
+                        <tr>
+                          <th>Overall</th>
+                          <th>User-friendly</th>
+                          <th>Website Aesthetics</th>
+                          <th>Date Posted</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr onclick="window.location='#';">
+                          <td>* * * * *</td>
+                          <td>* * *</td>
+                          <td>* * * * *</td>
+                          <td>12 Apr 2023</td>
+                          <td>
+                            <button class="btn btn-danger">Delete</button>
+                          </td>
+                        </tr>
+                        <tr onclick="window.location='#';">
+                            <td>* * * * *</td>
+                            <td>* * *</td>
+                            <td>* * * * *</td>
+                            <td>12 Apr 2023</td>
+                            <td>
+                              <button class="btn btn-danger">Delete</button>
+                            </td>
+                          </tr>
+                          <tr onclick="window.location='#';">
+                            <td>* * * * *</td>
+                            <td>* * *</td>
+                            <td>* * * * *</td>
+                            <td>12 Apr 2023</td>
+                            <td>
+                              <button class="btn btn-danger">Delete</button>
+                            </td>
+                          </tr>
+                          <tr onclick="window.location='#';">
+                            <td>* * * * *</td>
+                            <td>* * *</td>
+                            <td>* * * * *</td>
+                            <td>12 Apr 2023</td>
+                            <td>
+                              <button class="btn btn-danger">Delete</button>
+                            </td>
+                          </tr>
+                          <tr onclick="window.location='#';">
+                            <td>* * * * *</td>
+                            <td>* * *</td>
+                            <td>* * * * *</td>
+                            <td>12 Apr 2023</td>
+                            <td>
+                              <button class="btn btn-danger">Delete</button>
+                            </td>
+                          </tr>
+                          <tr onclick="window.location='#';">
+                            <td>* * * * *</td>
+                            <td>* * *</td>
+                            <td>* * * * *</td>
+                            <td>12 Apr 2023</td>
+                            <td>
+                              <button class="btn btn-danger">Delete</button>
+                            </td>
+                          </tr>
+                          <tr onclick="window.location='#';">
+                            <td>* * * * *</td>
+                            <td>* * *</td>
+                            <td>* * * * *</td>
+                            <td>12 Apr 2023</td>
+                            <td>
+                              <button class="btn btn-danger">Delete</button>
+                            </td>
+                          </tr>
+                          <tr onclick="window.location='#';">
+                            <td>* * * * *</td>
+                            <td>* * *</td>
+                            <td>* * * * *</td>
+                            <td>12 Apr 2023</td>
+                            <td>
+                              <button class="btn btn-danger">Delete</button>
+                            </td>
+                          </tr>
+                          <tr onclick="window.location='#';">
+                            <td>* * * * *</td>
+                            <td>* * *</td>
+                            <td>* * * * *</td>
+                            <td>12 Apr 2023</td>
+                            <td>
+                              <button class="btn btn-danger">Delete</button>
+                            </td>
+                          </tr>
+                          <tr onclick="window.location='#';">
+                            <td>* * * * *</td>
+                            <td>* * *</td>
+                            <td>* * * * *</td>
+                            <td>12 Apr 2023</td>
+                            <td>
+                              <button class="btn btn-danger">Delete</button>
+                            </td>
+                          </tr>
+                          <tr onclick="window.location='#';">
+                            <td>* * * * *</td>
+                            <td>* * *</td>
+                            <td>* * * * *</td>
+                            <td>12 Apr 2023</td>
+                            <td>
+                              <button class="btn btn-danger">Delete</button>
+                            </td>
+                          </tr>
+                          <tr onclick="window.location='#';">
+                            <td>* * * * *</td>
+                            <td>* * *</td>
+                            <td>* * * * *</td>
+                            <td>12 Apr 2023</td>
+                            <td>
+                              <button class="btn btn-danger">Delete</button>
+                            </td>
+                          </tr>
+                        <!-- Repeat the pattern for each course -->
+                        <!-- ... -->
+                      </tbody>
+                </table>
+            </div>
+        </div> <!-- end of the main div content-->
+{% endblock %}

@@ -52,7 +52,7 @@ def search(request, course_name, program_type):
     return  render(request, 'rateMyUogCourse/course_rating_overview.html', context=context_dict)
 
 #For testing base.html
-def basePage(request):
+def base_page(request):
     return render(request,'base.html')
 
 
@@ -64,7 +64,8 @@ def save_website_feedback(request):
 
     print('Website feedback saved successfully.')
 
-
+def course_detail_page(request):
+   return render(request, 'student/course_detail.html')
    
 
 
