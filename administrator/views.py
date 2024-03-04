@@ -18,7 +18,7 @@ def reported_reviews_management(request):
     course_feedbacks = CourseFeedback.objects.all().values('course_id', 'courseId__courseName', 'review',
                                                            'reported').filter(reported__gt=0).order_by('reported')
     print(course_feedbacks)
-    return render(request, 'reported_reviews_management.html', {'course_feedbacks': course_feedbacks})
+    return render(request, 'administrator/reported_reviews_management.html', {'course_feedbacks': course_feedbacks})
 
     # return render(request, 'report_review_management.html')
 
@@ -66,7 +66,7 @@ def website_feedback_management(request):
     friendly_avg = friendly_avg / count
     aesthetic_avg = aesthetic_avg / count
 
-    return render(request, 'feedback_management.html',
+    return render(request, 'administrator/feedback_management.html',
                   {'course_feedbacks': website_feedbacks, 'overall_avg': overall_avg, 'friendly_avg': friendly_avg,
                    'aesthetic_avg': aesthetic_avg})
 
@@ -105,7 +105,7 @@ def website_feedback_delete(request):
 # @return: courses a list of courses
 def course_management(request):
     courses = Course.objects.all()
-    return render(request, 'administrator/course-management.html', {'courses': courses})
+    return render(request, 'administrator/course_management.html', {'courses': courses})
 
 
 
@@ -154,18 +154,18 @@ def course_delete(request):
     else:
         return render(request, 'course_edit.html', {'success': False})
 
-def course_management(request):
-    return render(request, 'administrator/course_management.html')
-
 def base(request):
     return render(request, 'administrator/base_admin.html')
 
-def feedback_management(request):
-    return render(request, 'administrator/feedback_management.html')
+# View for testing viewing the Feedback Management page
+# def feedback_management(request):
+#     return render(request, 'administrator/feedback_management.html')
 
-def reported_reviews_management(request):
-    return render(request, 'administrator/reported_reviews_management.html')
+# View for testing viewing the Reported Reviews Management page
+# def reported_reviews_management(request):
+#     return render(request, 'administrator/reported_reviews_management.html')
 
+# View for testing viewing the Lecturer Management page
 def lecturer_management(request):
     return render(request, 'administrator/lecturer_management.html')
 
