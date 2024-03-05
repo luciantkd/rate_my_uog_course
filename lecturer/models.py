@@ -17,7 +17,6 @@ class Course(models.Model):
     courseName = models.CharField(max_length=200)
     programType = models.CharField(max_length=4)
     semester = models.IntegerField()
-    feedbackNum = models.IntegerField(default=0)
     
     def __str__(self):
         return self.courseName

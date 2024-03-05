@@ -46,7 +46,7 @@
                   <td>{{ course.courseName }}</td>
                   <td>{{ course.lecturercourseassignment__lecturerId__lecturerName }}</td>
                   <td>{{ course.programType }}</td>
-                  <td>{{ course.feedbackNum }}</td> 
+                  <td> 0 </td>
                   <td>
                     <form action="{% url 'administrator:course_delete' %}" method="post">
                     {% csrf_token %}

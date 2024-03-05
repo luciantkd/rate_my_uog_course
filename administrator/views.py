@@ -14,12 +14,13 @@ def mainPage(request):
     return HttpResponse("Main Page")
 
 
-def reported_reviews_management(request):
+def report_review_management(request):
     # get course feedbacks where reported != 0, and join with course names, and sort by reported
-    course_feedbacks = CourseFeedback.objects.all().values('course_id', 'courseId__courseName', 'review',
+    course_feedbacks = CourseFeedback.objects.all().values('courseId', 'courseId__courseName', 'courseId__coursesearchtable__reviews',
                                                            'reported').filter(reported__gt=0).order_by('reported')
-    print(course_feedbacks)
-    return render(request, 'administrator/reported_reviews_management.html', {'course_feedbacks': course_feedbacks})
+    # print(course_feedbacks)
+    return render(request, "administrator/reported_reviews_management.html", {'course_feedbacks': course_feedbacks})
+    # return render(request, reverse('administrator:reported_reviews_management'), {'course_feedbacks': course_feedbacks})
 
     # return render(request, 'report_review_management.html')
 
@@ -107,7 +108,7 @@ def website_feedback_delete(request):
 def course_management(request):
     # courses = Course.objects.all()
     # course with lectrer name, and count of feedbacks
-    courses = Course.objects.all().values('courseId', 'courseName', 'programType', 'semester', 'feedbackNum', 'lecturercourseassignment__lecturerId__lecturerName').order_by('courseId')
+    courses = Course.objects.all().values('courseId', 'courseName', 'programType', 'semester', 'lecturercourseassignment__lecturerId__lecturerName').order_by('courseId')
     return render(request, 'administrator/course_management.html', {'courses': courses})
 
 
