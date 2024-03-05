@@ -16,7 +16,7 @@ def mainPage(request):
 
 def report_review_management(request):
     # get course feedbacks where reported != 0, and join with course names, and sort by reported
-    course_feedbacks = CourseFeedback.objects.all().values('courseId', 'courseId__courseName', 'courseId__coursesearchtable__reviews',
+    course_feedbacks = CourseFeedback.objects.all().values('feedbackId', 'courseId', 'courseId__courseName', 'courseId__coursesearchtable__reviews',
                                                            'reported').filter(reported__gt=0).order_by('reported')
     # print(course_feedbacks)
     return render(request, "administrator/reported_reviews_management.html", {'course_feedbacks': course_feedbacks})
