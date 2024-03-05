@@ -6,7 +6,8 @@ class Lecturer(models.Model):
     lecturerName = models.CharField(max_length=200)
     designation = models.CharField(max_length=250)
     password = models.TextField()
-    
+
+
     def __str__(self):
         return self.courseName
 
