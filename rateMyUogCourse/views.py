@@ -29,26 +29,41 @@ def user_login(request):
         
         if Student.objects.filter(email = email):
             user = Student.objects.filter(email = email)[0]
-            checkPassword(password, user.password)
-            request.session['user_email'] = email
-            # TODO: redirect to student page
-            return redirect(mainPage)
+            if checkPassword(password, user.password):
+                request.session['user_email'] = user.email
+                request.session['user_type'] = 'student'
+                request.session['user_id'] = user.guid
+                # TODO: redirect to student page
+                return redirect('rateMyUogCourse:search', course_name='None', program_type='None')
+            else: 
+                # TODO: change this into error context or pop up block
+                return HttpResponse("Incorrect password")
             
         elif Lecturer.objects.filter(email = email):
             user = Lecturer.objects.filter(email = email)[0]
-            checkPassword(password, user.password)
-            request.session['user_email'] = email
-            # TODO: redirect to lecturer page
-            return redirect(mainPage)
+            if checkPassword(password, user.password):
+                request.session['user_email'] = user.email
+                request.session['user_type'] = 'lecturer'
+                request.session['user_id'] = user.lecturerId
+                # TODO: redirect to lecturer page
+                return redirect(reverse('lecturer:course_overview'), lecturer_id = user.lecturerId)
+            else: 
+                # TODO: change this into error context or pop up block
+                return HttpResponse("Incorrect password")
             
         elif Admin.objects.filter(email = email):
             user = Admin.objects.filter(email = email)[0]
-            checkPassword(password, user.password)
-            request.session['user_email'] = email
-            # TODO: redirect to administrator page
-            return redirect(mainPage)
+            if checkPassword(password, user.password):
+                request.session['user_email'] = user.email
+                request.session['user_type'] = 'administrator'
+
+                return redirect(reverse('administrator:course_management'))
+            else: 
+                # TODO: change this into error context or pop up block
+                return HttpResponse("Incorrect password")
             
         else:
+            # TODO: change this into error context or pop up block
             return HttpResponse('Invalid login details')
 
     return render(request, 'rateMyUogCourse/login.html')
@@ -91,7 +106,8 @@ def signup(request):
                 return redirect(reverse('rateMyUogCourse:login'))
                 
             else:
-                # TODO: if password not the same
+                # if the password is not the same as confirmPassword
+                # TODO: change this into error context or pop up block
                 return render(request, 'rateMyUogCourse/signup.html')
 
     return render(request, 'rateMyUogCourse/signup.html') 
