@@ -27,12 +27,6 @@ html, body {
     position: relative; /* Position relative to allow absolute positioning of pseudo-elements */
     padding-left: 20px; /* Add space for the arrow icon */
   }
-  .header nav a:before {
-    content: '→'; /* Arrow icon */
-    position: absolute;
-    left: 0; /* Position the arrow to the left of the text */
-    color: white !important; /* Force white color for the arrow icon */
-  }
   .container {
     flex: 1; /* This will make the container take up all available space */
     width: 80%;
@@ -82,4 +76,6 @@ html, body {
     color: white;
     text-decoration: none;
   }  
+  
+
   
