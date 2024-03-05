@@ -4,6 +4,7 @@ from django.db import models
 
 class Admin(models.Model):
     userName = models.CharField(max_length=20)
+    email = models.CharField(max_length=100)
     password = models.CharField(max_length=8)
     
     def __str__(self):
