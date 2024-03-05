@@ -7,7 +7,8 @@ class Lecturer(models.Model):
     designation = models.CharField(max_length=250)
     email = models.CharField(max_length=100)
     password = models.TextField()
-    
+
+
     def __str__(self):
         return self.courseName
 

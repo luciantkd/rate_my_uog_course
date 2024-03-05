@@ -44,9 +44,9 @@
                 <tr onclick="window.location='#';">
                   <td>{{ course.courseId }}</td>
                   <td>{{ course.courseName }}</td>
-                  <td>Prof. John Doe</td> <!-- Assuming lecturer is not part of your model -->
+                  <td>{{ course.lecturercourseassignment__lecturerId__lecturerName }}</td>
                   <td>{{ course.programType }}</td>
-                  <td>54</td> <!-- Assuming reviews are not part of your model -->
+                  <td> 0 </td>
                   <td>
                     <form action="{% url 'administrator:course_delete' %}" method="post">
                     {% csrf_token %}
