@@ -99,3 +99,112 @@ main {
     width: 47%;
     margin: 10px; 
 }
+
+/* Reviews list */
+
+.review-container {
+    display: flex;
+    gap: 24px;
+    padding: 16px;
+    border: solid black 2px;
+    margin-bottom: 32px;
+    flex-wrap: nowrap;
+    overflow-y: auto;
+}
+
+
+.ratings {
+    background-color: var(--text-background);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    height: max-content
+}
+
+.rating.title {
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.rating-score {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding-left: 16px;
+    align-items: center;
+    justify-content: start;
+}
+
+.score {
+    padding: 2px;
+    width: 32px;
+    height: auto;
+    text-align: center;
+    color: white; /* Assuming you want white text */
+}
+
+/* Add specific classes for each score range */
+.score-1 { background-color: #ff4c4c; } /* red */
+.score-2 { background-color: #ffad33; } /* orange */
+.score-3 { background-color: #fffb96; } /* yellow */
+.score-4 { background-color: #90ee90; } /* light green */
+.score-5 { background-color: #008000; } /* green */
+
+.review-content {
+    flex: 5;
+    background-color: var(--text-background);
+    padding: 16px;
+}
+
+.title {
+    font-weight: 700;
+}
+
+.review-content-top.title {
+    padding-bottom: 8px;
+}
+
+.review-content-top {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: solid black 1px;
+    padding-bottom: 8px;
+}
+
+.course-comment.title {
+    margin-top: 8px;
+}
+
+.course-comment-container {
+    margin-bottom: 16px;
+}
+
+.misc-rating {
+    margin-bottom: 5px;
+}
+
+.answer {
+    font-weight: normal;
+}
+
+.review-bottom {
+    display: flex;
+    justify-content: right;
+    gap: 16px;
+}
+
+.like-button, .report-button {
+    background: none;
+	color: inherit;
+	border: none;
+	padding: 8px;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+    font-weight: 700;
+}
+
+.like-button:focus {
+    outline: revert;
+}

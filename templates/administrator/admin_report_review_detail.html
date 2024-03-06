@@ -20,9 +20,71 @@
         <label for="Name">Name:</label>
         <input id="Name" name="Name" type="text" value="Basic Machine Learning">
     </div>
+    <div class="review-container"> <!-- the first review, copy as many as needed -->
+
+        <div class="ratings">
+            <div class="rating title">Ratings</div>
+            <div class="rating-score">
+                <div class="score score-1">1</div>
+                <div>Difficulty</div>
+            </div>
+            <div class="rating-score">
+                <div class="score score-2">2</div>
+                <div>Usefulness</div>
+            </div>
+            <div class="rating-score">
+                <div class="score score-3">3</div>
+                <div>Workload</div>
+            </div>
+            <div class="rating-score">
+                <div class="score score-5">5</div>
+                <div>Professor Rating</div>
+            </div>
+        </div>
+
+        <div class="review-content">
+            <div class="review-content-top title">
+                <div class="course-when-taken">When Taken: Semester 2 2022</div>
+                <div class="post-date">7 Sept 2022</div>
+            </div>
+            <div class="course-comment-container">
+                <div class="course-comment title">Comments on Course</div>
+                <div class="course-comment-content">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+                    Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis
+                    parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu,
+                    pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet
+                    nec, vulputate eget, arcu. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget
+                    condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam
+                    quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante
+                    tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam
+                    sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh.
+                    Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus
+                    nunc,</div>
+            </div>
+            <div class="miscellaneous-ratings">
+                <div class="misc-rating title">Would recommend: <span class="answer">No</span></div>
+                <div class="misc-rating title">Grade: <span class="answer">B3</span></div>
+                <div class="misc-rating title">Exam Format: <span class="answer">Multiple Choice Questions,
+                        Short Answer Questions, Essay Questions</span></div>
+                <div class="evaluation-methods-label title">Evaluation Methods:</div>
+                <ul class="evaluation-methods">
+                    <li>Attendance Grade</li>
+                    <li>Class Participation Grade</li>
+                    <li>Individual Coursework</li>
+                    <li>Group Coursework</li>
+                    <li>Quiz</li>
+                    <li>Exam</li>
+                </ul>
+                <div class="review-bottom">
+                    <button class="like-button btn btn-primary">👍 105</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="button-top-row">
         <button type="button" class="btn btn-danger reject-button" style="background-color: red;">Reject</button>
         <button type="submit" class="btn btn-primary approve-button">Approve</button>
+    </div>
     </div>
 </form>
 {% endblock %}
