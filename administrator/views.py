@@ -173,6 +173,26 @@ def lecturer_management(request):
 
 # def lecturer_management(request):
 
+def course_edit(request):
+    return render(request, 'administrator/course_edit.html')
+
+def create_course_management(request):
+    return render(request, 'administrator/create_course_management.html')
+
+def feedback_detail(request):
+    return render(request, 'administrator/feedback_detail.html')
+
+def lecturer_edit(request):
+    return render(request, 'administrator/lecturer_edit.html')
+
+def create_lecturer_account(request):
+    return render(request, 'administrator/create_lecturer_account.html')
+
+def report_review_detail(request):
+    return render(request, 'administrator/report_review_detail.html')
+
+
+
 
 # TODO: session check
 # def session_check(request):

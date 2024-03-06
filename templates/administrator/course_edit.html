@@ -1,0 +1,39 @@
+{% extends 'administrator/base_admin.html' %}
+
+{% load static %}
+
+{% block title %} Course Management {% endblock %}
+
+{% block additional_styles %}
+<link rel="stylesheet" href="{% static 'css/administrator/style-admin-course-edit.css' %}">
+{% endblock %}
+
+{% block pagetitle %} Course Edit {% endblock %}
+
+{% block content %}
+<form action="/path-to-your-edit-handler" method="post">
+    <div>
+        <label for="courseID">Course ID:</label>
+        <input id="CourseID" name="course_id" type="text" value="COMPSCI5044">
+    <div>
+        <label for="courseName">Name:</label>
+        <input id="courseName" name="course_name" type="text" value="Basic Algorithms and Data Structures">
+    </div>
+    <div>
+        <label for="professor">Professor Teaching:</label>
+        <input id="professor" name="professor" type="text" placeholder="Search By Name or Email...">
+    </div>
+    <div>
+        <label for="programType">Program Type:</label>
+        <select id="programType" name="program_type">
+            <option value="IT+">IT+</option>
+            <option value="CS+">CS+</option>
+            <option value="Both">Both</option>
+        </select>
+    </div>
+    <div class="buttons-right">
+        <button type="submit" class="btn btn-primary save-button mr-2">Save</button>
+<button type="button" class="btn btn-danger delete-button" style="background-color: red;">Delete</button>
+    </div>
+</form>
+{% endblock %}
