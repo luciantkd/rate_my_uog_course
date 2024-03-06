@@ -14,7 +14,7 @@ def mainPage(request):
     return HttpResponse("Main Page")
 
 
-def report_review_management(request):
+def reported_reviews_management(request):
     # get course feedbacks where reported != 0, and join with course names, and sort by reported
     course_feedbacks = CourseFeedback.objects.all().values('feedbackId', 'courseId', 'courseId__courseName', 'courseId__coursesearchtable__reviews',
                                                            'reported').filter(reported__gt=0).order_by('reported')
@@ -193,8 +193,8 @@ def lecturer_edit(request):
 def create_lecturer_account(request):
     return render(request, 'administrator/create_lecturer_account.html')
 
-def report_review_detail(request):
-    return render(request, 'administrator/report_review_detail.html')
+def admin_report_review_detail(request):
+    return render(request, 'administrator/admin_report_review_detail.html')
 
 
 

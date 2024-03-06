@@ -1,0 +1,36 @@
+{% extends 'administrator/base_admin.html' %}
+
+{% load static %}
+
+{% block title %} Lecturer Edit {% endblock %}
+
+{% block additional_styles %}
+<link rel="stylesheet" href="{% static 'css/administrator/style-admin-lecturer-edit.css' %}">
+{% endblock %}
+
+{% block pagetitle %} Lecturer Edit {% endblock %}
+
+{% block content %}
+<form action="/path-to-your-edit-handler" method="post">
+    <div>
+        <label for="Name">Name:</label>
+        <input id="Name" name="Name" type="text" value="Dai Hang">
+    <div>
+        <label for="Designation">Designation:</label>
+        <input id="Designation" name="Designation" type="text" value="Lecturer for Machine Learning">
+    </div>
+    <div>
+        <label for="Email">Email:</label>
+        <input id="Email" name="Email" type="email" value="Hang.Dai@glasgow.ac.uk" required>
+    </div>
+    <div>
+        <label for="Password">Password:</label>
+        <input id="Password" name="Password" type="password" required>
+    </div>
+    <div class="button-top-row">
+        <button type="button" class="btn return-button">Return</button>
+        <button type="submit" class="btn btn-primary save-button">Save</button>
+    </div>
+    <button type="button" class="btn btn-danger delete-button" style="background-color: red;">Delete Account</button>
+</form>
+{% endblock %}

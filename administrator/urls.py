@@ -23,5 +23,5 @@ urlpatterns = [
     path ('feedback_detail/', views.feedback_detail, name='feedback_detail'),
     path ('lecturer_edit/', views.lecturer_edit, name='lecturer_edit'),
     path ('create_lecturer_account/', views.create_lecturer_account, name='create_lecturer_account'),
-    path ('report_review_detail/', views.report_review_detail, name='report_review_detail'),
+    path ('admin_report_review_detail/', views.admin_report_review_detail, name='admin_report_review_detail'),
 ]

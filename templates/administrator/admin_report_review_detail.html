@@ -1,0 +1,28 @@
+{% extends 'administrator/base_admin.html' %}
+
+{% load static %}
+
+{% block title %} Report Review Detail {% endblock %}
+
+{% block additional_styles %}
+<link rel="stylesheet" href="{% static 'css/administrator/style-admin-report-review-detail.css' %}">
+{% endblock %}
+
+{% block pagetitle %} Report Review Detail {% endblock %}
+
+{% block content %}
+<form action="/path-to-your-edit-handler" method="post">
+    <div>
+        <label for="CourseID">Course ID:</label>
+        <input id="courseID" name="course_id" type="text" value="COMPSCI404">
+    </div>
+    <div>
+        <label for="Name">Name:</label>
+        <input id="Name" name="Name" type="text" value="Basic Machine Learning">
+    </div>
+    <div class="button-top-row">
+        <button type="button" class="btn btn-danger reject-button" style="background-color: red;">Reject</button>
+        <button type="submit" class="btn btn-primary approve-button">Approve</button>
+    </div>
+</form>
+{% endblock %}

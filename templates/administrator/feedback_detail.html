@@ -1,0 +1,57 @@
+{% extends 'administrator/base_admin.html' %}
+
+{% load static %}
+
+{% block title %} Feedback Detail {% endblock %}
+
+{% block additional_styles %}
+<link rel="stylesheet" href="{% static 'css/administrator/style-admin-feedback-detail.css' %}">
+{% endblock %}
+
+{% block pagetitle %} Feedback Detail {% endblock %}
+
+{% block content %}
+<form action="/path-to-your-edit-handler" method="post">
+    <div>
+        <label for="DatePosted">Date Posted:</label>
+        <input id="dateposted" name="date_posted" type="date" value="07-01-2024">
+    </div>
+    <div class="feedback-rating">
+        <label>Overall:</label>
+        <div class="star-rating">
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+        </div>
+    </div>
+    <div class="feedback-rating">
+        <label>User-Friendly:</label>
+        <div class="star-rating">
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+        </div>
+    </div>
+    <div class="feedback-rating">
+        <label>Website Aesthetics:</label>
+        <div class="star-rating">
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+        </div>
+    </div>
+    <div>
+        <label for="Explanation">Explanation:</label>
+        <textarea id="explanation" name="explanation" rows="4" cols="50"></textarea>
+    </div>
+    <div class="buttons-right">
+        <button type="button" class="btn btn-danger delete-button" style="background-color: red;">Delete</button>
+    </div>
+</form>
+{% endblock %}
