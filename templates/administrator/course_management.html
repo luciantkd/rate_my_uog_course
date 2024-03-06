@@ -47,7 +47,12 @@
                   <td>{{ course.lecturercourseassignment__lecturerId__lecturerName }}</td>
                   <td>{{ course.programType }}</td>
                   <td> 0 </td>
-                  <td>
+                  <td class="buttons">
+                    <form action="{% url 'administrator:course_delete' %}" method="post">
+                      {% csrf_token %}
+                      <input type="hidden" name="course_id" value="{{ course.courseId }}">
+                      <button type="submit" class="btn btn-primary">Edit</button>
+                      </form>
                     <form action="{% url 'administrator:course_delete' %}" method="post">
                     {% csrf_token %}
                     <input type="hidden" name="course_id" value="{{ course.courseId }}">
