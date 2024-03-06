@@ -5,7 +5,7 @@ from django.http import HttpResponse
 from django.urls import reverse
 
 from administrator.models import Admin
-from lecturer.models import Course
+from lecturer.models import Course, Lecturer
 from student.models import CourseFeedback
 from rateMyUogCourse.models import WebsiteFeedback, CourseSearchTable
 
@@ -14,12 +14,13 @@ def mainPage(request):
     return HttpResponse("Main Page")
 
 
-def reported_reviews_management(request):
+def report_review_management(request):
     # get course feedbacks where reported != 0, and join with course names, and sort by reported
-    course_feedbacks = CourseFeedback.objects.all().values('course_id', 'courseId__courseName', 'review',
+    course_feedbacks = CourseFeedback.objects.all().values('feedbackId', 'courseId', 'courseId__courseName', 'courseId__coursesearchtable__reviews',
                                                            'reported').filter(reported__gt=0).order_by('reported')
-    print(course_feedbacks)
-    return render(request, 'administrator/reported_reviews_management.html', {'course_feedbacks': course_feedbacks})
+    # print(course_feedbacks)
+    return render(request, "administrator/reported_reviews_management.html", {'course_feedbacks': course_feedbacks})
+    # return render(request, reverse('administrator:reported_reviews_management'), {'course_feedbacks': course_feedbacks})
 
     # return render(request, 'report_review_management.html')
 
@@ -105,7 +106,9 @@ def website_feedback_delete(request):
 # This method is to show the course management page
 # @return: courses a list of courses
 def course_management(request):
-    courses = Course.objects.all()
+    # courses = Course.objects.all()
+    # course with lectrer name, and count of feedbacks
+    courses = Course.objects.all().values('courseId', 'courseName', 'programType', 'semester', 'lecturercourseassignment__lecturerId__lecturerName').order_by('courseId')
     return render(request, 'administrator/course_management.html', {'courses': courses})
 
 
@@ -169,7 +172,9 @@ def base(request):
 
 # View for testing viewing the Lecturer Management page
 def lecturer_management(request):
-    return render(request, 'administrator/lecturer_management.html')
+    # get lecturer list except passwords
+    lecturers = Lecturer.objects.all().values('lecturerId', 'lecturerName', 'designation').order_by('lecturerId')
+    return render(request, 'administrator/lecturer_management.html', {'lecturers': lecturers})
 
 # def lecturer_management(request):
 
