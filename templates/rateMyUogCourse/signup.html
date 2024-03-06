@@ -18,7 +18,7 @@
         <h2>Sign Up</h2>
         <p>Sign up to start reviewing courses!</p>
 
-        <form method="POST">
+        <form id = "signupForm" method="POST">
 			{% csrf_token %}
             <div class="input-group">
                 <label for="name">Name</label>
@@ -79,7 +79,32 @@
             // toggle the eye / eye slash icon
             this.classList.toggle('bi-eye');
         });
+		
+		
+		document.getElementById("signupForm").addEventListener("submit", function (e) {
+			e.preventDefault();
+			// check email domain
+			if(document.getElementById('email').value.split("@")[1].toLowerCase() !== 'student.gla.ac.uk'){
+				alert("Please use UofG email to sign up!");
+				document.getElementById("signupForm").reset();
+			}else{
+				// check the password equals to confirm password
+				if (password.value === confirmPassword.value){
+					alert("Successfully signed up! \n\nRedirecting to login page...");
+					document.getElementById("signupForm").submit();
+					
+				}else{
+					alert("Cofirm password is not the same!");
+					
+					document.getElementById("password").value = "";
+					document.getElementById("confirm-password").value = "";
+				}
+			}
+
+		});
+
     </script>
+
 
 </body>
 

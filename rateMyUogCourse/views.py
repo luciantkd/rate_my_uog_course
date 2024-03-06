@@ -23,9 +23,8 @@ def user_login(request):
 
     if request.method == 'POST':
 
-        email = request.POST.get('email')
+        email = request.POST.get('email').lower()
         password = request.POST.get('password')
-        # user = Student.objects.filter(email = email)[0]
         
         if Student.objects.filter(email = email):
             user = Student.objects.filter(email = email)[0]
@@ -64,7 +63,9 @@ def user_login(request):
             
         else:
             # TODO: change this into error context or pop up block
-            return HttpResponse('Invalid login details')
+            context_dict = {}
+            context_dict['errorMessage'] = 'Invalid login details'
+            return render(request, 'rateMyUogCourse/login.html', context_dict)
 
     return render(request, 'rateMyUogCourse/login.html')
 
@@ -74,20 +75,20 @@ def signup(request):
 
     if request.method == 'POST':
 
-        email = request.POST.get('email')
+        email = request.POST.get('email').lower()
         name = request.POST.get('name')
         password = request.POST.get('password')
         programType = request.POST.get('program_type')
         confirmPassword = request.POST.get('confirm_password')
         
-        # check if the email is already signed update
+        # check if the email is already signed up
         if Student.objects.filter(email=email):
             return HttpResponse('Already signed up')
         else:
             # check if the email is UofG student
             emailDomain = email.split("@")[1]
             if emailDomain != 'student.gla.ac.uk':
-                return HttpResponse('You are not a student of UofG.')
+                return HttpResponse('Use UofG email to sign up.')
             
             # check if the password is the same
             if password == confirmPassword:

@@ -16,7 +16,7 @@
     <div class="login-container">
         <h2>Welcome Back</h2>
         <p>Please log in to continue</p>
-        <form method="POST">
+        <form id='loginForm' method="POST">
 			{% csrf_token %}
             <div class="input-group">
                 <label for="email">Email Address</label>
@@ -27,6 +27,7 @@
                 <input type="password" id="password" name="password" required>
                 <i class="bi bi-eye-slash" id="togglePassword"></i>
             </div>
+			<div class="input-group" style="color:red" id="error">{{ errorMessage }}</div>
             <button type="submit">Log In</button>
         </form>
         <div class="signup-link">
@@ -45,6 +46,13 @@
             // toggle the eye / eye slash icon
             this.classList.toggle('bi-eye');
         });
+		
+		// use to clear the error message
+		document.getElementById("loginForm").addEventListener("submit", function(e) {
+			document.getElementById("error").innerHTML = "";
+			
+		});
+		
     </script>
 </body>
 
