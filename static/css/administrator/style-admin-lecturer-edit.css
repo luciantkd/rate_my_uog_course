@@ -1,0 +1,121 @@
+input, select, textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 6px 0 16px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 0;
+    font-size: 1rem;
+}
+
+.form-section {
+    display: block;
+}
+
+input[type="submit"], custom-button {
+    background-color: blue;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+input[type="submit"]:hover, button:hover {
+    background-color: blue;
+}
+
+.save-button {
+    background-color: #2196F3;
+}
+
+.save-button:hover {
+    background-color: #1976D2;
+}
+
+input {
+    max-width: none;
+}
+
+select {
+    max-width: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.table-scroll {
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+tbody > tr:hover {
+    cursor: pointer;
+}
+
+.table thead tr th {
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 10;
+}
+
+.container {
+    width: 90%;
+    margin: 0 auto;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #333;
+    margin-top: 0;
+}
+
+label {
+    display: block;
+    margin: 8px 0;
+}
+
+.logout-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 16px;
+}
+
+main {
+    padding-right: 30px;
+}
+
+.button-top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    margin-bottom: 10px;
+}
+
+.return-button {
+    border: 1px solid #ccc;
+    padding: 8px 16px;
+    padding-left: 20px;
+    background-color: #f8f9fa;
+    color: #000; 
+    width: 40%; 
+}
+
+.return-button:hover {
+    background-color: #e2e6ea; 
+}
+
+.save-button {
+    margin-left: auto; 
+    padding: 8px 16px;
+    padding-right: 20px;
+    width: 40%; 
+}
+
+.delete-button {
+    display: block;
+    width: 70%; 
+    margin: 10px auto; 
+    padding: 8px 16px; 
+}

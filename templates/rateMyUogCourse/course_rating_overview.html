@@ -1,61 +1,60 @@
+{% extends "base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>All Courses Reviews</title>
-<link rel="stylesheet" type="text/css" href="{% static 'css/rateMyUogCourse/style.css' %}">
-</head>
-<body>
-  <header class="header">
-    <img src="" alt="UofG Logo" class="logo">
-    <nav>
-      <a href="/">Home</a>
-      <a href="#">Courses</a>
-      <a href="{% url 'rateMyUogCourse:signup' %}">Sign Up</a>
-      <a href="{% url 'rateMyUogCourse:login' %}">Login</a>
-    </nav>
-  </header>
-  <div class="container">
-    <div class="search-bar">
-      <input type="text" placeholder="Search a course here...">
-      <select>
-        <option value="program_type">Program Type</option>
-        <!-- Add more options here -->
-      </select>
-    </div>
-    <table>
-      <tr>
-        <th>Code</th>
-        <th>Name</th>
-        <th>Overall</th>
-        <th>Difficulty</th>
-        <th>Usefulness</th>
-        <th>Workload</th>
-        <th>Reviews</th>
-        <th>% Would Recommend</th>
-      </tr>
-      <!-- Repeat this block for each course -->
-      {% for value in search_results.values %}
-      <tr>
-          <td>{{ value.courseId_id }}</td>
-          <td> {{ value.courseName }}</td>
-          <td> {{ value.overall }}</td>
-          <td> {{ value.difficulty }}</td>
-          <td> {{ value.usefulness }}</td>
-          <td> {{ value.workload }}</td>
-          <td> {{ value.reviews }}</td>
-          <td> {{ value.wouldRecommend }}</td>
-      </tr>
-      {% endfor %}
-      <!-- Add more course rows here -->
-    </table>
-  </div>
 
-  <footer class="footer">
-    <p>RateMyUofGCourse © 2024. All rights reserved.</p>
-    <p>Have concerns about our website? <a href="{% url 'rateMyUogCourse:feedback' %}">Give your feedback here!</a></p>
-  </footer>
-</body>
-</html>
+{% block title %}Home - Rate My UofG Course{% endblock %}
+{% block additional_styles %}
+<link rel="stylesheet" href="{% static 'css/rateMyUogCourse/styles-homepage.css' %}">{% endblock %}
+{% block content %}
+<h1>All course reviews</h1>
+<div class="container">
+  <div class="search">
+      <input class="form-control" id="myInput" type="text" placeholder="Search a course here..">
+    <!-- Dropdown for filtering -->
+  </div>
+  <div class="filter-add-section">
+    <select class="form-control btn-secondary" id="tableFilter" placeholder="Course:">
+      <option value="" selected disabled>Select a Program</option>
+      <option class="dropdown-item" value="">All</option>
+      <option class="dropdown-item" value="IT+">IT+</option>
+      <option class="dropdown-item" value="CS+">CS+</option>
+      <!-- more options as needed -->
+    </select>
+  </div>
+</div>
+<table class="table" id="dataTable">
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Name</th>
+      <th>Overall</th>
+      <th>Difficulty</th>
+      <th>Usefulness</th>
+      <th>Workload</th>
+      <th>Reviews</th>
+      <th>% Would Recommend</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- Repeat this block for each course -->
+    {% for value in search_results.values %}
+    <tr onclick="window.location='#';">
+      <td>{{ value.courseId_id }}</td>
+      <td> {{ value.courseName }}</td>
+      <td><span class="star-rating" data-rating="{{ value.overall }}"></span></td>
+      <td><span class="star-rating" data-rating="{{ value.difficulty }}"></span></td>
+      <td><span class="star-rating" data-rating="{{ value.usefulness }}"></span></td>
+      <td><span class="star-rating" data-rating="{{ value.workload }}"></span></td>
+      <td> {{ value.reviews }}</td>
+      <td> {{ value.wouldRecommend }}</td>
+    </tr>
+    {% endfor %}
+
+    <script src="{% static 'js/starRating.js' %}"></script>
+
+  </tbody>
+</table>
+
+<!-- Add more course rows here -->
+</div>
+
+{% endblock %}
