@@ -5,6 +5,7 @@ class Lecturer(models.Model):
     lecturerId = models.CharField(max_length=20, unique = True, primary_key=True)
     lecturerName = models.CharField(max_length=200)
     designation = models.CharField(max_length=250)
+    email = models.CharField(max_length=100)
     password = models.TextField()
 
 

@@ -18,7 +18,8 @@
         <h2>Sign Up</h2>
         <p>Sign up to start reviewing courses!</p>
 
-        <form action="/submit-your-form" method="POST">
+        <form method="POST">
+			{% csrf_token %}
             <div class="input-group">
                 <label for="name">Name</label>
                 <input type="text" id="name" name="name" required>
