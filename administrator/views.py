@@ -68,8 +68,10 @@ def website_feedback_management(request):
     friendly_avg = friendly_avg / count
     aesthetic_avg = aesthetic_avg / count
 
+    print(website_feedbacks)
+
     return render(request, 'administrator/feedback_management.html',
-                  {'course_feedbacks': website_feedbacks, 'overall_avg': overall_avg, 'friendly_avg': friendly_avg,
+                  {'website_feedbacks': website_feedbacks, 'overall_avg': overall_avg, 'friendly_avg': friendly_avg,
                    'aesthetic_avg': aesthetic_avg, 'count':count})
 
 
