@@ -70,7 +70,7 @@ def website_feedback_management(request):
 
     return render(request, 'administrator/feedback_management.html',
                   {'course_feedbacks': website_feedbacks, 'overall_avg': overall_avg, 'friendly_avg': friendly_avg,
-                   'aesthetic_avg': aesthetic_avg})
+                   'aesthetic_avg': aesthetic_avg, 'count':count})
 
 
 # Admin - Website Feedback Review Detail
