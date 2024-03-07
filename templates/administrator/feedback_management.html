@@ -68,7 +68,7 @@
           <td>{{ feedback.overall|times:"*" }}</td> <!-- Custom template filter to convert numeric rating to stars -->
           <td>{{ feedback.friendly|times:"*" }}</td>
           <td>{{ feedback.aesthetic|times:"*" }}</td>
-          <td>{{ feedback.feedbackTime|times:"*" }}</td>
+          <td>{{ feedback.feedbackTime|date:"d M Y" }}</td>
           <td>
             <button class="btn btn-primary">Detail</button>
           </td>
