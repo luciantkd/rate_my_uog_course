@@ -6,6 +6,7 @@
 
 {% block additional_styles %}
 <link rel="stylesheet" href="{% static 'css/administrator/style-admin-feedback-management.css' %}">
+<script src="{% static 'js/admin_feedback_management.js' %}"></script>
 {% endblock %}
 
 {% block pagetitle %} Feedback Management {% endblock %}
@@ -29,21 +30,21 @@
         <td class="rating-category-name">User-friendly</td>
         <td class="progress-container w-75">
           <div class="progress">
-            <div class="progress-bar w-75" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+            <div class="progress-bar friendly-progress-bar" role="progressbar" aria-valuenow="{{ friendly_avg }}" aria-valuemin="0" aria-valuemax="5" data-value="{{ friendly_avg }}">
             </div>
           </div>
         </td>
-        <td class="rating-category-name">4.0/5.0</td>
+        <td class="rating-category-name">{{ friendly_avg }}/5.0</td>
       </tr>
       <tr class="rating-category">
         <td class="rating-category-name">Website Aesthetics</td>
-        <td class="progress-container w-25">
+        <td class="progress-container w-75">
           <div class="progress">
-            <div class="progress-bar w-50" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+            <div class="progress-bar aesthetic-progress-bar" role="progressbar" aria-valuenow="{{ aesthetic_avg }}" aria-valuemin="0" aria-valuemax="5" data-value="{{ aesthetic_avg }}">
             </div>
           </div>
         </td>
-        <td class="rating-category-name">2.5/5.0</td>
+        <td class="rating-category-name">{{ aesthetic_avg }}/5.0</td>
       </tr>
   </table>
 </div> <!-- end of average-->
