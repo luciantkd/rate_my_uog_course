@@ -2,6 +2,7 @@ from django.urls import path
 from administrator import views
 from administrator.view import lecturer_view
 from administrator.view import course_view
+from administrator.view import feedback_view
 app_name = 'administrator'
 
 urlpatterns = [
@@ -10,9 +11,10 @@ urlpatterns = [
     path ('report_review_management/', views.reported_reviews_management, name='report_review_management'),
     path ('report_review_detail/', views.reported_review_detail, name='report_review_detail'),
     path ('report_review_delete/', views.reported_review_delete, name='report_review_delete'),
-    path ('website_feedback_management/', views.website_feedback_management, name='website_feedback_management'),
-    path ('website_feedback_detail/', views.website_feedback_detail, name='website_feedback_detail'),
-    path ('website_feedback_delete/', views.website_feedback_delete, name='website_feedback_delete'),
+    # website feedback part
+    path ('website_feedback_management/', feedback_view.website_feedback_management, name='website_feedback_management'),
+    path ('website_feedback_detail/', feedback_view.website_feedback_detail, name='website_feedback_detail'),
+    path ('website_feedback_delete/', feedback_view.website_feedback_delete, name='website_feedback_delete'),
     # course part
     path ('course_management/', course_view.course_management, name='course_management'),
     path ('course_edit_post/', course_view.course_edit_post, name='course_edit_post'),

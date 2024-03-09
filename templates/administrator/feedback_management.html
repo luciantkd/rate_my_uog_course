@@ -70,7 +70,9 @@
           <td>{{ feedback.aesthetic|times:"*" }}</td>
           <td>{{ feedback.feedbackTime|date:"d M Y" }}</td>
           <td>
-            <button class="btn btn-primary">Detail</button>
+{#            <button class="btn btn-primary">Detail</button>#}
+{#            get method to redirect to detail page#}
+            <a href="{% url 'administrator:website_feedback_detail'%}?feedback_id={{ feedback.feedbackId }}" class="btn btn-primary">Detail</a>
           </td>
         </tr>
         {% endfor %}

@@ -50,65 +50,6 @@ def reported_review_delete(request):
         return render(request, 'report_review_detail.html', {'success': False})
 
 
-def website_feedback_management(request):
-    # get website feedbacks, sort by feedbackDateTime
-    website_feedbacks = WebsiteFeedback.objects.all().values('feedbackTime', 'friendly', 'overall',
-                                                             'aesthetic').order_by('feedbackTime')
-    print(website_feedbacks)
-    # count average of overall, friendly, aesthetic
-    overall_avg = 0
-    friendly_avg = 0
-    aesthetic_avg = 0
-    count = 0
-    for feedback in website_feedbacks:
-        overall_avg += feedback['overall']
-        friendly_avg += feedback['friendly']
-        aesthetic_avg += feedback['aesthetic']
-        count += 1
-    overall_avg = overall_avg / count
-    friendly_avg = friendly_avg / count
-    aesthetic_avg = aesthetic_avg / count
-
-    print(website_feedbacks)
-
-    return render(request, 'administrator/feedback_management.html',
-                  {'website_feedbacks': website_feedbacks, 'overall_avg': overall_avg, 'friendly_avg': friendly_avg,
-                   'aesthetic_avg': aesthetic_avg, 'count':count})
-
-
-# Admin - Website Feedback Review Detail
-# This method is to show the detail of a feedback
-# TODO: we need add one more attribute to the feedback, which is the feedback_id, right now we use feedback_time as
-#  the id
-# @param feedback_time the time of the feedback
-# @return: feedback_entity
-def website_feedback_detail(request):
-    # get feedback time
-    feedback_time = request.GET.get('feedback_time')
-    print(feedback_time)
-    # feedback_time is not a primary key
-    feedback_entity_list = get_object_or_404(WebsiteFeedback, feedback_time=feedback_time)
-    # get the first one
-    feedback_entity = feedback_entity_list[0]
-    return render(request, 'administrator/feedback_detail.html', {'feedback_entity': feedback_entity})
-
-
-# Admin - Delete Website Feedback
-# This method is to delete a feedback
-# @param feedback_time: the time of the feedback
-# @return: boolean success
-def website_feedback_delete(request):
-    feedback_time = request.GET.get('feedback_time')
-    feedback_entity = get_object_or_404(WebsiteFeedback, feedback_time=feedback_time)
-    if feedback_entity is not None:
-        feedback_entity.delete()
-        return render(request, 'feedback_detail.html', {'success': True})
-    else:
-        return render(request, 'feedback_detail.html', {'success': False})
-
-
-
-
 
 
 def base(request):
