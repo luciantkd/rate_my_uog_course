@@ -11,30 +11,28 @@
 {% block pagetitle %} Lecturer Edit {% endblock %}
 
 {% block content %}
-<form action="/administrator/lecturer_save_post/" method="post">
+<form action="/administrator/lecturer_add_post/" method="post">
     {% csrf_token %}
-    <input type="hidden" name="lecturerId" value="{{ lecturer_entity.lecturerId }}">
+    <input type="hidden" name="lecturerId" value="">
     <div>
         <label for="lecturerName">Name:</label>
-        <input id="lecturerName" name="lecturerName" type="text" value="{{ lecturer_entity.lecturerName }}">
+        <input id="lecturerName" name="lecturerName" type="text" value="">
     </div>
     <div>
         <label for="designation">Designation:</label>
-        <input id="designation" name="designation" type="text" value="{{ lecturer_entity.designation }}">
+        <input id="designation" name="designation" type="text" value="">
     </div>
     <div>
         <label for="Email">Email:</label>
-{#        this field is not editable#}
-        <input id="Email" name="Email" type="email" value="{{ lecturer_entity.email }}" required readonly>
+        <input id="Email" name="Email" type="email" value="" required>
     </div>
     <div>
         <label for="Password" >Password:</label>
-        <input id="Password" name="Password" type="password" value="">
+        <input id="Password" name="Password" type="password" value="" required>
     </div>
     <div class="button-top-row">
         <button type="button" class="btn return-button">Return</button>
         <button type="submit" class="btn btn-primary save-button">Save</button>
     </div>
-    <button type="button" class="btn btn-danger delete-button" style="background-color: red;">Delete Account</button>
 </form>
 {% endblock %}

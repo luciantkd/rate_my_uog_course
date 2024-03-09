@@ -12,46 +12,43 @@
 
 {% block content %}
 <form action="/path-to-your-edit-handler" method="post">
+    {% csrf_token %}
     <div>
         <label for="DatePosted">Date Posted:</label>
-        <input id="dateposted" name="date_posted" type="date" value="07-01-2024">
+        <input id="dateposted" readonly name="date_posted" type="date" value="{{ feedback_entity.feedbackTime|date:"Y-m-d" }}">
     </div>
     <div class="feedback-rating">
         <label>Overall:</label>
         <div class="star-rating">
-            <span class="star">&#9733;</span>
-            <span class="star">&#9733;</span>
-            <span class="star">&#9733;</span>
-            <span class="star">&#9733;</span>
-            <span class="star">&#9733;</span>
+        {% for star in ratings.overall %}
+                <span class="star">&#9733;</span>
+            {% endfor %}
         </div>
     </div>
     <div class="feedback-rating">
         <label>User-Friendly:</label>
         <div class="star-rating">
-            <span class="star">&#9733;</span>
-            <span class="star">&#9733;</span>
-            <span class="star">&#9733;</span>
-            <span class="star">&#9733;</span>
-            <span class="star">&#9733;</span>
+            {% for star in ratings.friendly %}
+                <span class="star">&#9733;</span>
+            {% endfor %}
         </div>
     </div>
     <div class="feedback-rating">
         <label>Website Aesthetics:</label>
         <div class="star-rating">
-            <span class="star">&#9733;</span>
-            <span class="star">&#9733;</span>
-            <span class="star">&#9733;</span>
-            <span class="star">&#9733;</span>
-            <span class="star">&#9733;</span>
+            {% for star in ratings.aesthetic %}
+                <span class="star">&#9733;</span>
+            {% endfor %}
         </div>
     </div>
     <div>
         <label for="Explanation">Explanation:</label>
-        <textarea id="explanation" name="explanation" rows="4" cols="50"></textarea>
+        <textarea id="explanation" name="explanation" rows="4" cols="50" readonly>{{ feedback_entity.comment }}</textarea>
     </div>
     <div class="buttons-right">
-        <button type="button" class="btn btn-danger delete-button" style="background-color: red;">Delete</button>
+{#        <button type="button" class="btn btn-danger delete-button" style="background-color: red;">Delete</button>#}
+{#        using get method#}
+        <a href="{% url 'administrator:website_feedback_delete' %}?feedback_id={{ feedback_entity.feedbackId }}" class="btn btn-danger delete-button" style="background-color: red;">Delete</a>
     </div>
 </form>
 {% endblock %}

@@ -24,7 +24,8 @@
             <option class="dropdown-item" value="CS+">CS+</option>
             <!-- more options as needed -->
         </select>
-        <button type="button" class="btn btn-primary add-a-course">+ Add a Course</button>
+{#        <button type="button" class="btn btn-primary add-a-course">+ Add a Course</button>#}
+        <a href="{% url 'administrator:course_add' %}" class="btn btn-primary add-a-course">+ Add a Course</a>
     </div>
     <div class="table-scroll">
         <!-- Table to filter -->
@@ -47,7 +48,13 @@
                   <td>{{ course.lecturercourseassignment__lecturerId__lecturerName }}</td>
                   <td>{{ course.programType }}</td>
                   <td> 0 </td>
-                  <td>
+                  <td class="buttons">
+{#                    <form action="{% url 'administrator:course_delete' %}" method="post">#}
+{#                      {% csrf_token %}#}
+{#                      <input type="hidden" name="course_id" value="{{ course.courseId }}">#}
+{#                      <button type="submit" class="btn btn-primary">Edit</button>#}
+{#                      </form>#}
+                    <a href="{% url 'administrator:course_edit' %}?course_id={{ course.courseId }}" class="btn btn-primary">Edit</a>
                     <form action="{% url 'administrator:course_delete' %}" method="post">
                     {% csrf_token %}
                     <input type="hidden" name="course_id" value="{{ course.courseId }}">
