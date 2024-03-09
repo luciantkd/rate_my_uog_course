@@ -24,7 +24,8 @@
     </div>
     <div>
         <label for="Email">Email:</label>
-        <input id="Email" name="Email" type="email" value="{{ lecturer_entity.email }}" required>
+{#        this field is not editable#}
+        <input id="Email" name="Email" type="email" value="{{ lecturer_entity.email }}" required readonly>
     </div>
     <div>
         <label for="Password" >Password:</label>
