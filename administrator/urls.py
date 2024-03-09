@@ -24,6 +24,7 @@ urlpatterns = [
     path ('lecturer_edit/', lecturer_view.lecturer_edit, name='lecturer_edit'),
     path ('lecturer_save_post/', lecturer_view.lecturer_save_post, name='lecturer_save_post'),
     path ('lecturer_delete/', lecturer_view.lecturer_delete, name='lecturer_delete'),
+    path ('lecturer_add/', lecturer_view.lecturer_add, name='lecturer_add'),
     path ('create_lecturer_account/', views.create_lecturer_account, name='create_lecturer_account'),
     path ('admin_report_review_detail/', views.admin_report_review_detail, name='admin_report_review_detail'),
 ]

@@ -79,3 +79,33 @@ def lecturer_delete(request):
         return redirect(reverse('administrator:lecturer_management'))  # Redirect to the lecturer management page
     else:
         return redirect(reverse('administrator:lecturer_management'))
+
+def lecturer_add(request):
+    return render(request, 'administrator/lecturer_add.html')
+
+def lecturer_add_post(request):
+    if request.method == 'POST':
+        # 获取表单数据
+        lecturer_name = request.POST.get('lecturerName')
+        designation = request.POST.get('designation')
+        email = request.POST.get('Email')
+        password = request.POST.get('Password')
+
+        # lecturerId will be the same as email name
+        lecturer_id = email.split('@')[0]
+        print(lecturer_id)
+
+        # TODO: Hash the password
+        # password = password
+
+        # 创建讲师对象
+        lecturer = Lecturer(lecturerId=lecturer_id, lecturerName=lecturer_name, designation=designation, email=email, password=password)
+
+        # 保存到数据库
+        lecturer.save()
+
+        # 重定向到讲师列表或其他页面
+        return redirect(reverse('administrator:lecturer_management'))
+    else:
+        # 如果不是POST请求，则重定向到编辑页面或显示错误
+        return redirect(reverse('administrator:lecturer_management'))

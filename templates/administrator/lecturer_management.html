@@ -16,7 +16,8 @@
     <!-- Dropdown for filtering -->
   </div>
   <div class="filter-add-section">
-    <button type="button" class="btn btn-primary add-a-course">+ Add a Lecturer</button>
+{#    <button type="button" class="btn btn-primary add-a-course">+ Add a Lecturer</button>#}
+    <a href="{% url 'administrator:lecturer_add' %}" class="btn btn-primary add-a-course">+ Add a Lecturer</a>
   </div>
   <div class="table-scroll">
     <!-- Table to filter -->
