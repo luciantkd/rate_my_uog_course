@@ -10,7 +10,7 @@ class Lecturer(models.Model):
 
 
     def __str__(self):
-        return self.courseName
+        return self.lecturerName
 
         
 class Course(models.Model):

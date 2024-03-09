@@ -1,13 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect
 
-# Create your views here.
-from django.http import HttpResponse
 from django.urls import reverse
 
-from administrator.models import Admin
-from lecturer.models import Course, Lecturer
-from student.models import CourseFeedback
-from rateMyUogCourse.models import WebsiteFeedback, CourseSearchTable
+from lecturer.models import Lecturer
+
 
 
 # View for testing viewing the Feedback Management page
@@ -31,7 +27,8 @@ def lecturer_edit(request):
     lecturer_id = request.GET.get('lecturer_id')
     print(lecturer_id)
     # get lecturer entity
-    lecturer_entity = (get_object_or_404(Lecturer, pk=lecturer_id))
+    lecturer_entity = get_object_or_404(Lecturer, pk=lecturer_id)
+    print(lecturer_entity)
     # values('lecturerId', 'lecturerName', 'designation'))
     lecturer_entity = {'lecturerId': lecturer_entity.lecturerId, 'lecturerName': lecturer_entity.lecturerName,
                        'designation': lecturer_entity.designation, 'email': lecturer_entity.email}

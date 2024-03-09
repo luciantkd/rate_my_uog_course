@@ -11,7 +11,7 @@
 {% block pagetitle %} Lecturer Edit {% endblock %}
 
 {% block content %}
-<form action="/administrator/lecturer_save_post/" method="post">
+<form action="/administrator/lecturer_add_post/" method="post">
     {% csrf_token %}
     <input type="hidden" name="lecturerId" value="">
     <div>

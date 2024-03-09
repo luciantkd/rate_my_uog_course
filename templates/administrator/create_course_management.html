@@ -2,33 +2,35 @@
 
 {% load static %}
 
-{% block title %} Create a Course {% endblock %}
+{% block title %}Create a Course{% endblock %}
 
 {% block additional_styles %}
 <link rel="stylesheet" href="{% static 'css/administrator/style-admin-create-course-management.css' %}">
 {% endblock %}
 
-{% block pagetitle %} Create a Course {% endblock %}
+{% block pagetitle %}Create a Course{% endblock %}
 
 {% block content %}
 <form action="/path-to-your-edit-handler" method="post">
+    {% csrf_token %}
     <div>
         <label for="courseID">Course ID:</label>
-        <input id="CourseID" name="course_id" type="text" value="COMPSCI5044">
+        <input id="CourseID" name="course_id" type="text" value="{{ course.courseId }}">
+    </div>
     <div>
         <label for="courseName">Name:</label>
-        <input id="courseName" name="course_name" type="text" value="Basic Algorithms and Data Structures">
+        <input id="courseName" name="course_name" type="text" value="{{ course.courseName }}">
     </div>
     <div>
         <label for="professor">Professor Teaching:</label>
-        <input id="professor" name="professor" type="text" placeholder="Search By Name or Email...">
+        <input id="professor" name="professor" type="text" value="{{ course.lecturerName }}">
     </div>
     <div>
         <label for="programType">Program Type:</label>
         <select id="programType" name="program_type">
-            <option value="IT+">IT+</option>
-            <option value="CS+">CS+</option>
-            <option value="Both">Both</option>
+            <option value="IT+" {% if course.programType == "IT+" %}selected{% endif %}>IT+</option>
+            <option value="CS+" {% if course.programType == "CS+" %}selected{% endif %}>CS+</option>
+            <option value="Both" {% if course.programType == "Both" %}selected{% endif %}>Both</option>
         </select>
     </div>
     <div class="buttons-right">
