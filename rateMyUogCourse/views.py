@@ -109,7 +109,21 @@ def signup(request):
     # only Student can sign up from website
 
     if request.method == 'POST':
+        recaptcha_response = request.POST.get('g-recaptcha-response')
+        data = {
+            'secret': RECAPTCHA_PRIVATE_KEY,
+            'response': recaptcha_response
+        }
+        r = requests.post('https://www.google.com/recaptcha/api/siteverify', data=data)
+        result = r.json()
+        print(result)
+        # if the recaptcha is not valid
+        if not result['success']:
+            return render(request, 'rateMyUogCourse/signup.html', {'errorMessage': 'Invalid reCAPTCHA. Please try again.'})
 
+        '''
+            This is the original signup function
+        '''
         email = request.POST.get('email').lower()
         name = request.POST.get('name')
         password = request.POST.get('password')
