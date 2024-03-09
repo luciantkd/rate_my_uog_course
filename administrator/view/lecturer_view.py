@@ -68,3 +68,14 @@ def lecturer_save_post(request):
     else:
         # 如果不是POST请求，则重定向到编辑页面或显示错误
         return redirect(reverse('administrator:lecturer_management'))
+
+
+def lecturer_delete(request):
+    # django delete post
+    if request.method == "POST":
+        lecturer_id = request.POST.get('lecturer_id')
+        lecturer = get_object_or_404(Lecturer, pk=lecturer_id)
+        lecturer.delete()
+        return redirect(reverse('administrator:lecturer_management'))  # Redirect to the lecturer management page
+    else:
+        return redirect(reverse('administrator:lecturer_management'))

@@ -36,14 +36,16 @@
           <td>{{ lecturer.designation }}</td>
           <td>{{ lecturer.email }}</td>
           <td class="buttons">
-            <form action="#" method="post">
+{#            <form action="#" method="post">#}
+{#              {% csrf_token %}#}
+{#              <input type="hidden" name="lecturer_id" value="#">#}
+{#              <button type="submit" class="btn btn-primary">Edit</button>#}
+{#            </form>#}
+{#              using get method#}
+            <a href="{% url 'administrator:lecturer_edit' %}?lecturer_id={{ lecturer.lecturerId }}" class="btn btn-primary">Edit</a>
+            <form action="{% url 'administrator:lecturer_delete' %}" method="post">
               {% csrf_token %}
-              <input type="hidden" name="course_id" value="#">
-              <button type="submit" class="btn btn-primary">Edit</button>
-            </form>
-            <form action="#" method="post">
-              {% csrf_token %}
-              <input type="hidden" name="course_id" value="#">
+              <input type="hidden" name="lecturer_id" value="{{ lecturer.lecturerId }}">
               <button type="submit" class="btn btn-danger">Delete</button>
             </form>
           </td>
