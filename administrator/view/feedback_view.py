@@ -36,8 +36,6 @@ def website_feedback_management(request):
 
 # Admin - Website Feedback Review Detail
 # This method is to show the detail of a feedback
-# TODO: we need add one more attribute to the feedback, which is the feedback_id, right now we use feedback_time as
-#  the id
 # @param feedback_time the time of the feedback
 # @return: feedback_entity
 def website_feedback_detail(request):

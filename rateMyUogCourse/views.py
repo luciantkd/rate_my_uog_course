@@ -19,6 +19,20 @@ def checkPassword(inputPassword, userPassword):
     # check if the input password equals the user's password
     return hashlib.sha256(inputPassword.encode('utf-8')).hexdigest() == userPassword
 
+
+def encryptPassword(password : str) -> str:
+    """
+    Encrypts a password using SHA-256 hashing algorithm.
+
+    Parameters:
+    password (str): The password to be encrypted.
+
+    Returns:
+    str: The hashed password.
+
+    """
+    return hashlib.sha256(password.encode('utf-8')).hexdigest()
+
 def user_login(request):
 
     if request.method == 'POST':

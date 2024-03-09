@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 
 from lecturer.models import Lecturer
-
+from rateMyUogCourse.views import encryptPassword
 
 
 # View for testing viewing the Feedback Management page
@@ -54,8 +54,8 @@ def lecturer_save_post(request):
 
         # 如果密码字段不为空，则更新密码
         if password:
-            # TODO: Hash the password
-            lecturer.password = password
+            # hash the password
+            lecturer.password = encryptPassword(password)
 
         # 保存更改到数据库
         lecturer.save()
@@ -92,8 +92,8 @@ def lecturer_add_post(request):
         lecturer_id = email.split('@')[0]
         print(lecturer_id)
 
-        # TODO: Hash the password
-        # password = password
+        # Encrypt the password
+        password = encryptPassword(password)
 
         # 创建讲师对象
         lecturer = Lecturer(lecturerId=lecturer_id, lecturerName=lecturer_name, designation=designation, email=email, password=password)
