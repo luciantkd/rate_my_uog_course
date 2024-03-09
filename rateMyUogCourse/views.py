@@ -1,8 +1,10 @@
+import requests
 from django.shortcuts import render, redirect, reverse
 from rateMyUogCourse.models import CourseSearchTable
 
 from lecturer.models import Course
 from rateMyUogCourse.forms import WebsiteFeedback
+from rate_my_uog_course.settings import RECAPTCHA_PRIVATE_KEY
 from student.models import Student
 from lecturer.models import Lecturer
 from administrator.models import Admin
@@ -33,10 +35,29 @@ def encryptPassword(password : str) -> str:
     """
     return hashlib.sha256(password.encode('utf-8')).hexdigest()
 
+
 def user_login(request):
-
+    '''
+    This is the google recaptcha v3 login function
+    '''
     if request.method == 'POST':
+        recaptcha_response = request.POST.get('g-recaptcha-response')
+        data = {
+            'secret': RECAPTCHA_PRIVATE_KEY,
+            'response': recaptcha_response
+        }
+        r = requests.post('https://www.google.com/recaptcha/api/siteverify', data=data)
+        result = r.json()
+        print(result)
+        # if the recaptcha is not valid
+        if not result['success']:
+            return render(request, 'rateMyUogCourse/login.html', {'errorMessage': 'Invalid reCAPTCHA. Please try again.'})
 
+
+
+        '''
+            This is the original login function
+        '''
         email = request.POST.get('email').lower()
         password = request.POST.get('password')
         

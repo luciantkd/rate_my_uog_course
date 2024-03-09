@@ -24,9 +24,9 @@ STATIC_DIR=os.path.join(BASE_DIR,'static')
 # You need to use the domain of "it.gla.elviss.me" to visit the website
 # "it.gla.elviss.me" has been referring to the localhost(127.0.0.1)
 # This public key is going to the template
-RECAPTCHA_PUBLIC_KEY = '6LfKh4gpAAAAAJadeylKAXMq3Tr_fIozgQseg_Vz'
+RECAPTCHA_PUBLIC_KEY = '6LdDSpMpAAAAAKRJW8sZcBXEAREiVui0cL1YLnhc'
 # This private key is going to the server
-RECAPTCHA_PRIVATE_KEY = '6LfKh4gpAAAAAPinMAzHigZGwMQg5g96IaQweJoh'
+RECAPTCHA_PRIVATE_KEY = '6LdDSpMpAAAAAAZRgGI2Z-7YsoO2u0mZfR_veCWj'
 
 
 
@@ -39,7 +39,11 @@ SECRET_KEY = '_oc!p#mimb7hp!q$^v$=n=-wmg6ckryrl%txq$e-vsbelxzhu9'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'it.gla.elviss.me',
+    'localhost',
+    '127.0.0.1'
+]
 
 
 # Application definition
