@@ -18,7 +18,7 @@ def reported_reviews_management(request):
     # get course feedbacks where reported != 0, and join with course names, and sort by reported
     course_feedbacks = CourseFeedback.objects.all().values('feedbackId', 'courseId', 'courseId__courseName', 'courseId__coursesearchtable__reviews',
                                                            'reported').filter(reported__gt=0).order_by('reported')
-    # print(course_feedbacks)
+    print(course_feedbacks)
     return render(request, "administrator/reported_reviews_management.html", {'course_feedbacks': course_feedbacks})
     # return render(request, reverse('administrator:reported_reviews_management'), {'course_feedbacks': course_feedbacks})
 
@@ -54,6 +54,7 @@ def website_feedback_management(request):
     # get website feedbacks, sort by feedbackDateTime
     website_feedbacks = WebsiteFeedback.objects.all().values('feedbackTime', 'friendly', 'overall',
                                                              'aesthetic').order_by('feedbackTime')
+    print(website_feedbacks)
     # count average of overall, friendly, aesthetic
     overall_avg = 0
     friendly_avg = 0
@@ -84,11 +85,12 @@ def website_feedback_management(request):
 def website_feedback_detail(request):
     # get feedback time
     feedback_time = request.GET.get('feedback_time')
+    print(feedback_time)
     # feedback_time is not a primary key
     feedback_entity_list = get_object_or_404(WebsiteFeedback, feedback_time=feedback_time)
     # get the first one
     feedback_entity = feedback_entity_list[0]
-    return render(request, 'feedback_detail.html', {'feedback_entity': feedback_entity})
+    return render(request, 'administrator/feedback_detail.html', {'feedback_entity': feedback_entity})
 
 
 # Admin - Delete Website Feedback
@@ -164,19 +166,6 @@ def course_delete(request):
 def base(request):
     return render(request, 'administrator:course_management')
 
-# View for testing viewing the Feedback Management page
-# def feedback_management(request):
-#     return render(request, 'administrator/feedback_management.html')
-
-# View for testing viewing the Reported Reviews Management page
-# def reported_reviews_management(request):
-#     return render(request, 'administrator/reported_reviews_management.html')
-
-# View for testing viewing the Lecturer Management page
-def lecturer_management(request):
-    # get lecturer list except passwords
-    lecturers = Lecturer.objects.all().values('lecturerId', 'lecturerName', 'designation').order_by('lecturerId')
-    return render(request, 'administrator/lecturer_management.html', {'lecturers': lecturers})
 
 # def lecturer_management(request):
 
