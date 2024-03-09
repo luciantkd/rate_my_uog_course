@@ -4,190 +4,55 @@
 {% block title %} Lecturer Management {% endblock %}
 
 {% block additional_styles %}
-    <link rel="stylesheet" href="{% static 'css/administrator/style-admin-lecturer-management.css' %}">
+<link rel="stylesheet" href="{% static 'css/administrator/style-admin-lecturer-management.css' %}">
 {% endblock %}
 
 {% block pagetitle %} Lecturer Management {% endblock %}
 
 {% block content %}
-        <div>
-            <div class="search">
-                <input class="form-control" id="myInput" type="text" placeholder="Search a lecturer name or email here..">
-                <!-- Dropdown for filtering -->
-            </div>
-            <div class="filter-add-section">
-                <button type="button" class="btn btn-primary add-a-course">+ Add a Lecturer</button>
-            </div>
-            <div class="table-scroll">
-                <!-- Table to filter -->
-                <table class="table" id="dataTable">
-                    <thead>
-                        <tr onclick="window.location='#';">
-                          <th>Name</th>
-                          <th>Designation</th>
-                          <th>Email</th>
-                          <th>Action</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr onclick="window.location='#';">
-                          <td>Hang Dai</td>
-                          <td>Lecturer for Machine Learning</td>
-                          <td>hand.dai@glasgow.ac.uk</td>
-                          <td>
-                            <button class="btn btn-primary">Edit</button>
-                            <button class="btn btn-danger">Delete</button>
-                          </td>
-                        </tr>
-                        <tr onclick="window.location='#';">
-                            <td>Hang Dai</td>
-                            <td>Lecturer for Machine Learning</td>
-                            <td>hand.dai@glasgow.ac.uk</td>
-                            <td>
-                              <button class="btn btn-primary">Edit</button>
-                              <button class="btn btn-danger">Delete</button>
-                            </td>
-                          </tr>
-                          <tr onclick="window.location='#';">
-                            <td>Hang Dai</td>
-                            <td>Lecturer for Machine Learning</td>
-                            <td>hand.dai@glasgow.ac.uk</td>
-                            <td>
-                              <button class="btn btn-primary">Edit</button>
-                              <button class="btn btn-danger">Delete</button>
-                            </td>
-                          </tr>
-                          <tr onclick="window.location='#';">
-                            <td>Hang Dai</td>
-                            <td>Lecturer for Machine Learning</td>
-                            <td>hand.dai@glasgow.ac.uk</td>
-                            <td>
-                              <button class="btn btn-primary">Edit</button>
-                              <button class="btn btn-danger">Delete</button>
-                            </td>
-                          </tr>
-                          <tr onclick="window.location='#';">
-                            <td>Hang Dai</td>
-                            <td>Lecturer for Machine Learning</td>
-                            <td>hand.dai@glasgow.ac.uk</td>
-                            <td>
-                              <button class="btn btn-primary">Edit</button>
-                              <button class="btn btn-danger">Delete</button>
-                            </td>
-                          </tr>
-                          <tr onclick="window.location='#';">
-                            <td>Hang Dai</td>
-                            <td>Lecturer for Machine Learning</td>
-                            <td>hand.dai@glasgow.ac.uk</td>
-                            <td>
-                              <button class="btn btn-primary">Edit</button>
-                              <button class="btn btn-danger">Delete</button>
-                            </td>
-                          </tr>
-                          <tr onclick="window.location='#';">
-                            <td>Hang Dai</td>
-                            <td>Lecturer for Machine Learning</td>
-                            <td>hand.dai@glasgow.ac.uk</td>
-                            <td>
-                              <button class="btn btn-primary">Edit</button>
-                              <button class="btn btn-danger">Delete</button>
-                            </td>
-                          </tr>
-                          <tr onclick="window.location='#';">
-                            <td>Hang Dai</td>
-                            <td>Lecturer for Machine Learning</td>
-                            <td>hand.dai@glasgow.ac.uk</td>
-                            <td>
-                              <button class="btn btn-primary">Edit</button>
-                              <button class="btn btn-danger">Delete</button>
-                            </td>
-                          </tr>
-                          <tr onclick="window.location='#';">
-                            <td>Hang Dai</td>
-                            <td>Lecturer for Machine Learning</td>
-                            <td>hand.dai@glasgow.ac.uk</td>
-                            <td>
-                              <button class="btn btn-primary">Edit</button>
-                              <button class="btn btn-danger">Delete</button>
-                            </td>
-                          </tr>
-                          <tr onclick="window.location='#';">
-                            <td>Hang Dai</td>
-                            <td>Lecturer for Machine Learning</td>
-                            <td>hand.dai@glasgow.ac.uk</td>
-                            <td>
-                              <button class="btn btn-primary">Edit</button>
-                              <button class="btn btn-danger">Delete</button>
-                            </td>
-                          </tr>
-                          <tr onclick="window.location='#';">
-                            <td>Hang Dai</td>
-                            <td>Lecturer for Machine Learning</td>
-                            <td>hand.dai@glasgow.ac.uk</td>
-                            <td>
-                              <button class="btn btn-primary">Edit</button>
-                              <button class="btn btn-danger">Delete</button>
-                            </td>
-                          </tr>
-                          <tr onclick="window.location='#';">
-                            <td>Hang Dai</td>
-                            <td>Lecturer for Machine Learning</td>
-                            <td>hand.dai@glasgow.ac.uk</td>
-                            <td>
-                              <button class="btn btn-primary">Edit</button>
-                              <button class="btn btn-danger">Delete</button>
-                            </td>
-                          </tr>
-                          <tr onclick="window.location='#';">
-                            <td>Hang Dai</td>
-                            <td>Lecturer for Machine Learning</td>
-                            <td>hand.dai@glasgow.ac.uk</td>
-                            <td>
-                              <button class="btn btn-primary">Edit</button>
-                              <button class="btn btn-danger">Delete</button>
-                            </td>
-                          </tr>
-                          <tr onclick="window.location='#';">
-                            <td>Hang Dai</td>
-                            <td>Lecturer for Machine Learning</td>
-                            <td>hand.dai@glasgow.ac.uk</td>
-                            <td>
-                              <button class="btn btn-primary">Edit</button>
-                              <button class="btn btn-danger">Delete</button>
-                            </td>
-                          </tr>
-                          <tr onclick="window.location='#';">
-                            <td>Hang Dai</td>
-                            <td>Lecturer for Machine Learning</td>
-                            <td>hand.dai@glasgow.ac.uk</td>
-                            <td>
-                              <button class="btn btn-primary">Edit</button>
-                              <button class="btn btn-danger">Delete</button>
-                            </td>
-                          </tr>
-                          <tr onclick="window.location='#';">
-                            <td>Hang Dai</td>
-                            <td>Lecturer for Machine Learning</td>
-                            <td>hand.dai@glasgow.ac.uk</td>
-                            <td>
-                              <button class="btn btn-primary">Edit</button>
-                              <button class="btn btn-danger">Delete</button>
-                            </td>
-                          </tr>
-                          <tr onclick="window.location='#';">
-                            <td>Hang Dai</td>
-                            <td>Lecturer for Machine Learning</td>
-                            <td>hand.dai@glasgow.ac.uk</td>
-                            <td>
-                              <button class="btn btn-primary">Edit</button>
-                              <button class="btn btn-danger">Delete</button>
-                            </td>
-                          </tr>
-
-                        <!-- Repeat the pattern for each course -->
-                        <!-- ... -->
-                      </tbody>
-                </table>
-            </div>
-        </div> <!-- end of the main div content-->
+<div>
+  <div class="search">
+    <input class="form-control" id="myInput" type="text" placeholder="Search a lecturer name or email here..">
+    <!-- Dropdown for filtering -->
+  </div>
+  <div class="filter-add-section">
+    <button type="button" class="btn btn-primary add-a-course">+ Add a Lecturer</button>
+  </div>
+  <div class="table-scroll">
+    <!-- Table to filter -->
+    <table class="table" id="dataTable">
+      <thead>
+        <tr onclick="window.location='#';">
+          <th>Name</th>
+          <th>Designation</th>
+          <th>Email</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for lecturer in lecturers %}
+        <tr onclick="window.location='#';">
+          <td>{{ lecturer.lecturerName }}</td>
+          <td>{{ lecturer.designation }}</td>
+          <td>{{ lecturer.email }}</td>
+          <td class="buttons">
+            <form action="#" method="post">
+              {% csrf_token %}
+              <input type="hidden" name="course_id" value="#">
+              <button type="submit" class="btn btn-primary">Edit</button>
+            </form>
+            <form action="#" method="post">
+              {% csrf_token %}
+              <input type="hidden" name="course_id" value="#">
+              <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+        <!-- Repeat the pattern for each course -->
+        <!-- ... -->
+      </tbody>
+    </table>
+  </div>
+</div> <!-- end of the main div content-->
 {% endblock %}

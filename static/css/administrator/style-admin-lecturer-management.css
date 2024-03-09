@@ -7,6 +7,11 @@
   tbody > tr:hover {
     cursor: pointer;
   }
+
+  .buttons {
+    display: flex;
+    gap: 8px;
+  }
   
   /* Sticky table header */
   .table thead tr th {
