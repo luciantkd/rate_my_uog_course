@@ -24,7 +24,8 @@
             <option class="dropdown-item" value="CS+">CS+</option>
             <!-- more options as needed -->
         </select>
-        <button type="button" class="btn btn-primary add-a-course">+ Add a Course</button>
+{#        <button type="button" class="btn btn-primary add-a-course">+ Add a Course</button>#}
+        <a href="{% url 'administrator:course_add' %}" class="btn btn-primary add-a-course">+ Add a Course</a>
     </div>
     <div class="table-scroll">
         <!-- Table to filter -->

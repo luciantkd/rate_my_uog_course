@@ -59,10 +59,10 @@ def base(request):
 # def lecturer_management(request):
 
 def course_edit(request):
-    return render(request, 'administrator/course_edit.html')
+    return render(request, 'administrator/course_add.html')
 
 def create_course_management(request):
-    return render(request, 'administrator/create_course_management.html')
+    return render(request, 'administrator/course_edit.html')
 
 def feedback_detail(request):
     return render(request, 'administrator/feedback_detail.html')

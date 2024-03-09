@@ -20,6 +20,8 @@ urlpatterns = [
     path ('course_edit_post/', course_view.course_edit_post, name='course_edit_post'),
     path ('course_delete/', course_view.course_delete, name='course_delete'),
     path ('course_edit/', course_view.course_edit, name='course_edit'),
+    path ('course_add/', course_view.course_add, name='course_add'),
+    path ('course_add_post/', course_view.course_add_post, name='course_add_post'),
     path ('create_course_management/', views.create_course_management, name='create_course_management'),
     path ('feedback_detail/', views.feedback_detail, name='feedback_detail'),
     # Lecturer Part

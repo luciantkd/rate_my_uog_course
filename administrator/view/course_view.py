@@ -5,21 +5,23 @@ from django.urls import reverse
 from lecturer.models import Course, LecturerCourseAssignment, Lecturer
 
 
-# Admin - Course Management
-# This method is to show the course management page
-# @return: courses a list of courses
 def course_management(request):
-    # courses = Course.objects.all()
-    # course with lectrer name, and count of feedbacks
+    '''
+    This method is to show the course management page
+    :param request:
+    :return: ourses a list of courses
+    '''
     courses = Course.objects.all().values('courseId', 'courseName', 'programType', 'semester', 'lecturercourseassignment__lecturerId__lecturerName').order_by('courseId')
     return render(request, 'administrator/course_management.html', {'courses': courses})
 
 
 # Admin - Course Edit Page
-# This page is for the admin to edit the course details
-# @param course_id: the id of the course
-# @return: course
 def course_edit(request):
+    '''
+    This page is for the admin to edit the course details
+    :param request: the course_id of the course
+    :return: course
+    '''
     # print(request)
     course_id = request.GET.get('course_id')
     # get all
@@ -30,7 +32,7 @@ def course_edit(request):
 
     # print("course_detail is here: ")
     # print(course)
-    return render(request, 'administrator/create_course_management.html', {'course': course})
+    return render(request, 'administrator/course_edit.html', {'course': course})
 
 
 
@@ -83,4 +85,23 @@ def course_delete(request):
 
 # def course_edit(request):
 #
-#     return render(request, 'administrator/create_course_management.html')
+#     return render(request, 'administrator/course_edit.html')
+def course_add(request):
+    return render(request, 'administrator/course_add.html')
+def course_add_post(request):
+    if request.method == "POST":
+        course_id = request.POST.get('course_id')
+        course_name = request.POST.get('course_name')
+        program_type = request.POST.get('program_type')
+        semester = request.POST.get('semester')
+        lecturer_name = request.POST.get('lecturer_name')
+        # TODO: WE DO NOT HAVE SEMESTER
+        if semester is None:
+            semester = 2023/2024
+        course = Course(courseId=course_id, courseName=course_name, programType=program_type, semester=semester)
+        course.save()
+        if lecturer_name is not None:
+            lecturer = Lecturer.get_object_or_404(Lecturer, lecturerName=lecturer_name)
+            lecturer_course_assignment = LecturerCourseAssignment(lecturerId=lecturer.lecturerId, courseId=course)
+            lecturer_course_assignment.save()
+        return redirect(reverse('administrator:course_management'))
