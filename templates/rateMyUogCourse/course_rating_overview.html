@@ -4,27 +4,57 @@
 {% block title %}Home - Rate My UofG Course{% endblock %}
 {% block additional_styles %}
 <link rel="stylesheet" href="{% static 'css/rateMyUogCourse/styles-homepage.css' %}">{% endblock %}
+
+
+
+{% block nav_bar %}
+{% if user_type == 'student' or user_type == 'lecturer' %}
+<li><a href="{% url 'rateMyUogCourse:logout' %}" data-toggle="modal" data-target="#logoutModal">Logout</a></li>
+{% else %}
+<li><a href="{% url 'rateMyUogCourse:mainPage'%}">Home</a></li>
+<li><a href="{% url 'rateMyUogCourse:search'  %}">Courses</a></li>
+<li><a href="{% url 'rateMyUogCourse:login' %}">Login</a></li>
+<li><a href="{% url 'rateMyUogCourse:signup' %}">Sign Up</a></li>
+{% endif %}
+
+{% endblock %}
+
+
+
+
 {% block content %}
+{% if user_type != 'lecturer' %}
 <h1>All course reviews</h1>
-<div class="container">
-  <div class="search">
-      <input class="form-control" id="myInput" type="text" placeholder="Search a course here..">
-    <!-- Dropdown for filtering -->
+{% if user_type == 'student' %}
+<form action="{% url 'student:search'  %}" method="post">
+{% else %}
+<form action="{% url 'rateMyUogCourse:search'  %}" method="post">
+{% endif %}
+  {% csrf_token %}
+  <div class="container">
+    <div class="search">
+      <input class="form-control" id="myInput" type="text" name="course_name" placeholder="Search a course here..">
+      <button type="submit">Search</button>
+    </div>
+    <div class="filter-add-section">
+      <select class="form-control btn-secondary" id="tableFilter" name="program_type" placeholder="Course:">
+        <option value="" selected disabled>Select a Program</option>
+        <option class="dropdown-item" value="">All</option>
+        <option class="dropdown-item" value="IT+">IT+</option>
+        <option class="dropdown-item" value="CS+">CS+</option>
+        <!-- more options as needed -->
+      </select>
+    </div>
   </div>
-  <div class="filter-add-section">
-    <select class="form-control btn-secondary" id="tableFilter" placeholder="Course:">
-      <option value="" selected disabled>Select a Program</option>
-      <option class="dropdown-item" value="">All</option>
-      <option class="dropdown-item" value="IT+">IT+</option>
-      <option class="dropdown-item" value="CS+">CS+</option>
-      <!-- more options as needed -->
-    </select>
-  </div>
-</div>
+</form>
+{% endif %}
+
+
+
 <table class="table" id="dataTable">
   <thead>
     <tr>
-      <th>Code</th>
+      <th>Course Id</th>
       <th>Name</th>
       <th>Overall</th>
       <th>Difficulty</th>
@@ -37,8 +67,14 @@
   <tbody>
     <!-- Repeat this block for each course -->
     {% for value in search_results.values %}
-    <tr onclick="window.location='#';">
-      <td>{{ value.courseId_id }}</td>
+    {% if user_type == 'student' %}
+    <tr onclick="window.location='{% url 'student:show_detailed_rating' value.courseId_id user_id %}';">
+    {% elif user_type == 'lecturer' %}
+    <tr onclick="window.location='{% url 'student:show_detailed_rating' value.courseId_id user_id %}';">
+      {% else %}
+    <tr onclick="window.location= '{% url 'rateMyUogCourse:login' %}'">
+    {% endif %}
+      <td>{{ value.courseId_id }}</a></td>
       <td> {{ value.courseName }}</td>
       <td><span class="star-rating" data-rating="{{ value.overall }}"></span></td>
       <td><span class="star-rating" data-rating="{{ value.difficulty }}"></span></td>
@@ -47,6 +83,7 @@
       <td> {{ value.reviews }}</td>
       <td> {{ value.wouldRecommend }}</td>
     </tr>
+
     {% endfor %}
 
     <script src="{% static 'js/starRating.js' %}"></script>

@@ -1,17 +1,30 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %}Course Detail - Rage My UofG Course{% endblock %}
+{% block title %}Course Detail - Rate My UofG Course{% endblock %}
 {% block additional_styles %}
 <link rel="stylesheet" href="{% static 'css/student/styles-coursedetail.css' %}">{% endblock %}
+{% block nav_bar %}
+{% if user_type == 'student' %}  
+  <li><a href="{% url 'student:search'  %}">Courses</a></li>
+{% else %}
+<li><a href="{% url 'lecturer:course_overview'  user_id %}">My Courses</a></li>
+{% endif %}
+  <li><a href="{% url 'rateMyUogCourse:logout' %}" data-toggle="modal" data-target="#logoutModal">Logout</a></li>
+
+
+{% endblock %}
 {% block content %}
+
 <div class="main-container">
     <div class="top">
         <button type="button" class="btn btn-outline-primary">← All Courses</button>
 
-        <h1 class="course-code">COMPSCI 5044</h1>
-        <h2 class="course-name">Basic Algorithms and Data Structures</h2>
-        <h4 class="lecturer-name-title">Lecturer: Hang Dai - Lecturer for Machine Learning</h3>
+        <h1 class="course-code">{{ course_id }}</h1>
+        <h2 class="course-name">{{ course_name }}</h2>
+        {% for lecturer in lecturer_query_sets.values %}
+        <h4 class="lecturer-name-title">Lecturer: {{lecturer.lecturerName}} - {{lecturer.designation}}</h3>
+        {% endfor %}
     </div>
 
     <div class="overall-average-container">
@@ -19,10 +32,10 @@
             <div class="overall-average">
                 <div class="overall-average-title">Overall average</div>
                 <div class="average">
-                    <div class="average-score">4.2</div>
+                    <div class="average-score">{{ overall_course_details.overall }}</div>
                     <div class="average-outof">out of 5.0</div>
                 </div>
-                <div class="num-reviews">Total: 54 reviews</div>
+                <div class="num-reviews">Total: {{ overall_course_details.reviews }} reviews</div>
             </div>
         </div>
 
@@ -36,7 +49,7 @@
                                 aria-valuemax="100"></div>
                         </div>
                     </td>
-                    <td class="rating-category-name">4.0/5.0</td>
+                    <td class="rating-category-name">{{ overall_course_details.difficulty }}/5.0</td>
                 </tr>
                 <tr class="rating-category">
                     <td class="rating-category-name">Usefulness</td>
@@ -46,7 +59,7 @@
                                 aria-valuemax="100"></div>
                         </div>
                     </td>
-                    <td class="rating-category-name">2.5/5.0</td>
+                    <td class="rating-category-name">{{ overall_course_details.usefulness }}/5.0</td>
                 </tr>
                 <tr class="rating-category">
                     <td class="rating-category-name">Workload</td>
@@ -56,7 +69,7 @@
                                 aria-valuemax="100"></div>
                         </div>
                     </td>
-                    <td class="rating-category-name">4.0/5.0</td>
+                    <td class="rating-category-name">{{ overall_course_details.workload }}/5.0</td>
                 </tr>
                 <tr class="rating-category">
                     <td class="rating-category-name">Professor Rating</td>
@@ -66,19 +79,21 @@
                                 aria-valuemax="100"></div>
                         </div>
                     </td>
-                    <td class="rating-category-name">5.0/5.0</td>
+                    <td class="rating-category-name">{{ overall_course_details.professorRating}}/5.0</td>
                 </tr>
             </tbody>
         </table>
     </div>
 
     <div class="reviews-list-container">
+        {% if user_type == 'student' %} 
         <div class="reviews-list-top">
             <h2 class="reviews-section title">Reviews</h2>
             <button type="button" class="btn btn-primary" onclick="location.href='#reviewSection'">
                 + Leave a Review
               </button>
         </div>
+        {% endif %}
         <div class="reviews-list">
 
             <div class="review-container"> <!-- the first review, copy as many as needed -->
@@ -136,143 +151,19 @@
                             <li>Quiz</li>
                             <li>Exam</li>
                         </ul>
+                        {% if user_type == 'student'%}
                         <div class="review-bottom">
                             <button class="like-button btn btn-primary">👍 105</button>
                             <button class="report-button btn btn-primary">🚩 Report</button>
                         </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>
 
-            <div class="review-container">
-
-                <div class="ratings">
-                    <div class="rating title">Ratings</div>
-                    <div class="rating-score">
-                        <div class="score yellow-green">4</div>
-                        <div>Difficulty</div>
-                    </div>
-                    <div class="rating-score">
-                        <div class="score orange">2</div>
-                        <div>Usefulness</div>
-                    </div>
-                    <div class="rating-score">
-                        <div class="score yellow">3</div>
-                        <div>Workload</div>
-                    </div>
-                    <div class="rating-score">
-                        <div class="score green">5</div>
-                        <div>Professor Rating</div>
-                    </div>
-                </div>
-
-                <div class="review-content">
-                    <div class="review-content-top title">
-                        <div class="course-when-taken">When Taken: Semester 2 2022</div>
-                        <div class="post-date">7 Sept 2022</div>
-                    </div>
-                    <div class="course-comment-container">
-                        <div class="course-comment title">Comments on Course</div>
-                        <div class="course-comment-content">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                            Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis
-                            parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu,
-                            pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet
-                            nec, vulputate eget, arcu. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget
-                            condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam
-                            quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante
-                            tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam
-                            sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh.
-                            Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus
-                            nunc,</div>
-                    </div>
-                    <div class="miscellaneous-ratings">
-                        <div class="misc-rating title">Would recommend: <span class="answer">No</span></div>
-                        <div class="misc-rating title">Grade: <span class="answer">B3</span></div>
-                        <div class="misc-rating title">Exam Format: <span class="answer">Multiple Choice Questions,
-                                Short Answer Questions, Essay Questions</span></div>
-                        <div class="evaluation-methods-label title">Evaluation Methods:</div>
-                        <ul class="evaluation-methods">
-                            <li>Attendance Grade</li>
-                            <li>Class Participation Grade</li>
-                            <li>Individual Coursework</li>
-                            <li>Group Coursework</li>
-                            <li>Quiz</li>
-                            <li>Exam</li>
-                        </ul>
-                        <div class="review-bottom">
-                            <button class="like-button btn btn-primary">👍 105</button>
-                            <button class="report-button btn btn-primary">🚩 Report</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="review-container">
-
-                <div class="ratings">
-                    <div class="rating title">Ratings</div>
-                    <div class="rating-score">
-                        <div class="score yellow-green">4</div>
-                        <div>Difficulty</div>
-                    </div>
-                    <div class="rating-score">
-                        <div class="score orange">2</div>
-                        <div>Usefulness</div>
-                    </div>
-                    <div class="rating-score">
-                        <div class="score yellow">3</div>
-                        <div>Workload</div>
-                    </div>
-                    <div class="rating-score">
-                        <div class="score green">5</div>
-                        <div>Professor Rating</div>
-                    </div>
-                </div>
-
-                <div class="review-content">
-                    <div class="review-content-top title">
-                        <div class="course-when-taken">When Taken: Semester 2 2022</div>
-                        <div class="post-date">7 Sept 2022</div>
-                    </div>
-                    <div class="course-comment-container">
-                        <div class="course-comment title">Comments on Course</div>
-                        <div class="course-comment-content">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                            Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis
-                            parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu,
-                            pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet
-                            nec, vulputate eget, arcu. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget
-                            condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam
-                            quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante
-                            tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam
-                            sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh.
-                            Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus
-                            nunc,</div>
-                    </div>
-                    <div class="miscellaneous-ratings">
-                        <div class="misc-rating title">Would recommend: <span class="answer">No</span></div>
-                        <div class="misc-rating title">Grade: <span class="answer">B3</span></div>
-                        <div class="misc-rating title">Exam Format: <span class="answer">Multiple Choice Questions,
-                                Short Answer Questions, Essay Questions</span></div>
-                        <div class="evaluation-methods-label title">Evaluation Methods:</div>
-                        <ul class="evaluation-methods">
-                            <li>Attendance Grade</li>
-                            <li>Class Participation Grade</li>
-                            <li>Individual Coursework</li>
-                            <li>Group Coursework</li>
-                            <li>Quiz</li>
-                            <li>Exam</li>
-                        </ul>
-                        <div class="review-bottom">
-                            <button class="like-button btn btn-primary">👍 105</button>
-                            <button class="report-button btn btn-primary">🚩 Report</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-        </div> <!-- end of review list -->
-    </div> 
-
+{% if user_type == 'student'%}
+<div class="review-container">
+                  
 
     <div class="review-form-container" id="reviewSection">      
         <h2 class="title">Leave a Review</h2>
@@ -402,6 +293,8 @@
 
             </div>
     </div>
+
 </div>
+{% endif %}
 
 {% endblock %}

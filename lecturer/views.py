@@ -7,24 +7,25 @@ from lecturer.models import LecturerCourseAssignment
 from rateMyUogCourse.models import CourseSearchTable
 
 
-def mainPage(request):
- return HttpResponse("Main Page")
 
 
 
-def lecturer_course_overview(request, lecturer_id):
+def lecturer_course_overview(request, lecturerId):
  
  context_dict={}
- 
- lecturer_courses_id = LecturerCourseAssignment.objects.filter(lecturer_id)
 
- course_id_list = [lecturer_courses_id.courseId for each_lecturer in lecturer_courses_id]
+ context_dict['user_type'] = request.session.get('user_type')
+ context_dict['user_id'] = request.session.get('user_id')
+ 
+ lecturer_courses_id = LecturerCourseAssignment.objects.filter(lecturerId=lecturerId)
+
+ course_id_list = [each_lecturer.courseId for each_lecturer in lecturer_courses_id]
 
  lecturer_courses_overview = CourseSearchTable.objects.filter(courseId__in = course_id_list)
 
  context_dict['search_results'] = lecturer_courses_overview
 
- context_dict['is_lecturer'] = True
+ print(context_dict)
 
  return  render(request, 'rateMyUogCourse/course_rating_overview.html', context=context_dict)
 

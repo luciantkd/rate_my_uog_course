@@ -4,7 +4,7 @@ from lecturer import views
 
 app_name = 'lecturer'
 
-urlpatterns = [
-path('', views.mainPage, name='mainPage'),
-path('rateMyUogCourse/course_rating_overview', views.lecturer_course_overview, name = 'course_overview')
+urlpatterns =[
+
+path('course_rating_overview/<str:lecturerId>', views.lecturer_course_overview, name='course_overview'),
 ]
