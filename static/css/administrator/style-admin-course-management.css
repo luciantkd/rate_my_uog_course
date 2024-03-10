@@ -16,6 +16,11 @@ tbody > tr:hover {
   z-index: 10;
 }
 
+td.buttons {
+  display: flex;
+  gap: 8px;
+}
+
 /* Custom part */
 
 input {

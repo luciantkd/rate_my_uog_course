@@ -2,16 +2,17 @@
 
 {% load static %}
 
-{% block title %} Create a Course {% endblock %}
+{% block title %} Course Edit {% endblock %}
 
 {% block additional_styles %}
-<link rel="stylesheet" href="{% static 'css/administrator/style-admin-create-course-management.css' %}">
+<link rel="stylesheet" href="{% static 'css/administrator/style-admin-course-edit.css' %}">
 {% endblock %}
 
-{% block pagetitle %} Create a Course {% endblock %}
+{% block pagetitle %} Course Edit {% endblock %}
 
 {% block content %}
-<form action="/path-to-your-edit-handler" method="post">
+<form action="/administrator/course_add_post/" method="post">
+    {% csrf_token %}
     <div>
         <label for="courseID">Course ID:</label>
         <input id="CourseID" name="course_id" type="text" value="COMPSCI5044">

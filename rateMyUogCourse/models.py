@@ -15,6 +15,8 @@ class CourseSearchTable(models.Model):
     
 
 class WebsiteFeedback(models.Model):
+    # # feedbackId auto increment
+    feedbackId = models.AutoField(primary_key = True, unique = True)
     feedbackTime = models.DateTimeField(auto_now_add = True)
     friendly = models.IntegerField()
     overall = models.IntegerField()
@@ -22,4 +24,4 @@ class WebsiteFeedback(models.Model):
     comment = models.TextField()
     
     def __str__(self):
-        return self.feedbackTime
+        return str(self.feedbackId)
