@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 
 from django.urls import reverse
-
+from django.contrib import messages
 from lecturer.models import Course, LecturerCourseAssignment, Lecturer
 from rateMyUogCourse.models import CourseSearchTable
 
@@ -59,28 +59,47 @@ def course_edit(request):
 # @param course: an entity of course
 # @return: boolean success
 def course_edit_post(request):
-    if (request.method == 'POST'):
-        course_id = request.POST.get('course_id')
-        course_name = request.POST.get('course_name')
-        program_type = request.POST.get('program_type')
-        lecturer_names = request.POST.get('professor').split(',')  # 假设讲师名字是逗号分隔的
-        print(course_name)
-        # TODO: convert program type
-        semester = request.POST.get('semester')
-        semester = 2023
-        # 更新或创建课程
+    if request.method == 'POST':
+        course_id = request.POST.get('course_id', '').strip()
+        course_name = request.POST.get('course_name', '').strip()
+        program_type = request.POST.get('program_type', '').strip()
+        lecturer_names = [name.strip() for name in request.POST.get('professor', '').split(',')]
+        semester = request.POST.get('semester', '2023').strip()
+
+        # 示例错误判定：检查课程名称是否为空
+        if not course_name:
+            messages.error(request, 'Course name cannot be empty.')
+            return redirect(reverse('administrator:course_edit'))
+
+        # 仅在所有验证通过后更新或创建课程
         course, created = Course.objects.update_or_create(
             courseId=course_id,
             defaults={'courseName': course_name, 'programType': program_type, 'semester': semester}
         )
 
+        # 处理讲师名字
         for lecturer_name in lecturer_names:
-            lecturer_name = lecturer_name.strip()
-            lecturer, _ = Lecturer.objects.get_or_create(lecturerName=lecturer_name)
-            LecturerCourseAssignment.objects.update_or_create(lecturerId=lecturer, courseId=course)
+            try:
+                lecturer = Lecturer.objects.get(lecturerName=lecturer_name)
+                LecturerCourseAssignment.objects.update_or_create(lecturerId=lecturer, courseId=course)
+            except Lecturer.DoesNotExist:
+                # 如果找不到讲师，向用户显示错误消息
+                messages.error(request, f'Lecturer "{lecturer_name}" not found. Please check the name and try again.')
+                # 返回到编辑页面，附带之前输入的信息，以便用户可以更正
+                return render(request, 'administrator/course_edit.html', {
+                    'course': {
+                        'courseId': course_id,
+                        'courseName': course_name,
+                        'programType': program_type,
+                        'semester': semester,
+                        'lecturerName': ', '.join(lecturer_names)
+                    }
+                })
 
-        # or redirect to the course management page
         return redirect(reverse('administrator:course_management'))
+
+    # 如果请求方法不是POST，重定向到某个视图
+    return redirect(reverse('administrator:course_management'))
 
 
 
@@ -121,7 +140,6 @@ def course_add_post(request):
             lecturer_course_assignment = LecturerCourseAssignment(lecturerId=lecturer.lecturerId, courseId=course)
             lecturer_course_assignment.save()
         # create search table for the course
-        course_search = CourseSearchTable(courseId=course, courseName=course_name, overall=0, difficulty=0,
-                                          usefulness=0, workload=0, reviews=0, wouldRecommend=0, professorRating=0)
+        course_search = CourseSearchTable(courseId=course, courseName=course_name)
         course_search.save()
         return redirect(reverse('administrator:course_management'))
