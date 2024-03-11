@@ -292,6 +292,10 @@ select.row2{
     min-height: 180px;
 }
 
+.course-exam-format-container, .course-evaluation-method-container {
+    margin-bottom: 8px;
+}
+
 .submit-button-container {
     text-align: right;
 }

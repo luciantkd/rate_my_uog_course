@@ -257,29 +257,14 @@
                         </div>
                     </div>
                     <div class="form-group row2">
-                            <div class="form-group">
-                              <label class="misc-rating title" for="exampleFormControlSelect2">Exam format: <span class="help-text">(hold ctrl or shift (or drag with the mouse) to select more than one)</span></label>
-                              <select multiple class="form-control row2" id="exampleFormControlSelect2">
-                                <option value="short_answer_questions">Short answer questions</option>
-                                <option value="long_essay_questions">Long essay questions</option>
-                                <option value="multiple_choice_questions">Multiple Choice Questions</option>
-                                <option value="online_at_campus">Online at Campus</option>
-                                <option value="online">Online</option>
-                                <option value="offline">Offline</option>
-                              </select>
-                            </div>                     
-                            <div class="form-group">
-                              <label class="misc-rating title" for="exampleFormControlSelect3">Evaluation Methods: <span class="help-text">(hold ctrl or shift (or drag with the mouse) to select more than one)</span></label>
-                              <select multiple class="form-control row2" id="exampleFormControlSelect3">
-                                <option value="attendance_grade">Attendance Grade</option>
-                                <option value="class_participation_grade">Class Participation Grade</option>
-                                <option value="individual_coursework_heavy">Individual Coursework Heavy</option>
-                                <option value="group_coursework_heavy">Group Coursework Heavy</option>
-                                <option value="quiz_heavy">Quiz Heavy</option>
-                                <option value="exam_heavy">Exam Heavy</option>
-                              </select>
-                            </div>
-                        </div> 
+                        <div class="course-exam-format-container">
+                            <label class="exam-format form title">Exam Format <span class="required-star">*</span></label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Write your overall thoughts on the course here..." maxlength="500" required></textarea>
+                        </div>                  
+                        <div class="course-evaluation-method-container">
+                            <label class="evaluation-method form title">Evaluation Methods<span class="required-star">*</span></label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Write your overall thoughts on the course here..." maxlength="500" required></textarea>
+                        </div>    
                         <div class="submit-button-container">
                             <button type="submit" form="review" class="btn btn-primary leave-a-review" value="Submit">Submit</button>
                         </div>
