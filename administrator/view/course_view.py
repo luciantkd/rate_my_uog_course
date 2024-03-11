@@ -11,7 +11,21 @@ def course_management(request):
     :param request:
     :return: ourses a list of courses
     '''
-    courses = Course.objects.all().values('courseId', 'courseName', 'programType', 'semester', 'lecturercourseassignment__lecturerId__lecturerName').order_by('courseId')
+    # courses = Course.objects.all().values('courseId', 'courseName', 'programType', 'semester', 'lecturercourseassignment__lecturerId__lecturerName').order_by('courseId')
+    courses_list = Course.objects.all().order_by('courseId')
+    courses = []
+
+    for course in courses_list:
+        lecturer_names = course.lecturercourseassignment_set.all().values_list('lecturerId__lecturerName', flat=True)
+        lecturer_names_str = ', '.join(lecturer_names)
+
+        courses.append({
+            'courseId': course.courseId,
+            'courseName': course.courseName,
+            'programType': course.programType,
+            'semester': course.semester,
+            'lecturercourseassignment__lecturerId__lecturerName': lecturer_names_str
+        })
     return render(request, 'administrator/course_management.html', {'courses': courses})
 
 
@@ -27,8 +41,10 @@ def course_edit(request):
     # get all
     course = get_object_or_404(Course, courseId=course_id)
     # .values('courseId', 'courseName', 'programType', 'semester', 'lecturercourseassignment__lecturerId__lecturerName')
-    lecturer_name = course.lecturercourseassignment_set.all().values('lecturerId__lecturerName').first()
-    course = {'courseId': course.courseId, 'courseName': course.courseName, 'programType': course.programType, 'semester': course.semester, 'lecturerName': lecturer_name}
+    # this is a sets of lecturer
+    lecturer_names = course.lecturercourseassignment_set.all().values_list('lecturerId__lecturerName', flat=True)
+    lecturer_names_str = ', '.join(lecturer_names)
+    course = {'courseId': course.courseId, 'courseName': course.courseName, 'programType': course.programType, 'semester': course.semester, 'lecturerName': lecturer_names_str}
 
     # print("course_detail is here: ")
     # print(course)
@@ -46,25 +62,24 @@ def course_edit_post(request):
         course_id = request.POST.get('course_id')
         course_name = request.POST.get('course_name')
         program_type = request.POST.get('program_type')
-        lecturer_name = request.POST.get('lecturer_name')
+        lecturer_names = request.POST.get('professor').split(',')  # 假设讲师名字是逗号分隔的
+        print(course_name)
         # TODO: convert program type
         semester = request.POST.get('semester')
-        course = Course(courseId=course_id, courseName=course_name, programType=program_type, semester=semester)
-        course.save()
+        semester = 2023
+        # 更新或创建课程
+        course, created = Course.objects.update_or_create(
+            courseId=course_id,
+            defaults={'courseName': course_name, 'programType': program_type, 'semester': semester}
+        )
 
-        # find lecturer id by lecturer name
-        lecturer = Lecturer.get_object_or_404(Lecturer, lecturerName=lecturer_name)
-        # right now, one course can only have one lecturer
-        # if the course already has a lecturer, update the lecturer
-        if course.lecturercourseassignment_set.exists():
-            course.lecturercourseassignment_set.update(lecturerId=lecturer.lecturerId)
-        else:
-            # if the course does not have a lecturer, create a new lecturer
-            lecturer_course_assignment = LecturerCourseAssignment(lecturerId=lecturer.lecturerId, courseId=course)
-            lecturer_course_assignment.save()
+        for lecturer_name in lecturer_names:
+            lecturer_name = lecturer_name.strip()
+            lecturer, _ = Lecturer.objects.get_or_create(lecturerName=lecturer_name)
+            LecturerCourseAssignment.objects.update_or_create(lecturerId=lecturer, courseId=course)
 
         # or redirect to the course management page
-        return render(request, reverse('administrator:course_management'), {'success': True})
+        return redirect(reverse('administrator:course_management'))
 
 
 
