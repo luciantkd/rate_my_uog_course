@@ -10,8 +10,7 @@ class Lecturer(models.Model):
 
 
     def __str__(self):
-        return self.lecturerName
-
+        return self.lecturerId
         
 class Course(models.Model):
     courseId = models.CharField(max_length=20, unique = True, primary_key=True)
@@ -27,4 +26,4 @@ class LecturerCourseAssignment(models.Model):
     lecturerId = models.ForeignKey(Lecturer, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.courseId+self.lecturerId
+        return str(self.courseId) + str(self.lecturerId)

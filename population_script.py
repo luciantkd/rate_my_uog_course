@@ -28,6 +28,8 @@ def populate():
     for student in students:
         s = add_student(student['guid'], student['email'], student['name'], student['password'], student['programType'])
     
+    print(Student.objects.all())
+    
     # dummy data for Course
     courses = [
         {'courseId': 'COMPSCI4039',
@@ -42,6 +44,10 @@ def populate():
          'courseName': 'ALGORITHMS AND DATA STRUCTURES (M)',
          'programType': 'IT+',
          'semester': 2},
+        {'courseId': 'COMPSCI5003',
+         'courseName': 'INTERNET TECHNOLOGY (M)',
+         'programType': 'All',
+         'semester': 2}
     ]
     for course in courses:
         c = add_course(course['courseId'], course['courseName'], course['programType'], course['semester'])
@@ -83,7 +89,19 @@ def populate():
          'lecturerRating': 5,
          'gradeReceived': 'A3',
          'recommendCourse': True,
-         'textFeedback': 'dummy data for course feedback...'}
+         'textFeedback': 'dummy data for course feedback...'},
+        {'courseId': 'COMPSCI5003',
+         'guid': '1234567',
+         'overall': 7,
+         'difficulty': 6,
+         'usefulness': 6,
+         'workload': 5,
+         'examFormat': 'test',
+         'evaluationMethod': 'some text here',
+         'lecturerRating': 5,
+         'gradeReceived': 'A3',
+         'recommendCourse': True,
+         'textFeedback': 'dummy data for course feedback...'},
     ]
     f = add_courseFeedback(courseFeedbacks[0])
     
@@ -91,21 +109,33 @@ def populate():
     cal_courseSearchTable(courseFeedbacks[0]['courseId'])
     cal_courseSearchTable(courseFeedbacks[1]['courseId'])
     cal_courseSearchTable(courseFeedbacks[2]['courseId'])
+    cal_courseSearchTable(courseFeedbacks[3]['courseId'])
     
     # dummy data for Lecturer
 
     lecturer = [
         {'lecturerId': 'test.lecturer',
          'lecturerName': 'test lecturer',
+         'email':'a.b@glasgow.ac.uk',
          'designation': 'prof.',
          'password': '1qaz@WSX3edc'
         }
     ]
-    l = add_lecturer(lecturer[0]['lecturerId'], lecturer[0]['lecturerName'], lecturer[0]['designation'], lecturer[0]['password'])
+    l = add_lecturer(lecturer[0]['lecturerId'], lecturer[0]['lecturerName'], lecturer[0]['designation'], lecturer[0]['password'],lecturer[0]['email'])
+
+    
     
     # dummy data for LecturerCourseAssignment
     
     LecturerCourseAssignment.objects.create(lecturerId = Lecturer.objects.get(lecturerId = 'test.lecturer'), courseId = Course.objects.get(courseId = 'COMPSCI4039'))
+    LecturerCourseAssignment.objects.create(lecturerId = Lecturer.objects.get(lecturerId = 'test.lecturer'), courseId = Course.objects.get(courseId = 'COMPSCI4084'))
+    LecturerCourseAssignment.objects.create(lecturerId = Lecturer.objects.get(lecturerId = 'test.lecturer'), courseId = Course.objects.get(courseId = 'COMPSCI5004'))
+    LecturerCourseAssignment.objects.create(lecturerId = Lecturer.objects.get(lecturerId = 'test.lecturer'), courseId = Course.objects.get(courseId = 'COMPSCI5003'))
+    
+
+
+
+    print(LecturerCourseAssignment.objects.all())
     
     # dummy data for WebsiteFeedback
     
@@ -115,8 +145,8 @@ def populate():
     aesthetic = websiteFeedback['aesthetic'], comment = websiteFeedback['comment'])
     
     # Admin user
-    admin = {'userName': 'administrator', 'password': '1qaz@WSX'}
-    Admin.objects.create(userName = admin['userName'], password = admin['password'])
+    admin = {'userName': 'administrator', 'password': '1qaz@WSX', 'email' : 'admin.admin@glasgow.ac.uk'}
+    Admin.objects.create(userName = admin['userName'], password = admin['password'], email = admin['email'])
             
 def add_student(guid, email, name, password, program):
     s = Student.objects.get_or_create(guid = guid)[0]
@@ -143,11 +173,13 @@ def add_courseFeedback(feedback):
     f.save()
     return f
     
-def add_lecturer(lid, name, d, password):
+def add_lecturer(lid, name, d, password,email):
     l = Lecturer.objects.get_or_create(lecturerId = lid)[0]
     l.lecturerName = name
     l.designation = d
     l.password = password
+    l.email = email
+    l.save()
     return l
 def cal_courseSearchTable(cid):
     course_data = CourseFeedback.objects.filter(courseId = cid)

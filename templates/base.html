@@ -17,10 +17,12 @@
         <img src="{% static 'images/UoGlogo.jpg' %}" alt="UofG Logo" id="logo">
         <nav>
             <ul>
+                {% block nav_bar%}
                 <li><a href="{% url 'rateMyUogCourse:mainPage'%}">Home</a></li>
-                <li><a href="{% url 'rateMyUogCourse:search' None None %}">Courses</a></li>
+                <li><a href="{% url 'rateMyUogCourse:search' %}">Courses</a></li>
                 <li><a href="{% url 'rateMyUogCourse:login' %}">Login</a></li>
                 <li><a href="{% url 'rateMyUogCourse:signup' %}">Sign Up</a></li>
+                {% endblock %}
             </ul>
         </nav>
     </header>
@@ -35,7 +37,7 @@
         <p>&copy; 2024 RateMyUofGCourse. All rights reserved.</p>
         <p class="footer-subtitle">Have concerns about our website? Give your feedback <a href="{% url 'rateMyUogCourse:feedback' %}">here</a>!</p>
     </footer>
-
+ {% block logout_modal %}
     <!-- Logout Modal -->
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel"
         aria-hidden="true">
@@ -52,11 +54,12 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <a href="#" class="btn btn-danger">Log Out</a>
+                    <a href = "{% url 'rateMyUogCourse:logout' %}" class="btn btn-danger">Log Out</a>
                 </div>
             </div>
         </div>
     </div>
+ {% endblock %}
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>

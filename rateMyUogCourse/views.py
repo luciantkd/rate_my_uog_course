@@ -10,11 +10,14 @@ from lecturer.models import Lecturer
 from administrator.models import Admin
 import hashlib
 
+from django.contrib.sessions.models import Session
+
 # Create your views here.
 from django.http import HttpResponse
 
 
 def mainPage(request):
+ request.session['user_type'] = 'visitor'
  return render(request, 'rateMyUogCourse/homepage.html')
     
 def checkPassword(inputPassword, userPassword):
@@ -68,22 +71,24 @@ def user_login(request):
                 request.session['user_type'] = 'student'
                 request.session['user_id'] = user.guid
                 # TODO: redirect to student page
-                return redirect('rateMyUogCourse:search', course_name='None', program_type='None')
+                return redirect('student:search')
             else: 
-                # TODO: change this into error context or pop up block
-                return HttpResponse("Incorrect password")
+                context_dict = {}
+                context_dict['errorMessage'] = 'Invalid login details'
+                return render(request, 'rateMyUogCourse/login.html', context_dict)
             
         elif Lecturer.objects.filter(email = email):
             user = Lecturer.objects.filter(email = email)[0]
-            if checkPassword(password, user.password):
+            if password == user.password:
                 request.session['user_email'] = user.email
                 request.session['user_type'] = 'lecturer'
                 request.session['user_id'] = user.lecturerId
                 # TODO: redirect to lecturer page
-                return redirect(reverse('lecturer:course_overview'), lecturer_id = user.lecturerId)
+                return redirect('lecturer:course_overview', lecturerId=user.lecturerId)
             else: 
-                # TODO: change this into error context or pop up block
-                return HttpResponse("Incorrect password")
+                context_dict = {}
+                context_dict['errorMessage'] = 'Invalid login details'
+                return render(request, 'rateMyUogCourse/login.html', context_dict)
             
         elif Admin.objects.filter(email = email):
             user = Admin.objects.filter(email = email)[0]
@@ -93,8 +98,9 @@ def user_login(request):
 
                 return redirect(reverse('administrator:course_management'))
             else: 
-                # TODO: change this into error context or pop up block
-                return HttpResponse("Incorrect password")
+                context_dict = {}
+                context_dict['errorMessage'] = 'Invalid login details'
+                return render(request, 'rateMyUogCourse/login.html', context_dict)
             
         else:
             # TODO: change this into error context or pop up block
@@ -167,27 +173,40 @@ def feedback(request):
  return render(request, 'rateMyUogCourse/feedbackPage.html')
 
 
-def search(request, course_name, program_type):
+def search(request):
 
+
+    course_name = request.POST.get('course_name')
+    program_type = request.POST.get('program_type')
     context_dict={}
-    search_results = None
+    if bool(request.session):
+        if request.session.get('user_type') == 'student':
+            context_dict['user_type'] = 'student'
+            context_dict['user_id'] = request.session.get('user_id')
+        else:
+            context_dict['user_type'] = 'visitor'
+    search_results = CourseSearchTable.objects.all()
 
-    if(course_name == 'None' and program_type == 'None'):
+    if(course_name == '' and (program_type == None or program_type == 'All')):
         search_results =  CourseSearchTable.objects.all()
 
     else:
- 
         try:
-            if program_type != 'None':
-                course_of_program_type = Course.objects.filter(programType = program_type)
-                course_name = [course.courseName for course in course_of_program_type]
-                if course_name != 'None':
-                    search_results = CourseSearchTable.objects.filter(courseName__in = course_name)
-
+            if program_type != None and course_name != '':
+                if program_type == 'All':
+                    search_results = CourseSearchTable.objects.filter(courseName__icontains=course_name)
                 else:
-                    search_results = course_of_program_type
+                    course_of_program_type = Course.objects.filter(programType = program_type) | Course.objects.filter(programType= 'All')
+                    course_name_list = [course.courseName for course in course_of_program_type]
+                    course_filtered = [element for element in course_name_list if course_name.lower() in element.lower()]
+                    search_results =  CourseSearchTable.objects.filter(courseName__in = course_filtered)
+            elif program_type != None and course_name == '':
+                course_of_program_type = Course.objects.filter(programType = program_type) | Course.objects.filter(programType= 'All')
+                course_name_list = [course.courseName for course in course_of_program_type]
+                search_results =  CourseSearchTable.objects.filter(courseName__in = course_name_list)
             else:
-                search_results = CourseSearchTable.objects.filter(courseName=course_name )
+                search_results = CourseSearchTable.objects.filter(courseName__icontains=course_name)
+
             
         except:
             pass
@@ -209,8 +228,11 @@ def save_website_feedback(request):
 
     print('Website feedback saved successfully.')
 
-def course_detail_page(request):
-   return render(request, 'student/course_detail.html')
+def logout(request):
+    request.session.flush()
+    return redirect(reverse('rateMyUogCourse:mainPage'))
+
+
    
 
 

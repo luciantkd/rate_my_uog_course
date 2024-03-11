@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from student.forms import CourseFeedback
 from student.models import CourseFeedback as Course_Feedback_Model, StudentFeedbackLikes
 from rateMyUogCourse.models import CourseSearchTable
-from lecturer.models import Course
+from lecturer.models import Course, Lecturer, LecturerCourseAssignment
 
 def save_feedback(request):
     if request.method == 'POST':
@@ -76,13 +76,28 @@ def show_detailed_rating(request, course_Id, guId):
     
     context_dict ={}
 
+    context_dict['user_type'] = request.session['user_type']
+    context_dict['user_id'] = request.session['user_id']
+    context_dict['course_id'] = course_Id
+
+    course_query_set = Course.objects.filter(courseId = course_Id)
+    context_dict['course_name'] = course_query_set[0].courseName.lower().capitalize()
+
+    lecturercourse_query_set = LecturerCourseAssignment.objects.filter(courseId = course_Id)
+
+    print(lecturercourse_query_set[0].lecturerId)
+
+    context_dict['lecturer_query_sets']  = Lecturer.objects.filter(lecturerId = lecturercourse_query_set[0].lecturerId)
+
+    print(context_dict['lecturer_query_sets'])
+
     detailed_feedback = Course_Feedback_Model.objects.filter(courseId = course_Id)
 
     context_dict['detailed_feedback'] = detailed_feedback
 
     overall_course_detail = CourseSearchTable.objects.filter(courseId = course_Id)
 
-    context_dict['overall_course_details'] = overall_course_detail
+    context_dict['overall_course_details'] = overall_course_detail[0]
 
     feedback_ids = [feedback.feedbackId for feedback in detailed_feedback]
 
@@ -93,7 +108,7 @@ def show_detailed_rating(request, course_Id, guId):
 
          context_dict['is_lecturer'] = True
 
-    return render(request, "" , context = context_dict)
+    return render(request, "student/course_detail.html" , context = context_dict)
 
 def mainPage(request):
  return HttpResponse("Main Page")
