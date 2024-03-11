@@ -3,6 +3,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 
 from lecturer.models import Course, LecturerCourseAssignment, Lecturer
+from rateMyUogCourse.models import CourseSearchTable
 
 
 def course_management(request):
@@ -112,11 +113,15 @@ def course_add_post(request):
         lecturer_name = request.POST.get('lecturer_name')
         # TODO: WE DO NOT HAVE SEMESTER
         if semester is None:
-            semester = 2023/2024
+            semester = 2023
         course = Course(courseId=course_id, courseName=course_name, programType=program_type, semester=semester)
         course.save()
         if lecturer_name is not None:
             lecturer = Lecturer.get_object_or_404(Lecturer, lecturerName=lecturer_name)
             lecturer_course_assignment = LecturerCourseAssignment(lecturerId=lecturer.lecturerId, courseId=course)
             lecturer_course_assignment.save()
+        # create search table for the course
+        course_search = CourseSearchTable(courseId=course, courseName=course_name, overall=0, difficulty=0,
+                                          usefulness=0, workload=0, reviews=0, wouldRecommend=0, professorRating=0)
+        course_search.save()
         return redirect(reverse('administrator:course_management'))
