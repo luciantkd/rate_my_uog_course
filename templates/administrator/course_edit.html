@@ -11,7 +11,7 @@
 {% block pagetitle %}Create a Course{% endblock %}
 
 {% block content %}
-<form action="/path-to-your-edit-handler" method="post">
+<form action="/administrator/course_edit_post/" method="post">
     {% csrf_token %}
     <div>
         <label for="courseID">Course ID:</label>
