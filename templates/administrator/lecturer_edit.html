@@ -32,9 +32,14 @@
         <input id="Password" name="Password" type="password" value="">
     </div>
     <div class="button-top-row">
-        <button type="button" class="btn return-button">Return</button>
+{#        <button type="button" class="btn return-button">Return</button>#}
+        <a href="{% url 'administrator:lecturer_management' %}" class="btn return-button">Return</a>
         <button type="submit" class="btn btn-primary save-button">Save</button>
     </div>
-    <button type="button" class="btn btn-danger delete-button" style="background-color: red;">Delete Account</button>
 </form>
+    <form action="{% url 'administrator:lecturer_delete' %}" method="post">
+         {% csrf_token %}
+        <input type="hidden" name="lecturer_id" value="{{ lecturer_entity.lecturerId }}">
+        <button type="submit" class="btn btn-danger delete-button" style="background-color: red;">Delete Account</button>
+    </form>
 {% endblock %}
