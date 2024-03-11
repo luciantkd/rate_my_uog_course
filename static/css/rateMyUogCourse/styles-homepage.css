@@ -63,6 +63,7 @@ h1 {
 .container {
   display: flex;
   justify-content: space-between;
+  gap: 8px;
 }
 
 .container .search, .container .filter-add-section {
