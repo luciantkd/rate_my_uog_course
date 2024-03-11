@@ -8,10 +8,10 @@
 <link rel="stylesheet" href="{% static 'css/administrator/style-admin-create-course-management.css' %}">
 {% endblock %}
 
-{% block pagetitle %}Create a Course{% endblock %}
+{% block pagetitle %}Create or Edit a Course{% endblock %}
 
 {% block content %}
-<form action="/administrator/course_edit_post/" method="post">
+<form action="/administrator/course_edit/" method="post">
     {% csrf_token %}
     <div>
         <label for="courseID">Course ID:</label>
