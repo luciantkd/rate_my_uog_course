@@ -1,4 +1,4 @@
-
+import requests
 from django.shortcuts import render, redirect, reverse
 from rateMyUogCourse.models import CourseSearchTable
 
@@ -73,8 +73,9 @@ def user_login(request):
                 # TODO: redirect to student page
                 return redirect('student:search')
             else: 
-                # TODO: change this into error context or pop up block
-                return HttpResponse("Incorrect password")
+                context_dict = {}
+                context_dict['errorMessage'] = 'Invalid login details'
+                return render(request, 'rateMyUogCourse/login.html', context_dict)
             
         elif Lecturer.objects.filter(email = email):
             user = Lecturer.objects.filter(email = email)[0]
@@ -85,8 +86,9 @@ def user_login(request):
                 # TODO: redirect to lecturer page
                 return redirect('lecturer:course_overview', lecturerId=user.lecturerId)
             else: 
-                # TODO: change this into error context or pop up block
-                return HttpResponse("Incorrect password")
+                context_dict = {}
+                context_dict['errorMessage'] = 'Invalid login details'
+                return render(request, 'rateMyUogCourse/login.html', context_dict)
             
         elif Admin.objects.filter(email = email):
             user = Admin.objects.filter(email = email)[0]
@@ -96,8 +98,9 @@ def user_login(request):
 
                 return redirect(reverse('administrator:course_management'))
             else: 
-                # TODO: change this into error context or pop up block
-                return HttpResponse("Incorrect password")
+                context_dict = {}
+                context_dict['errorMessage'] = 'Invalid login details'
+                return render(request, 'rateMyUogCourse/login.html', context_dict)
             
         else:
             # TODO: change this into error context or pop up block
@@ -182,7 +185,7 @@ def search(request):
             context_dict['user_id'] = request.session.get('user_id')
         else:
             context_dict['user_type'] = 'visitor'
-    search_results = None
+    search_results = CourseSearchTable.objects.all()
 
     if(course_name == '' and (program_type == None or program_type == 'All')):
         search_results =  CourseSearchTable.objects.all()
