@@ -22,8 +22,8 @@ urlpatterns = [
     path ('course_edit/', course_view.course_edit, name='course_edit'),
     path ('course_add/', course_view.course_add, name='course_add'),
     # path ('course_add_post/', course_view.course_add_post, name='course_add_post'),
-    path ('create_course_management/', views.create_course_management, name='create_course_management'),
-    path ('feedback_detail/', views.feedback_detail, name='feedback_detail'),
+    # path ('create_course_management/', views.create_course_management, name='create_course_management'),
+    # path ('feedback_detail/', views.feedback_detail, name='feedback_detail'),
     # Lecturer Part
     path ('lecturer_management/', lecturer_view.lecturer_management, name='lecturer_management'),
     path ('lecturer_edit/', lecturer_view.lecturer_edit, name='lecturer_edit'),
@@ -31,6 +31,6 @@ urlpatterns = [
     path ('lecturer_delete/', lecturer_view.lecturer_delete, name='lecturer_delete'),
     # path ('lecturer_add/', lecturer_view.lecturer_add, name='lecturer_add'),
     # path ('lecturer_add_post/', lecturer_view.lecturer_add_post, name='lecturer_add_post'),
-    path ('create_lecturer_account/', views.create_lecturer_account, name='create_lecturer_account'),
-    path ('admin_report_review_detail/', views.admin_report_review_detail, name='admin_report_review_detail'),
+    # path ('create_lecturer_account/', views.create_lecturer_account, name='create_lecturer_account'),
+    # path ('admin_report_review_detail/', views.admin_report_review_detail, name='admin_report_review_detail'),
 ]

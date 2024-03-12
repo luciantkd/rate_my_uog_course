@@ -11,10 +11,10 @@
 
 {% block content %}
 <div>
-  <div class="search">
-    <input class="form-control" id="myInput" type="text" placeholder="Search a lecturer name or email here..">
-    <!-- Dropdown for filtering -->
-  </div>
+    <div class="search">
+        <input class="form-control" id="myInput" type="text" placeholder="Search a lecturer name or email here..">
+        <button type="button" class="btn btn-primary" id="searchBtn">Search</button>
+    </div>
   <div class="filter-add-section">
 {#    <button type="button" class="btn btn-primary add-a-course">+ Add a Lecturer</button>#}
     <a href="{% url 'administrator:lecturer_edit' %}" class="btn btn-primary add-a-course">+ Add a Lecturer</a>
@@ -58,4 +58,17 @@
     </table>
   </div>
 </div> <!-- end of the main div content-->
+    
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const searchBtn = document.getElementById('searchBtn');
+        const searchInput = document.getElementById('myInput');
+    
+        searchBtn.addEventListener('click', function() {
+            const query = searchInput.value;
+            window.location.href = '?query=' + query;
+        });
+    });
+</script>
+
 {% endblock %}

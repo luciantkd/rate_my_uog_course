@@ -51,31 +51,8 @@ def reported_review_delete(request):
 
 
 
-
 def base(request):
     return render(request, 'administrator:course_management')
-
-
-# def lecturer_management(request):
-
-def course_edit(request):
-    return render(request, 'administrator/course_add.html')
-
-def create_course_management(request):
-    return render(request, 'administrator/course_edit.html')
-
-def feedback_detail(request):
-    return render(request, 'administrator/feedback_detail.html')
-
-def lecturer_edit(request):
-    return render(request, 'administrator/lecturer_edit.html')
-
-def create_lecturer_account(request):
-    return render(request, 'administrator/create_lecturer_account.html')
-
-def admin_report_review_detail(request):
-    return render(request, 'administrator/admin_report_review_detail.html')
-
 
 
 

@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.shortcuts import render, get_object_or_404, redirect
 
 from django.urls import reverse
@@ -8,9 +9,17 @@ from django.contrib import messages
 
 
 def lecturer_management(request):
-    # get lecturer list except passwords
-    lecturers = Lecturer.objects.all().values('lecturerId', 'lecturerName', 'designation', 'email').order_by('lecturerId')
-    print(lecturers)
+    search_query = request.GET.get('query', '')
+
+    # 使用 Q 对象进行复杂查询，允许同时按名字和电子邮件搜索
+    if search_query:
+        lecturers = Lecturer.objects.filter(
+            Q(lecturerName__icontains=search_query) |
+            Q(email__icontains=search_query)
+        ).values('lecturerId', 'lecturerName', 'designation', 'email').order_by('lecturerId')
+    else:
+        lecturers = Lecturer.objects.all().values('lecturerId', 'lecturerName', 'designation', 'email').order_by('lecturerId')
+
     return render(request, 'administrator/lecturer_management.html', {'lecturers': lecturers})
 
 

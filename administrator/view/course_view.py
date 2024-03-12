@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
 
@@ -11,7 +12,7 @@ def course_management(request):
     program_filter = request.GET.get('program', '')
     query = request.GET.get('query', '')
     search_text = request.GET.get('search_text', '')
-    courses_list = Course.objects.all()
+    courses_list = Course.objects.all().order_by('courseId')
 
     if program_filter:
         # add + in the program filter
@@ -20,9 +21,15 @@ def course_management(request):
         courses_list = courses_list.filter(programType=program_type)
 
     if query:
-        courses_list = courses_list.filter(courseName__icontains=query)
+        # courses_list = courses_list.filter(courseName__icontains=query)
+        # use Q object for complex queries, allowing search by both name and courseID
+        courses_list = courses_list.filter(
+            Q(courseName__icontains=query) |
+            Q(courseId__icontains=query)
+        ).order_by('courseId')
 
-    courses_list = courses_list.order_by('courseId')
+
+
     print(courses_list)
     courses = []
 
