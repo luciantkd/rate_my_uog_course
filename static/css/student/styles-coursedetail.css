@@ -126,6 +126,10 @@ td .progress-container{
     overflow-y: auto;
 }
 
+.review-form-container {
+    flex: 1;
+}
+
 .ratings {
     background-color: var(--text-background);
     flex: 1;

@@ -24,7 +24,7 @@ class WebsiteFeedback(models.Model):
     friendly = models.IntegerField()
     overall = models.IntegerField()
     aesthetic = models.IntegerField()
-    comment = models.TextField()
+    comment = models.TextField(blank=True)
     
     def __str__(self):
         return str(self.feedbackId)
