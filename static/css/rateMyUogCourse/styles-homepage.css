@@ -35,7 +35,8 @@ h1 {
 }
 
 #community {
-  background-color: #f0f0f0;
+  background-color: rgb(190, 194, 199);
+  border-radius: 100px;
   padding: 50px;
   text-align: center;
 }

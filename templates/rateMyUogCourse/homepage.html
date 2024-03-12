@@ -4,39 +4,38 @@
 {% block title %}Home - Rate My UofG Course{% endblock %}
 {% block additional_styles %}<link rel="stylesheet" href="{% static 'css/rateMyUogCourse/styles-homepage.css' %}">{% endblock %}
 {% block content %}
-
-<section id="search">
-    <div>
-        <h1>RateMyUofGCourse</h1>
-        <p>Know your courses now!</p>
-        <a href="{% url 'rateMyUogCourse:search'  %}" class="btn btn-primary">Explore →</a>
-    </div>
-</section>
-
-<section id="community">
-    <h2>Join The Community!</h2>
-    <p>Welcome to RateMyUofGCourse, the ultimate platform for current and prospective students to navigate
-        the University of Glasgow's academic landscape through peer insights. Dive into honest,
-        student-generated reviews of courses and lecturers, and contribute your own experiences to guide
-        others.</p>
-    <div class="features">
-        <div class="feature">
-            <span class="icon">👍</span>
-            <p>Rate a course</p>
+    <section id="search">
+        <div>
+            <h1>RateMyUofGCourse</h1>
+            <p>Know your courses now!</p>
+            <a href="{% url 'rateMyUogCourse:search'  %}" class="btn btn-primary">Explore →</a>
         </div>
-        <div class="feature">
-            <span class="icon">✍️</span>
-            <p>Leave anonymous reviews</p>
+    </section>
+    
+    <section id="community">
+        <h2>Join The Community!</h2>
+        <p>Welcome to RateMyUofGCourse, the ultimate platform for current and prospective students to navigate
+            the University of Glasgow's academic landscape through peer insights. Dive into honest,
+            student-generated reviews of courses and lecturers, and contribute your own experiences to guide
+            others.</p>
+        <div class="features">
+            <div class="feature">
+                <span class="icon">👍</span>
+                <p>Rate a course</p>
+            </div>
+            <div class="feature">
+                <span class="icon">✍️</span>
+                <p>Leave anonymous reviews</p>
+            </div>
+            <div class="feature">
+                <span class="icon">💡</span>
+                <p>Make more informed choices</p>
+            </div>
+            <div class="feature">
+                <span class="icon">🎓</span>
+                <p>Enjoy your classes more!</p>
+            </div>
         </div>
-        <div class="feature">
-            <span class="icon">💡</span>
-            <p>Make more informed choices</p>
-        </div>
-        <div class="feature">
-            <span class="icon">🎓</span>
-            <p>Enjoy your classes more!</p>
-        </div>
-    </div>
-</section>
+    </section>
 
 {% endblock %}
