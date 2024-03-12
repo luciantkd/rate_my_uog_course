@@ -30,7 +30,8 @@
         <td class="rating-category-name">User-friendly</td>
         <td class="progress-container w-75">
           <div class="progress">
-            <div class="progress-bar friendly-progress-bar" role="progressbar" aria-valuenow="{{ friendly_avg }}" aria-valuemin="0" aria-valuemax="5" data-value="{{ friendly_avg }}">
+            <div class="progress-bar friendly-progress-bar" role="progressbar" aria-valuenow="{{ friendly_avg }}"
+              aria-valuemin="0" aria-valuemax="5" data-value="{{ friendly_avg }}">
             </div>
           </div>
         </td>
@@ -40,7 +41,8 @@
         <td class="rating-category-name">Website Aesthetics</td>
         <td class="progress-container w-75">
           <div class="progress">
-            <div class="progress-bar aesthetic-progress-bar" role="progressbar" aria-valuenow="{{ aesthetic_avg }}" aria-valuemin="0" aria-valuemax="5" data-value="{{ aesthetic_avg }}">
+            <div class="progress-bar aesthetic-progress-bar" role="progressbar" aria-valuenow="{{ aesthetic_avg }}"
+              aria-valuemin="0" aria-valuemax="5" data-value="{{ aesthetic_avg }}">
             </div>
           </div>
         </td>
@@ -65,14 +67,15 @@
       <tbody>
         {% for feedback in website_feedbacks %}
         <tr onclick="window.location='#';">
-          <td>{{ feedback.overall|times:"*" }}</td> <!-- Custom template filter to convert numeric rating to stars -->
-          <td>{{ feedback.friendly|times:"*" }}</td>
-          <td>{{ feedback.aesthetic|times:"*" }}</td>
+          <td><span class="star-rating" data-rating="{{ feedback.overall }}"></span></td>
+          <td><span class="star-rating" data-rating="{{ feedback.friendly }}"></span></td>
+          <td><span class="star-rating" data-rating="{{ feedback.aesthetic }}"></span></td>
           <td>{{ feedback.feedbackTime|date:"d M Y" }}</td>
           <td>
-{#            <button class="btn btn-primary">Detail</button>#}
-{#            get method to redirect to detail page#}
-            <a href="{% url 'administrator:website_feedback_detail'%}?feedback_id={{ feedback.feedbackId }}" class="btn btn-primary">Detail</a>
+            {# <button class="btn btn-primary">Detail</button>#}
+            {# get method to redirect to detail page#}
+            <a href="{% url 'administrator:website_feedback_detail'%}?feedback_id={{ feedback.feedbackId }}"
+              class="btn btn-primary">Detail</a>
           </td>
         </tr>
         {% endfor %}
@@ -80,4 +83,6 @@
     </table>
   </div>
 </div> <!-- end of the main div content-->
+
+<script src="{% static 'js/starRating.js' %}"></script>
 {% endblock %}
