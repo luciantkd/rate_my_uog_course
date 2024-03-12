@@ -1,4 +1,5 @@
 import os
+
 os.environ.setdefault('DJANGO_SETTINGS_MODULE',
                       'rate_my_uog_course.settings')
 
@@ -8,6 +9,7 @@ from student.models import Student, CourseFeedback, StudentFeedbackLikes
 from lecturer.models import Lecturer, Course, LecturerCourseAssignment
 from rateMyUogCourse.models import CourseSearchTable, WebsiteFeedback
 from administrator.models import Admin
+from rateMyUogCourse.views import encryptPassword
 
 def populate():
    
@@ -121,7 +123,7 @@ def populate():
          'password': '1qaz@WSX3edc'
         }
     ]
-    l = add_lecturer(lecturer[0]['lecturerId'], lecturer[0]['lecturerName'], lecturer[0]['designation'], lecturer[0]['password'],lecturer[0]['email'])
+    l = add_lecturer(lecturer[0]['lecturerId'], lecturer[0]['lecturerName'], lecturer[0]['designation'],encryptPassword(lecturer[0]['password']),lecturer[0]['email'])
 
     
     
@@ -146,7 +148,7 @@ def populate():
     
     # Admin user
     admin = {'userName': 'administrator', 'password': '1qaz@WSX', 'email' : 'admin.admin@glasgow.ac.uk'}
-    Admin.objects.create(userName = admin['userName'], password = admin['password'], email = admin['email'])
+    Admin.objects.create(userName = admin['userName'], password = encryptPassword(admin['password']), email = admin['email'])
             
 def add_student(guid, email, name, password, program):
     s = Student.objects.get_or_create(guid = guid)[0]
