@@ -1,59 +1,63 @@
-from django.test import TestCase
-from django.urls import reverse
-
-import administrator.views as views
 from django.test import TestCase, Client
+from django.urls import reverse
+from django.utils import timezone
 
-from administrator.models import Admin
 from lecturer.models import Course
+from student.models import Student, CourseFeedback
 
 
-# Create your tests here.
-# urlpatterns = [
-#     path ('', views.mainPage, name='mainPage'),
-#     path ('report_review_management/', views.reported_reviews_management, name='report_review_management'),
-#     path ('report_review_detail/', views.reported_review_detail, name='report_review_detail'),
-#     path ('report_review_delete/', views.reported_review_delete, name='report_review_delete'),
-#     path ('website_feedback_management/', views.website_feedback_management, name='website_feedback_management'),
-#     path ('website_feedback_detail/', views.website_feedback_detail, name='website_feedback_detail'),
-#     path ('website_feedback_delete/', views.website_feedback_delete, name='website_feedback_delete'),
-#     path ('course_management/', views.course_management, name='course_management'),
-#     path ('course_detail/', views.course_detail, name='course_detail'),
-#     path ('course_edit_post/', views.course_edit_post, name='course_edit_post'),
-#     path ('course_delete/', views.course_delete, name='course_delete'),
-# ]
-
-# urlpatterns = [
-#     path ('', views.mainPage, name='mainPage'),
-#     path ('report_review_management/', views.reported_reviews_management, name='report_review_management'),
-#     path ('report_review_detail/', views.reported_review_detail, name='report_review_detail'),
-#     path ('report_review_delete/', views.reported_review_delete, name='report_review_delete'),
-#     path ('website_feedback_management/', views.website_feedback_management, name='website_feedback_management'),
-#     path ('website_feedback_detail/', views.website_feedback_detail, name='website_feedback_detail'),
-#     path ('website_feedback_delete/', views.website_feedback_delete, name='website_feedback_delete'),
-#     path ('course_management/', views.course_management, name='course_management'),
-#     path ('course_detail/', views.course_detail, name='course_detail'),
-#     path ('course_edit_post/', views.course_edit_post, name='course_edit_post'),
-#     path ('course_delete/', views.course_delete, name='course_delete'),
-# ]
-# python manage.py test administrator.tests.TestAdmin.unit_test
-
-
-class TestAdmin(TestCase):
+class CourseFeedbackViewTests(TestCase):
     def setUp(self):
+        # Setup code here to create test records in the database
         self.client = Client()
-        Admin.objects.create(userName='admin1', password='admin1@example.com')
-        # courses = [
-        #     {'courseId': 'COMPSCI4039',
-        #      'courseName': 'PROGRAMMING',
-        #      'programType': 'IT+',
-        #      'semester': 1},
-        Course.objects.create(courseId='COMPSCI4039', courseName='PROGRAMMING', programType='IT+', semester=1)
-    def unit_test(self):
-        # construct a request object
-        response = self.client.get(reverse('administrator:course_detail') + '?course_id=COMPSCI4039')
-        print(response)
-        # self.assertEqual(response.status_code, 404)
-        # print(response)
-        # views.course_detail('', "COMPSCI4039")
-        # print(Admin.objects.all())
+        self.course = Course.objects.create(courseId="CSC101", courseName="Intro to CS", programType="CS",
+                                            semester=2023)
+
+        # Assuming you have a method to add students as provided
+        self.student = Student.objects.create(guid="1234567", email="1234567t@student.gla.ac.uk", name="test_user_1",
+                                              password="1qaz@WSX", programType="CS")
+
+        self.feedback = CourseFeedback.objects.create(
+            courseId=self.course,
+            guid=self.student,
+            overall=5,
+            difficulty=3,
+            usefulness=4,
+            workload=3,
+            examFormat="Multiple Choice",
+            evaluationMethod="Exams and Projects",
+            lecturerRating=4,
+            gradeReceived="A",
+            recommendCourse=True,
+            textFeedback="Very informative course.",
+            likes=0,
+            reported=1,
+            approved=False,
+            feedbackDateTime=timezone.now()
+        )
+
+    def test_main_page(self):
+        response = self.client.get(reverse('mainPage'))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Main Page")
+
+    def test_reported_reviews_management(self):
+        response = self.client.get(reverse('administrator:report_review_management'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue('course_feedbacks' in response.context)
+
+    def test_reported_review_detail(self):
+        response = self.client.get(reverse('administrator:report_review_detail'), {'feedback_id': self.feedback.feedbackId})
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, self.feedback.textFeedback)
+
+    def test_reported_review_approve(self):
+        response = self.client.post(reverse('administrator:reported_review_approve', args=[self.feedback.feedbackId]))
+        self.assertEqual(response.status_code, 302)  # Redirect status
+        self.assertFalse(CourseFeedback.objects.filter(feedbackId=self.feedback.feedbackId).exists())
+
+    def test_reported_review_delete(self):
+        response = self.client.post(reverse('administrator:reported_review_delete', args=[self.feedback.feedbackId]))
+        self.assertEqual(response.status_code, 302)  # Redirect status
+        updated_feedback = CourseFeedback.objects.get(feedbackId=self.feedback.feedbackId)
+        self.assertEqual(updated_feedback.reported, 0)
