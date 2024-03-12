@@ -330,3 +330,11 @@ select.row2{
 .green {
     background-color: green;
 }
+
+/* Define CSS classes for color ranges */
+.rating-score .low { background-color: red; }
+.rating-score .low-medium { background-color: orange; }
+.rating-score .medium { background-color: yellow; }
+.rating-score .high-medium { background-color: yellowgreen; }
+.rating-score .high { background-color: green; }
+/* Continue defining as many as you need */

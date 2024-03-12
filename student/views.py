@@ -5,6 +5,8 @@ from student.forms import CourseFeedback
 from student.models import CourseFeedback as Course_Feedback_Model, StudentFeedbackLikes
 from rateMyUogCourse.models import CourseSearchTable
 from lecturer.models import Course, Lecturer, LecturerCourseAssignment
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
 
 def save_feedback(request,course_id, guId):
     if request.method == 'POST':
@@ -134,17 +136,23 @@ def mainPage(request):
 
 
 
-def report_feedback(feedback_id):
+def report_feedback(request, feedback_id):
+    if request.method == 'POST':
+        try:
+            # detailed_feedback = Course_Feedback_Model.objects.filter(feedbackId = feedback_id)
+            detailed_feedback = get_object_or_404(Course_Feedback_Model, feedbackId=feedback_id)
 
-    try:
-        detailed_feedback = Course_Feedback_Model.objects.filter(feedbackId = feedback_id)
+            detailed_feedback.reported =  detailed_feedback.reported + 1
 
-        detailed_feedback.reported =  detailed_feedback.reported + 1
+            detailed_feedback.save()
 
-        detailed_feedback.save()
-   
-    except Exception as e:
-        print(e)
+            return JsonResponse({'reported': True, 'reported_count': detailed_feedback.reported})
+    
+        except Exception as e:
+            print(e)
+            return JsonResponse({'error': str(e)}, status=500)
+    else:
+        return JsonResponse({'error': 'Invalid request'}, status=400)
 
 
 def like_feedback(feedback_id, guId):
