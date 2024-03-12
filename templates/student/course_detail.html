@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load rating_tags %}
 
 {% block title %}Course Detail - Rate My UofG Course{% endblock %}
 {% block additional_styles %}
@@ -104,19 +105,19 @@
                 <div class="ratings">
                     <div class="rating title">Ratings</div>
                     <div class="rating-score">
-                        <div class="score red">{{eachFeedback.difficulty}}</div>
+                        <div class="score {{ eachFeedback.difficulty|rating_color }}">{{eachFeedback.difficulty}}</div>
                         <div>Difficulty</div>
                     </div>
                     <div class="rating-score">
-                        <div class="score orange">{{eachFeedback.usefulness}}</div>
+                        <div class="score {{ eachFeedback.usefulness|rating_color }}">{{eachFeedback.usefulness}}</div>
                         <div>Usefulness</div>
                     </div>
                     <div class="rating-score">
-                        <div class="score yellow">{{eachFeedback.workload}}</div>
+                        <div class="score {{ eachFeedback.workload|rating_color }}">{{eachFeedback.workload}}</div>
                         <div>Workload</div>
                     </div>
                     <div class="rating-score">
-                        <div class="score green">{{eachFeedback.lecturerRating}}</div>
+                        <div class="score {{ eachFeedback.lecturerRating|rating_color }}">{{eachFeedback.lecturerRating}}</div>
                         <div>Professor Rating</div>
                     </div>
                 </div>
