@@ -86,7 +86,8 @@ def save_feedback(request,course_id, guId):
                 courseSearchTableRecord.save()
 
             #return redirect('success_url')  # Redirect to a success page
-            return HttpResponse('Successful')
+            # return HttpResponse('Successful')
+            return JsonResponse({'success': True, 'message': 'Course review submitted successfully!'})
 
 
 

@@ -173,26 +173,33 @@
     <div class="review-container">
 
 
-    <div class="review-form-container" id="reviewSection">      
-        <h2 class="title">Leave a Review</h2>
-        <div class="review-container">
-            <form action="{% url 'student:save_feedback'  course_id user_id%}" method="post" id="review" class="review-form">
-                {% csrf_token %}
-                <input type="hidden" name="courseId" value="{{ course_id }}">
-                <input type="hidden" name="guid" value="{{ user_id }}">
+        <div class="review-form-container" id="reviewSection">
+            <h2 class="title">Leave a Review</h2>
+            <div class="review-container">
+                <form action="{% url 'student:save_feedback'  course_id user_id%}" method="post" id="review"
+                    class="review-form">
+                    {% csrf_token %}
+                    <input type="hidden" name="courseId" value="{{ course_id }}">
+                    <input type="hidden" name="guid" value="{{ user_id }}">
 
-                <div class="review-form-ratings">
-                    <div class="rating-form-score">
-                        <h5 class="rating-form-category title">Rate the course:</h5>
-                        <label for="overall" class="rating-form-category title">Overall Ratings<span class="required-star">*</span></label>
-                        <div class="star-rating">
-                            <input id="overall5" type="radio" name="overall" value="5" required><label for="overall5">☆</label>
-                            <input id="overall4" type="radio" name="overall" value="4"><label for="overall4">☆</label>
-                            <input id="overall3" type="radio" name="overall" value="3"><label for="overall3">☆</label>
-                            <input id="overall2" type="radio" name="overall" value="2"><label for="overall2">☆</label>
-                            <input id="overall1" type="radio" name="overall" value="1"><label for="overall1">☆</label>
+                    <div class="review-form-ratings">
+                        <div class="rating-form-score">
+                            <h5 class="rating-form-category title">Rate the course:</h5>
+                            <label for="overall" class="rating-form-category title">Overall Ratings<span
+                                    class="required-star">*</span></label>
+                            <div class="star-rating">
+                                <input id="overall5" type="radio" name="overall" value="5" required><label
+                                    for="overall5">☆</label>
+                                <input id="overall4" type="radio" name="overall" value="4"><label
+                                    for="overall4">☆</label>
+                                <input id="overall3" type="radio" name="overall" value="3"><label
+                                    for="overall3">☆</label>
+                                <input id="overall2" type="radio" name="overall" value="2"><label
+                                    for="overall2">☆</label>
+                                <input id="overall1" type="radio" name="overall" value="1"><label
+                                    for="overall1">☆</label>
+                            </div>
                         </div>
-                    </div>
 
                         <div class="rating-form-score">
                             <label for="difficulty" class="rating-form-category title">Difficulty<span
@@ -245,70 +252,85 @@
                             </div>
                         </div>
 
-                    <div class="rating-form-score">
-                        <label for="lecturerRating" class="rating-form-category title">Professor Rating<span class="required-star">*</span></label>
-                        <div class="star-rating">
-                            <input id="professor5" type="radio" name="lecturerRating" value="5" required><label for="professor5">☆</label>
-                            <input id="professor4" type="radio" name="lecturerRating" value="4"><label for="professor4">☆</label>
-                            <input id="professor3" type="radio" name="lecturerRating" value="3"><label for="professor3">☆</label>
-                            <input id="professor2" type="radio" name="lecturerRating" value="2"><label for="professor2">☆</label>
-                            <input id="professor1" type="radio" name="lecturerRating" value="1"><label for="professor1">☆</label>
-                        </div>
-                    </div>
-                    
-                </div>
-                <div class="form review-content">
-                    <div class="course-comment-container">
-                        <label class="course-comment form title" >Course Comments <span class="required-star">*</span></label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" name ="textFeedback" rows="3" placeholder="Write your overall thoughts on the course here..." maxlength="500" required></textarea>
-                    </div>
-                    <div class="form-group row1">
-                        <div class="form-group would-recommend">
-                            <label class="misc-rating title" for="recommendCourse" >Would recommend? <span class="required-star">*</span></label>
-                            <select class="form-control" id="recommendCourse" name="recommendCourse" required >
-                                <option  value="">--Select an option--</option>
-                                <option  value="True">Yes</option>
-                                <option  value="False">No</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label class="misc-rating title" for="gradeReceived">Grade received: </label>
-                            <select class="form-control" id="gradeReceived" name="gradeReceived"> 
-                                <option  value="">--Select an option--</option>
-                                <option  value="A">A</option>
-                                <option  value="B">B</option>
-                                <option  value="C">C</option>
-                                <option  value="D">D</option>
-                                <option  value="E">E</option>
-                                <option  value="F">F</option>
-                                <option  value="G">G</option>
-                                <option  value="H">H</option>                              
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group row2">
-                            <div class="form-group">
-                              <label class="misc-rating title" for="examFormat">Exam format:</label>
-                        <textarea class="form-control" id="examFormat" name ="examFormat" rows="3" placeholder="Write about the exam format here..." maxlength="500" required></textarea>
-                            </div>                     
-                            <div class="form-group">
-                              <label class="misc-rating title" for="evaluationMethod">Evaluation Methods: </label>
-                        <textarea class="form-control" id="examFormat" name ="evaluationMethod" rows="3" placeholder="Write about the evaluation method here..." maxlength="500" required></textarea>
-                              
+                        <div class="rating-form-score">
+                            <label for="lecturerRating" class="rating-form-category title">Professor Rating<span
+                                    class="required-star">*</span></label>
+                            <div class="star-rating">
+                                <input id="professor5" type="radio" name="lecturerRating" value="5" required><label
+                                    for="professor5">☆</label>
+                                <input id="professor4" type="radio" name="lecturerRating" value="4"><label
+                                    for="professor4">☆</label>
+                                <input id="professor3" type="radio" name="lecturerRating" value="3"><label
+                                    for="professor3">☆</label>
+                                <input id="professor2" type="radio" name="lecturerRating" value="2"><label
+                                    for="professor2">☆</label>
+                                <input id="professor1" type="radio" name="lecturerRating" value="1"><label
+                                    for="professor1">☆</label>
                             </div>
-                        </div> 
+                        </div>
+
+                    </div>
+                    <div class="form review-content">
+                        <div class="course-comment-container">
+                            <label class="course-comment form title">Course Comments <span
+                                    class="required-star">*</span></label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" name="textFeedback" rows="3"
+                                placeholder="Write your overall thoughts on the course here..." maxlength="500"
+                                required></textarea>
+                        </div>
+                        <div class="form-group row1">
+                            <div class="form-group would-recommend">
+                                <label class="misc-rating title" for="recommendCourse">Would recommend? <span
+                                        class="required-star">*</span></label>
+                                <select class="form-control" id="recommendCourse" name="recommendCourse" required>
+                                    <option value="">--Select an option--</option>
+                                    <option value="True">Yes</option>
+                                    <option value="False">No</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="misc-rating title" for="gradeReceived">Grade received: </label>
+                                <select class="form-control" id="gradeReceived" name="gradeReceived">
+                                    <option value="">--Select an option--</option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="D">D</option>
+                                    <option value="E">E</option>
+                                    <option value="F">F</option>
+                                    <option value="G">G</option>
+                                    <option value="H">H</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row2">
+                            <div class="form-group">
+                                <label class="misc-rating title" for="examFormat">Exam format:</label>
+                                <textarea class="form-control" id="examFormat" name="examFormat" rows="3"
+                                    placeholder="Write about the exam format here..." maxlength="500"
+                                    required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="misc-rating title" for="evaluationMethod">Evaluation Methods: </label>
+                                <textarea class="form-control" id="examFormat" name="evaluationMethod" rows="3"
+                                    placeholder="Write about the evaluation method here..." maxlength="500"
+                                    required></textarea>
+
+                            </div>
+                        </div>
                         <div class="submit-button-container">
-                            <button type="submit" form="review" class="btn btn-primary leave-a-review" value="Submit">Submit</button>
+                            <button type="submit" form="review" class="btn btn-primary leave-a-review"
+                                value="Submit">Submit</button>
                         </div>
                     </div>
-                </div>
+            </div>
             </form>
 
-            </div>
         </div>
-
     </div>
-    {% endif %}
 
+</div>
+{% endif %}
+<script src="{% static 'js/course_review_form_submission.js' %}"></script>
 
-    {% endblock %}
+{% endblock %}
