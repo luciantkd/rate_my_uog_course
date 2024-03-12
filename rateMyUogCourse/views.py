@@ -78,7 +78,7 @@ def user_login(request):
                 return render(request, 'rateMyUogCourse/login.html', context_dict)
             
         elif Lecturer.objects.filter(email = email):
-            user = Lecturer.objects.filter(email = email)[0]
+            user = Lecturer.objects.get(lecturerId=email.split('@')[0])
             if checkPassword(password, user.password):
                 request.session['user_email'] = user.email
                 request.session['user_type'] = 'lecturer'

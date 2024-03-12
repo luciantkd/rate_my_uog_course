@@ -63,6 +63,8 @@ def lecturer_edit(request):
                     }
                 })
             lecturer_id = email.split('@')[0]  # Logic for generating lecturer ID
+            # Convert lecturer ID to lowercase
+            lecturer_id = lecturer_id.lower()
             lecturer = Lecturer(lecturerId=lecturer_id)
 
         # Update lecturer attributes
@@ -100,7 +102,6 @@ def lecturer_delete(request):
         lecturer_id = request.POST.get('lecturer_id')
         lecturer = get_object_or_404(Lecturer, pk=lecturer_id)
         lecturer.delete()
-
         # Redirect to the lecturer management page after deletion
         return redirect(reverse('administrator:lecturer_management'))
     else:

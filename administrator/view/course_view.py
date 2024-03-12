@@ -66,6 +66,9 @@ def course_edit(request):
         semester = request.POST.get('semester', '').strip()
         lecturer_names_input = request.POST.get('professor', '').strip()
 
+        if semester == '':
+            semester = 2023
+
         if not (course_id and course_name and program_type and lecturer_names_input):
             messages.error(request, 'All fields must be filled out.')
             return render(request, 'administrator/course_edit.html', {
