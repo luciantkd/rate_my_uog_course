@@ -73,7 +73,10 @@ MIDDLEWARE = [
     # TERN OFF THE ADMIN ACCESS MIDDLEWARE
     # 'administrator.middleware.AdminAccessMiddleware',
 ]
-
+CSRF_TRUSTED_ORIGINS = [
+    'https://itcapstone.elviss.me',
+    'https://it.gla.elviss.me',
+]
 ROOT_URLCONF = 'rate_my_uog_course.urls'
 
 TEMPLATES = [
