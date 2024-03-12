@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(data => {
                 alert(data.message); // Show the alert dialog with the response message
                 feedbackForm.reset(); // Reset the form fields to their initial values
+                window.location.reload(); // Reload the page
             })
             .catch((error) => {
                 console.error('Error:', error);
