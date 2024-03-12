@@ -40,6 +40,7 @@ SECRET_KEY = '_oc!p#mimb7hp!q$^v$=n=-wmg6ckryrl%txq$e-vsbelxzhu9'
 DEBUG = True
 
 ALLOWED_HOSTS = [
+    '*', # Allow any host
     'it.gla.elviss.me',
     'localhost',
     '127.0.0.1'
