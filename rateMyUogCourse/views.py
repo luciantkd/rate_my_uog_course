@@ -79,7 +79,7 @@ def user_login(request):
             
         elif Lecturer.objects.filter(email = email):
             user = Lecturer.objects.filter(email = email)[0]
-            if password == user.password:
+            if checkPassword(password, user.password):
                 request.session['user_email'] = user.email
                 request.session['user_type'] = 'lecturer'
                 request.session['user_id'] = user.lecturerId

@@ -12,11 +12,14 @@ class CourseSearchTable(models.Model):
     reviews = models.IntegerField()
     wouldRecommend = models.FloatField()
     professorRating = models.IntegerField()
+
+    def __str__(self):
+        return str(self.courseId)
     
 
 class WebsiteFeedback(models.Model):
     # # feedbackId auto increment
-    feedbackId = models.AutoField(primary_key = True, unique = True)
+    feedbackId = models.AutoField(primary_key = True, unique = True, default=1)
     feedbackTime = models.DateTimeField(auto_now_add = True)
     friendly = models.IntegerField()
     overall = models.IntegerField()

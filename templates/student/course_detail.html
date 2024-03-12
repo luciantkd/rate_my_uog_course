@@ -140,11 +140,6 @@
                         <div class="evaluation-methods-label title">Evaluation Methods:</div>
                         <ul class="evaluation-methods">
                             <li>{{eachFeedback.evaluationMethod}}</li>
-                            <li>Class Participation Grade</li>
-                            <li>Individual Coursework</li>
-                            <li>Group Coursework</li>
-                            <li>Quiz</li>
-                            <li>Exam</li>
                         </ul>
                         {% if user_type == 'student'%}
                         <div class="review-bottom">
@@ -166,17 +161,21 @@
     <div class="review-form-container" id="reviewSection">      
         <h2 class="title">Leave a Review</h2>
         <div class="review-container">
-            <form action="{% url 'rateMyUogCourse:detail'}" method="post" id="review" class="review-form">
+            <form action="{% url 'student:save_feedback'  course_id user_id%}" method="post" id="review" class="review-form">
+                {% csrf_token %}
+                <input type="hidden" name="courseId" value="{{ course_id }}">
+                <input type="hidden" name="guid" value="{{ user_id }}">
+
                 <div class="review-form-ratings">
                     <div class="rating-form-score">
                         <h5 class="rating-form-category title">Rate the course:</h5>
-                        <label for="overall-rating" class="rating-form-category title">Overall Ratings<span class="required-star">*</span></label>
+                        <label for="overall" class="rating-form-category title">Overall Ratings<span class="required-star">*</span></label>
                         <div class="star-rating">
-                            <input id="overall5" type="radio" name="overall-rating" value="5" required><label for="overall5">☆</label>
-                            <input id="overall4" type="radio" name="overall-rating" value="4"><label for="overall4">☆</label>
-                            <input id="overall3" type="radio" name="overall-rating" value="3"><label for="overall3">☆</label>
-                            <input id="overall2" type="radio" name="overall-rating" value="2"><label for="overall2">☆</label>
-                            <input id="overall1" type="radio" name="overall-rating" value="1"><label for="overall1">☆</label>
+                            <input id="overall5" type="radio" name="overall" value="5" required><label for="overall5">☆</label>
+                            <input id="overall4" type="radio" name="overall" value="4"><label for="overall4">☆</label>
+                            <input id="overall3" type="radio" name="overall" value="3"><label for="overall3">☆</label>
+                            <input id="overall2" type="radio" name="overall" value="2"><label for="overall2">☆</label>
+                            <input id="overall1" type="radio" name="overall" value="1"><label for="overall1">☆</label>
                         </div>
                     </div>
 
@@ -214,72 +213,55 @@
                     </div>
 
                     <div class="rating-form-score">
-                        <label for="professor" class="rating-form-category title">Professor Rating<span class="required-star">*</span></label>
+                        <label for="lecturerRating" class="rating-form-category title">Professor Rating<span class="required-star">*</span></label>
                         <div class="star-rating">
-                            <input id="professor5" type="radio" name="professor" value="5" required><label for="professor5">☆</label>
-                            <input id="professor4" type="radio" name="professor" value="4"><label for="professor4">☆</label>
-                            <input id="professor3" type="radio" name="professor" value="3"><label for="professor3">☆</label>
-                            <input id="professor2" type="radio" name="professor" value="2"><label for="professor2">☆</label>
-                            <input id="professor1" type="radio" name="professor" value="1"><label for="professor1">☆</label>
+                            <input id="professor5" type="radio" name="lecturerRating" value="5" required><label for="professor5">☆</label>
+                            <input id="professor4" type="radio" name="lecturerRating" value="4"><label for="professor4">☆</label>
+                            <input id="professor3" type="radio" name="lecturerRating" value="3"><label for="professor3">☆</label>
+                            <input id="professor2" type="radio" name="lecturerRating" value="2"><label for="professor2">☆</label>
+                            <input id="professor1" type="radio" name="lecturerRating" value="1"><label for="professor1">☆</label>
                         </div>
                     </div>
                     
                 </div>
                 <div class="form review-content">
                     <div class="course-comment-container">
-                        <label class="course-comment form title">Course Comments <span class="required-star">*</span></label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Write your overall thoughts on the course here..." maxlength="500" required></textarea>
+                        <label class="course-comment form title" >Course Comments <span class="required-star">*</span></label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" name ="textFeedback" rows="3" placeholder="Write your overall thoughts on the course here..." maxlength="500" required></textarea>
                     </div>
                     <div class="form-group row1">
                         <div class="form-group would-recommend">
-                            <label class="misc-rating title" for="sel1">Would recommend? <span class="required-star">*</span></label>
-                            <select class="form-control" id="sel1"required >
-                                <option value="">--Select an option--</option>
-                                <option>Yes</option>
-                                <option>No</option>
+                            <label class="misc-rating title" for="recommendCourse" >Would recommend? <span class="required-star">*</span></label>
+                            <select class="form-control" id="recommendCourse" name="recommendCourse" required >
+                                <option  value="">--Select an option--</option>
+                                <option  value="True">Yes</option>
+                                <option  value="False">No</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label class="misc-rating title" for="sel1">Grade received: </label>
-                            <select class="form-control" id="sel1">
-                                <option value="">--Select an option--</option>
-                                <option value="A">A</option>
-                                <option value="B">B</option>
-                                <option value="C">C</option>
-                                <option value="D">D</option>
-                                <option value="E">E</option>
-                                <option value="F">F</option>
-                                <option value="G">G</option>
-                                <option value="H">H</option>
-                                <option value="drop_withdrawal">Drop / withdrawal</option>
-                                <option value="rather_not_say">Rather not say</option>
-                                <option value="not_sure_yet">Not sure yet</option>
-                                <option value="audit_no_grade">Audit/No grade</option>                                
+                            <label class="misc-rating title" for="gradeReceived">Grade received: </label>
+                            <select class="form-control" id="gradeReceived" name="gradeReceived"> 
+                                <option  value="">--Select an option--</option>
+                                <option  value="A">A</option>
+                                <option  value="B">B</option>
+                                <option  value="C">C</option>
+                                <option  value="D">D</option>
+                                <option  value="E">E</option>
+                                <option  value="F">F</option>
+                                <option  value="G">G</option>
+                                <option  value="H">H</option>                              
                             </select>
                         </div>
                     </div>
                     <div class="form-group row2">
                             <div class="form-group">
-                              <label class="misc-rating title" for="exampleFormControlSelect2">Exam format: <span class="help-text">(hold ctrl or shift (or drag with the mouse) to select more than one)</span></label>
-                              <select multiple class="form-control row2" id="exampleFormControlSelect2">
-                                <option value="short_answer_questions">Short answer questions</option>
-                                <option value="long_essay_questions">Long essay questions</option>
-                                <option value="multiple_choice_questions">Multiple Choice Questions</option>
-                                <option value="online_at_campus">Online at Campus</option>
-                                <option value="online">Online</option>
-                                <option value="offline">Offline</option>
-                              </select>
+                              <label class="misc-rating title" for="examFormat">Exam format:</label>
+                        <textarea class="form-control" id="examFormat" name ="examFormat" rows="3" placeholder="Write about the exam format here..." maxlength="500" required></textarea>
                             </div>                     
                             <div class="form-group">
-                              <label class="misc-rating title" for="exampleFormControlSelect3">Evaluation Methods: <span class="help-text">(hold ctrl or shift (or drag with the mouse) to select more than one)</span></label>
-                              <select multiple class="form-control row2" id="exampleFormControlSelect3">
-                                <option value="attendance_grade">Attendance Grade</option>
-                                <option value="class_participation_grade">Class Participation Grade</option>
-                                <option value="individual_coursework_heavy">Individual Coursework Heavy</option>
-                                <option value="group_coursework_heavy">Group Coursework Heavy</option>
-                                <option value="quiz_heavy">Quiz Heavy</option>
-                                <option value="exam_heavy">Exam Heavy</option>
-                              </select>
+                              <label class="misc-rating title" for="evaluationMethod">Evaluation Methods: </label>
+                        <textarea class="form-control" id="examFormat" name ="evaluationMethod" rows="3" placeholder="Write about the evaluation method here..." maxlength="500" required></textarea>
+                              
                             </div>
                         </div> 
                         <div class="submit-button-container">
