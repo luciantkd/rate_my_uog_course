@@ -3,7 +3,9 @@
 
 {% block title %}Course Detail - Rate My UofG Course{% endblock %}
 {% block additional_styles %}
-<link rel="stylesheet" href="{% static 'css/student/styles-coursedetail.css' %}">{% endblock %}
+<link rel="stylesheet" href="{% static 'css/student/styles-coursedetail.css' %}">
+<script src="{% static 'js/course_detail.js' %}"></script>
+{% endblock %}
 {% block nav_bar %}
 {% if user_type == 'student' %}  
   <li><a href="{% url 'student:search'  %}">Courses</a></li>
@@ -49,8 +51,7 @@
                     <td class="rating-category-name">Difficulty</td>
                     <td class="progress-container w-75">
                         <div class="progress">
-                            <div class="progress-bar w-75" role="progressbar" aria-valuenow="50" aria-valuemin="0"
-                                aria-valuemax="100"></div>
+                            <div class="progress-bar difficulty-progress-bar" role="progressbar" aria-valuenow="{{ overall_course_details.difficulty }}" aria-valuemin="0" aria-valuemax="5" data-value="{{ overall_course_details.difficulty }}"></div>
                         </div>
                     </td>
                     <td class="rating-category-name">{{ overall_course_details.difficulty }}/5.0</td>
@@ -59,8 +60,7 @@
                     <td class="rating-category-name">Usefulness</td>
                     <td class="progress-container w-25">
                         <div class="progress">
-                            <div class="progress-bar w-50" role="progressbar" aria-valuenow="50" aria-valuemin="0"
-                                aria-valuemax="100"></div>
+                            <div class="progress-bar usefulness-progress-bar" role="progressbar" aria-valuenow="{{ overall_course_details.usefulness }}" aria-valuemin="0" aria-valuemax="5" data-value="{{ overall_course_details.usefulness }}"></div>
                         </div>
                     </td>
                     <td class="rating-category-name">{{ overall_course_details.usefulness }}/5.0</td>
@@ -69,8 +69,7 @@
                     <td class="rating-category-name">Workload</td>
                     <td class="progress-container w-50">
                         <div class="progress">
-                            <div class="progress-bar w-75" role="progressbar" aria-valuenow="50" aria-valuemin="0"
-                                aria-valuemax="100"></div>
+                            <div class="progress-bar workload-progress-bar" role="progressbar" aria-valuenow="{{ overall_course_details.workload }}" aria-valuemin="0" aria-valuemax="5" data-value="{{ overall_course_details.workload }}"></div>
                         </div>
                     </td>
                     <td class="rating-category-name">{{ overall_course_details.workload }}/5.0</td>
@@ -79,8 +78,7 @@
                     <td class="rating-category-name">Professor Rating</td>
                     <td class="progress-container w-50">
                         <div class="progress">
-                            <div class="progress-bar w-100" role="progressbar" aria-valuenow="50" aria-valuemin="0"
-                                aria-valuemax="100"></div>
+                            <div class="progress-bar professor-progress-bar" role="progressbar" aria-valuenow="{{ overall_course_details.professorRating}}" aria-valuemin="0" aria-valuemax="5" data-value="{{ overall_course_details.professorRating}}"></div>
                         </div>
                     </td>
                     <td class="rating-category-name">{{ overall_course_details.professorRating}}/5.0</td>
@@ -259,29 +257,14 @@
                         </div>
                     </div>
                     <div class="form-group row2">
-                            <div class="form-group">
-                              <label class="misc-rating title" for="exampleFormControlSelect2">Exam format: <span class="help-text">(hold ctrl or shift (or drag with the mouse) to select more than one)</span></label>
-                              <select multiple class="form-control row2" id="exampleFormControlSelect2">
-                                <option value="short_answer_questions">Short answer questions</option>
-                                <option value="long_essay_questions">Long essay questions</option>
-                                <option value="multiple_choice_questions">Multiple Choice Questions</option>
-                                <option value="online_at_campus">Online at Campus</option>
-                                <option value="online">Online</option>
-                                <option value="offline">Offline</option>
-                              </select>
-                            </div>                     
-                            <div class="form-group">
-                              <label class="misc-rating title" for="exampleFormControlSelect3">Evaluation Methods: <span class="help-text">(hold ctrl or shift (or drag with the mouse) to select more than one)</span></label>
-                              <select multiple class="form-control row2" id="exampleFormControlSelect3">
-                                <option value="attendance_grade">Attendance Grade</option>
-                                <option value="class_participation_grade">Class Participation Grade</option>
-                                <option value="individual_coursework_heavy">Individual Coursework Heavy</option>
-                                <option value="group_coursework_heavy">Group Coursework Heavy</option>
-                                <option value="quiz_heavy">Quiz Heavy</option>
-                                <option value="exam_heavy">Exam Heavy</option>
-                              </select>
-                            </div>
-                        </div> 
+                        <div class="course-exam-format-container">
+                            <label class="exam-format form title">Exam Format <span class="required-star">*</span></label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Write your overall thoughts on the course here..." maxlength="500" required></textarea>
+                        </div>                  
+                        <div class="course-evaluation-method-container">
+                            <label class="evaluation-method form title">Evaluation Methods<span class="required-star">*</span></label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Write your overall thoughts on the course here..." maxlength="500" required></textarea>
+                        </div>    
                         <div class="submit-button-container">
                             <button type="submit" form="review" class="btn btn-primary leave-a-review" value="Submit">Submit</button>
                         </div>
