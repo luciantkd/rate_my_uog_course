@@ -62,6 +62,7 @@ def lecturer_edit(request):
                         'email': email,
                     }
                 })
+
             lecturer_id = email.split('@')[0]  # Logic for generating lecturer ID
             # Convert lecturer ID to lowercase
             lecturer_id = lecturer_id.lower()
