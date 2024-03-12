@@ -77,7 +77,7 @@ def user_login(request):
                 context_dict['errorMessage'] = 'Invalid login details'
                 return render(request, 'rateMyUogCourse/login.html', context_dict)
             
-        elif Lecturer.objects.get(lecturerId=email.split('@')[0]):
+        elif Lecturer.objects.filter(lecturerId=email.split('@')[0]):
             user = Lecturer.objects.get(lecturerId=email.split('@')[0])
             if checkPassword(password, user.password):
                 request.session['user_email'] = user.email

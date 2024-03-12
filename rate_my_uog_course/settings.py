@@ -71,7 +71,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # TERN OFF THE ADMIN ACCESS MIDDLEWARE
-    # 'administrator.middleware.AdminAccessMiddleware',
+    'administrator.middleware.AdminAccessMiddleware',
 ]
 CSRF_TRUSTED_ORIGINS = [
     'https://itcapstone.elviss.me',
