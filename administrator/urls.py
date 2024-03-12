@@ -30,6 +30,7 @@ urlpatterns = [
     path ('lecturer_edit/', lecturer_view.lecturer_edit, name='lecturer_edit'),
     # path ('lecturer_save_post/', lecturer_view.lecturer_save_post, name='lecturer_save_post'),
     path ('lecturer_delete/', lecturer_view.lecturer_delete, name='lecturer_delete'),
+    path ('logout/', views.logout, name='logout')
     # path ('lecturer_add/', lecturer_view.lecturer_add, name='lecturer_add'),
     # path ('lecturer_add_post/', lecturer_view.lecturer_add_post, name='lecturer_add_post'),
     # path ('create_lecturer_account/', views.create_lecturer_account, name='create_lecturer_account'),

@@ -77,7 +77,11 @@ def reported_review_approve(request, feedback_id):
 def base(request):
     return render(request, 'administrator:course_management')
 
-
+def logout(request):
+    request.session.flush()
+    return redirect(reverse('rateMyUogCourse:mainPage'))
 
 # TODO: session check
-# def session_check(request):
+def session_check(request):
+    if request.session.get('user_type') != 'administrator':
+        return redirect(reverse('rateMyUogCourse:login'))
