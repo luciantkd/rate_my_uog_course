@@ -225,8 +225,13 @@ def save_website_feedback(request):
         form = WebsiteFeedback(request.POST)
         if form.is_valid():
             form.save()
-
-    print('Website feedback saved successfully.')
+            form_submitted = True
+        else:
+            return render(request, 'rateMyUogCourse/feedbackPage.html', {'form': form})
+    else:
+        form = WebsiteFeedback()
+    
+    return render(request, 'rateMyUogCourse/feedbackPage.html', {'form': form, 'form_submitted': form_submitted})
 
 def logout(request):
     request.session.flush()

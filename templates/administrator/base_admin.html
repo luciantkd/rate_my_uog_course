@@ -52,6 +52,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="logoutModalLabel">Log Out</h5>
+{#                    link to the home page#}
+{#                    <a href="{% url 'administrator:logout' %}" class="modal-title" id="logoutModalLabel">Log Out</a>#}
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -61,7 +63,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <a href="#" class="btn btn-danger">Log Out</a>
+                    <a href="{% url 'administrator:logout' %}" class="btn btn-danger">Log Out</a>
                 </div>
             </div>
         </div>

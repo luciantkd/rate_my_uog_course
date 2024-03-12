@@ -26,6 +26,10 @@ def website_feedback_management(request):
     overall_avg = overall_avg / count
     friendly_avg = friendly_avg / count
     aesthetic_avg = aesthetic_avg / count
+    # keep 2 decimal places
+    overall_avg = round(overall_avg, 2)
+    friendly_avg = round(friendly_avg, 2)
+    aesthetic_avg = round(aesthetic_avg, 2)
 
     print(website_feedbacks)
 

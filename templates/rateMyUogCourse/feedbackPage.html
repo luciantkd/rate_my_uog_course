@@ -2,7 +2,8 @@
 {% load static %}
 
 {% block title %}Leave a Feedback - Rage My UofG Course{% endblock %}
-{% block additional_styles %}<link rel="stylesheet" type="text/css" href="{% static 'css/rateMyUogCourse/feedbackStyle.css' %}">{% endblock %}
+{% block additional_styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/rateMyUogCourse/feedbackStyle.css' %}">{% endblock %}
 
 {% block content %}
 
@@ -13,10 +14,11 @@
   <h3>Rate Our Website and Leave Your Feedback!</h3>
   <p>If you think there’s anything to be improved from the website, please input your feedback.</p>
   <!-- Feedback form starts here -->
-  <form id="feedbackForm">
+  <form id="feedbackForm" action="{% url 'rateMyUogCourse:save_website_feedback' %}" method="post">
+    {% csrf_token %}
     <!-- Overall website rating -->
     <div class="feedback-item">
-      <label for="overallWebsite">Overall website*:</label>
+      <label for="overall">Overall website*:</label>
       <div class="star-rating">
         <input id="overall5" type="radio" name="overall" value="5"><label for="overall5">☆</label>
         <input id="overall4" type="radio" name="overall" value="4"><label for="overall4">☆</label>
@@ -28,34 +30,34 @@
     </div>
     <!-- User-friendly rating -->
     <div class="feedback-item">
-      <label for="userFriendly">User-friendly*:</label>
+      <label for="friendly">User-friendly*:</label>
       <div class="star-rating">
-        <input id="user5" type="radio" name="userFriendly" value="5"><label for="user5">☆</label>
-        <input id="user4" type="radio" name="userFriendly" value="4"><label for="user4">☆</label>
-        <input id="user3" type="radio" name="userFriendly" value="3"><label for="user3">☆</label>
-        <input id="user2" type="radio" name="userFriendly" value="2"><label for="user2">☆</label>
-        <input id="user1" type="radio" name="userFriendly" value="1"><label for="user1">☆</label>
+        <input id="user5" type="radio" name="friendly" value="5"><label for="user5">☆</label>
+        <input id="user4" type="radio" name="friendly" value="4"><label for="user4">☆</label>
+        <input id="user3" type="radio" name="friendly" value="3"><label for="user3">☆</label>
+        <input id="user2" type="radio" name="friendly" value="2"><label for="user2">☆</label>
+        <input id="user1" type="radio" name="friendly" value="1"><label for="user1">☆</label>
       </div>
 
     </div>
 
     <!-- Website Aesthetics rating -->
     <div class="feedback-item">
-      <label for="websiteAesthetics">Website Aesthetics*:</label>
+      <label for="aesthetic">Website Aesthetics*:</label>
       <div class="star-rating">
-        <input id="aes5" type="radio" name="websiteAesthetics" value="5"><label for="aes5">☆</label>
-        <input id="aes4" type="radio" name="websiteAesthetics" value="4"><label for="aes4">☆</label>
-        <input id="aes3" type="radio" name="websiteAesthetics" value="3"><label for="aes3">☆</label>
-        <input id="aes2" type="radio" name="websiteAesthetics" value="2"><label for="aes2">☆</label>
-        <input id="aes1" type="radio" name="websiteAesthetics" value="1"><label for="aes1">☆</label>
+        <input id="aes5" type="radio" name="aesthetic" value="5"><label for="aes5">☆</label>
+        <input id="aes4" type="radio" name="aesthetic" value="4"><label for="aes4">☆</label>
+        <input id="aes3" type="radio" name="aesthetic" value="3"><label for="aes3">☆</label>
+        <input id="aes2" type="radio" name="aesthetic" value="2"><label for="aes2">☆</label>
+        <input id="aes1" type="radio" name="aesthetic" value="1"><label for="aes1">☆</label>
       </div>
 
     </div>
 
     <!-- Explanation text area -->
     <div class="feedback-item">
-      <label for="explanation">Explanation:</label>
-      <textarea id="explanation" name="explanation" rows="4" placeholder="Please elaborate your feedback here..."
+      <label for="comment">Explanation:</label>
+      <textarea id="comment" name="comment" rows="4" placeholder="Please elaborate your feedback here..."
         maxlength="500"></textarea>
     </div>
 
@@ -65,5 +67,13 @@
     </div>
   </form>
 </div> <!-- Container ends here -->
+
+{% if form_submitted %}
+<script type="text/javascript">
+  window.formSubmitted = true;
+  window.redirectUrl = "{% url 'rateMyUogCourse:mainPage' %}";
+</script>
+<script src="{% static 'js/feedback_form_submission.js' %}"></script>
+{% endif %}
 
 {% endblock %}
