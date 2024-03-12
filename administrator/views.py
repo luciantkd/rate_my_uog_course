@@ -55,14 +55,13 @@ def reported_review_detail(request):
 # This method is to delete a reported review
 # @param feedback_id: the id of the feedback
 # @return: boolean success
-def reported_review_delete(request):
-    feedback_id = request.GET.get('feedback_id')
+def reported_review_approve(request, feedback_id):
     feedback_entity = get_object_or_404(CourseFeedback, pk=feedback_id)
     if feedback_entity is not None:
         feedback_entity.delete()
     return redirect(reverse('administrator:report_review_management'))
 
-def reported_review_approve(request, feedback_id):
+def reported_review_delete(request, feedback_id):
     print(feedback_id)
     feedback = get_object_or_404(CourseFeedback, feedbackId=feedback_id)
     feedback.reported = 0

@@ -57,9 +57,7 @@
                 <div class="misc-rating title">Exam Format: <span class="answer">{{ feedback_entity.examFormat }}</span></div>
                 <div class="evaluation-methods-label title">Evaluation Methods:</div>
                 <ul class="evaluation-methods">
-                    {% for method in feedback_entity.evaluationMethod %}
-                    <li>{{ method }}</li>
-                    {% endfor %}
+                    <li>{{ feedback_entity.evaluationMethod }}</li>
                 </ul>
                 <div class="review-bottom">
                     <text class="like-button btn btn-primary">👍 {{ feedback_entity.likes }}</text>
