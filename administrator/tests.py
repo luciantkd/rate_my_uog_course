@@ -2,7 +2,7 @@ from django.test import TestCase, Client
 from django.urls import reverse
 from django.utils import timezone
 
-from lecturer.models import Course
+from lecturer.models import Course, Lecturer
 from student.models import Student, CourseFeedback
 
 
@@ -35,6 +35,18 @@ class CourseFeedbackViewTests(TestCase):
             approved=False,
             feedbackDateTime=timezone.now()
         )
+        # Create some test data
+        self.course1 = Course.objects.create(courseId="CS101", courseName="Intro to Computer Science", programType="CS",
+                                             semester=2021)
+        self.course2 = Course.objects.create(courseId="CS102", courseName="Data Structures", programType="CS",
+                                             semester=2021)
+        self.lecturer1 = Lecturer.objects.create(lecturerId="L001", lecturerName="Dr. Algorithm",
+                                                 designation="Professor", email="algorithm@example.com",
+                                                 password="securepassword")
+
+        # Create a lecturer and assign to course1
+        self.course1.lecturers.add(self.lecturer1)
+
 
     def test_main_page(self):
         response = self.client.get(reverse('mainPage'))
@@ -61,3 +73,45 @@ class CourseFeedbackViewTests(TestCase):
         self.assertEqual(response.status_code, 302)  # Redirect status
         updated_feedback = CourseFeedback.objects.get(feedbackId=self.feedback.feedbackId)
         self.assertEqual(updated_feedback.reported, 0)
+
+    def test_course_management_with_filters(self):
+        # Set the query parameters for program filter
+        response = self.client.get(reverse('administrator:course_management'), {'program': 'CS'})
+        self.assertEqual(response.status_code, 200)
+        # Check if the response contains courses filtered by the CS program
+        courses = response.context['courses']
+        self.assertTrue(all(course['programType'] == 'CS' for course in courses))
+        # Optionally, check for specific course names or IDs in the response
+
+    def test_course_add_new(self):
+        new_course_data = {
+            'course_id': 'CS103',
+            'course_name': 'Algorithms',
+            'program_type': 'CS',
+            'semester': '2022',
+            'professor': 'Dr. Algorithm'
+        }
+        response = self.client.post(reverse('administrator:course_edit'), new_course_data)
+        self.assertEqual(response.status_code, 302)  # Expecting a redirect to the course management page
+        self.assertTrue(Course.objects.filter(courseId='CS103').exists())
+        # Optionally, verify that the lecturer is also created/assigned
+
+    def test_course_add_new(self):
+        new_course_data = {
+            'course_id': 'CS103',
+            'course_name': 'Algorithms',
+            'program_type': 'CS',
+            'semester': '2022',
+            'professor': 'Dr. Algorithm'
+        }
+        response = self.client.post(reverse('administrator:course_edit'), new_course_data)
+        self.assertEqual(response.status_code, 302)  # Expecting a redirect to the course management page
+        self.assertTrue(Course.objects.filter(courseId='CS103').exists())
+        # Optionally, verify that the lecturer is also created/assigned
+
+    def test_course_delete(self):
+        # Assuming course1 is to be deleted
+        response = self.client.post(reverse('administrator:course_delete'), {'course_id': self.course1.courseId})
+        self.assertEqual(response.status_code, 302)  # Expecting a redirect after deletion
+        self.assertFalse(Course.objects.filter(courseId=self.course1.courseId).exists())
+
