@@ -105,11 +105,10 @@ def show_detailed_rating(request, course_Id, guId):
 
     lecturercourse_query_set = LecturerCourseAssignment.objects.filter(courseId = course_Id)
 
-    print(lecturercourse_query_set)
+    lecturer_ids = [item.lecturerId for item in lecturercourse_query_set]
 
-    #to be changed
+    context_dict['lecturer_query_sets'] = Lecturer.objects.filter(lecturerId__in=lecturer_ids)
 
-    context_dict['lecturer_query_sets']  = Lecturer.objects.filter(lecturerId = lecturercourse_query_set[0].lecturerId)
 
     print(context_dict['lecturer_query_sets'])
 

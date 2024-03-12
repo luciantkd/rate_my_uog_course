@@ -48,8 +48,9 @@ def course_management(request):
         })
 
     # Check if it's an AJAX request
-    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+    if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
         return JsonResponse({'courses': courses}, safe=False)
+
 
     return render(request, 'administrator/course_management.html', {'courses': courses})
 
