@@ -69,6 +69,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # TERN OFF THE ADMIN ACCESS MIDDLEWARE
+    # 'administrator.middleware.AdminAccessMiddleware',
 ]
 
 ROOT_URLCONF = 'rate_my_uog_course.urls'

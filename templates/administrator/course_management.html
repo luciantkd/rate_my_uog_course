@@ -12,18 +12,22 @@
 
 {% block content %}
 <div>
-    <div class="search">
-        <input class="form-control" id="myInput" type="text" placeholder="Search a course here..">
+    <div class="filter-add-section">
+{#        <input class="form-control" id="myInput" type="text" placeholder="Search a course here.." >#}
         <!-- Dropdown for filtering -->
+{#        add content#}
+        <input class="form-control" id="myInput" type="text" placeholder="Search a course here.." value="{{ request.GET.query }}">
+        <button class="btn btn-primary add-a-course" id="searchButton">Search</button>
     </div>
     <div class="filter-add-section">
-        <select class="form-control btn-secondary" id="tableFilter" placeholder="Course:">
-            <option value="" selected disabled>Select a Program</option>
-            <option class="dropdown-item" value="">All</option>
-            <option class="dropdown-item" value="IT+">IT+</option>
-            <option class="dropdown-item" value="CS+">CS+</option>
-            <!-- more options as needed -->
-        </select>
+    <select class="form-control btn-secondary" id="tableFilter" onchange="this.form.submit()">
+        <option value="" disabled>Select a Program</option>
+        <option class="dropdown-item" value="" {% if request.GET.program == "" %}selected{% endif %}>All</option>
+        <option class="dropdown-item" value="IT+" {% if request.GET.program == "IT " %}selected{% endif %}>IT+</option>
+        <option class="dropdown-item" value="CS+" {% if request.GET.program == "CS " %}selected{% endif %}>CS+</option>
+        <!-- more options as needed -->
+    </select>
+
 {#        <button type="button" class="btn btn-primary add-a-course">+ Add a Course</button>#}
         <a href="{% url 'administrator:course_add' %}" class="btn btn-primary add-a-course">+ Add a Course</a>
     </div>
@@ -45,7 +49,7 @@
                 <tr onclick="window.location='#';">
                   <td>{{ course.courseId }}</td>
                   <td>{{ course.courseName }}</td>
-                  <td>{{ course.lecturercourseassignment__lecturerId__lecturerName }}</td>
+                  <td>{{ course.lecturerNames }}</td>
                   <td>{{ course.programType }}</td>
                   <td> 0 </td>
                   <td class="buttons">
@@ -67,4 +71,29 @@
         </table>
     </div>
 </div> <!-- end of the main div content-->
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const searchInput = document.getElementById('myInput');
+    const searchButton = document.getElementById('searchButton');
+    const filterSelect = document.getElementById('tableFilter');
+
+    // 将光标移动到输入框文本的末尾
+    const value = searchInput.value;
+    searchInput.focus();
+    searchInput.value = '';
+    searchInput.value = value;
+
+    // 处理搜索按钮点击
+    searchButton.addEventListener('click', function() {
+        window.location.href = '?program=' + filterSelect.value + '&query=' + searchInput.value;
+    });
+
+    filterSelect.addEventListener('change', function() {
+        window.location.href = '?program=' + this.value + '&query=' + searchInput.value;
+    });
+});
+</script>
+
+
 {% endblock %}

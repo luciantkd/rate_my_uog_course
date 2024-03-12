@@ -1,70 +1,89 @@
+from django.db.models import Q
 from django.shortcuts import render, get_object_or_404, redirect
 
 from django.urls import reverse
 
 from lecturer.models import Lecturer
 from rateMyUogCourse.views import encryptPassword
+from django.contrib import messages
 
 
-# View for testing viewing the Feedback Management page
-# def feedback_management(request):
-#     return render(request, 'administrator/feedback_management.html')
-
-# View for testing viewing the Reported Reviews Management page
-# def reported_reviews_management(request):
-#     return render(request, 'administrator/reported_reviews_management.html')
-
-# View for testing viewing the Lecturer Management page
 def lecturer_management(request):
-    # get lecturer list except passwords
-    lecturers = Lecturer.objects.all().values('lecturerId', 'lecturerName', 'designation', 'email').order_by('lecturerId')
-    print(lecturers)
+    search_query = request.GET.get('query', '')
+
+    # 使用 Q 对象进行复杂查询，允许同时按名字和电子邮件搜索
+    if search_query:
+        lecturers = Lecturer.objects.filter(
+            Q(lecturerName__icontains=search_query) |
+            Q(email__icontains=search_query)
+        ).values('lecturerId', 'lecturerName', 'designation', 'email').order_by('lecturerId')
+    else:
+        lecturers = Lecturer.objects.all().values('lecturerId', 'lecturerName', 'designation', 'email').order_by('lecturerId')
+
     return render(request, 'administrator/lecturer_management.html', {'lecturers': lecturers})
 
 
 def lecturer_edit(request):
-    # get lecturer id from request
     lecturer_id = request.GET.get('lecturer_id')
-    print(lecturer_id)
-    # get lecturer entity
-    lecturer_entity = get_object_or_404(Lecturer, pk=lecturer_id)
-    print(lecturer_entity)
-    # values('lecturerId', 'lecturerName', 'designation'))
-    lecturer_entity = {'lecturerId': lecturer_entity.lecturerId, 'lecturerName': lecturer_entity.lecturerName,
-                       'designation': lecturer_entity.designation, 'email': lecturer_entity.email}
-    print(lecturer_entity)
-    return render(request, 'administrator/lecturer_edit.html', {'lecturer_entity': lecturer_entity})
-
-def lecturer_save_post(request):
     if request.method == 'POST':
         # 获取表单数据
-        lecturer_id = request.POST.get('lecturerId')
-        lecturer_name = request.POST.get('lecturerName')
-        designation = request.POST.get('designation')
-        email = request.POST.get('Email')
-        password = request.POST.get('Password')
+        lecturer_id = request.POST.get('lecturerId', '').strip()
+        lecturer_name = request.POST.get('lecturerName', '').strip()
+        designation = request.POST.get('designation', '').strip()
+        email = request.POST.get('Email', '').strip()
+        password = request.POST.get('Password', '').strip()
 
-        # 根据ID获取讲师对象
-        lecturer = get_object_or_404(Lecturer, pk=lecturer_id)
+        # 输入验证
+        if not all([lecturer_name, designation, email]):
+            messages.error(request, "Name, designation, and email cannot be empty.")
+            return render(request, 'administrator/lecturer_edit.html', {
+                'lecturer_entity': {
+                    'lecturerId': lecturer_id,
+                    'lecturerName': lecturer_name,
+                    'designation': designation,
+                    'email': email,
+                }
+            })
 
-        # 更新讲师信息
+        if lecturer_id:  # 编辑现有讲师
+            lecturer = get_object_or_404(Lecturer, pk=lecturer_id)
+        else:  # 添加新讲师
+            # if password is not provided, return error message
+            if not password:
+                messages.error(request, "Password cannot be empty.")
+                return render(request, 'administrator/lecturer_edit.html', {
+                    'lecturer_entity': {
+                        'lecturerId': lecturer_id,
+                        'lecturerName': lecturer_name,
+                        'designation': designation,
+                        'email': email,
+                    }
+                })
+            lecturer_id = email.split('@')[0]  # 或其他生成讲师ID的逻辑
+            lecturer = Lecturer(lecturerId=lecturer_id)
+
         lecturer.lecturerName = lecturer_name
         lecturer.designation = designation
         lecturer.email = email
 
-        # 如果密码字段不为空，则更新密码
-        if password:
-            # hash the password
+        if password:  # 如果提供了密码，则更新密码
             lecturer.password = encryptPassword(password)
 
-        # 保存更改到数据库
         lecturer.save()
+        return redirect(reverse('administrator:lecturer_management'))
 
-        # 重定向到讲师列表或其他页面
-        return redirect(reverse('administrator:lecturer_management'))
-    else:
-        # 如果不是POST请求，则重定向到编辑页面或显示错误
-        return redirect(reverse('administrator:lecturer_management'))
+    else:  # GET请求
+        lecturer_entity = {}
+        if lecturer_id:  # 编辑模式
+            lecturer = get_object_or_404(Lecturer, pk=lecturer_id)
+            lecturer_entity = {
+                'lecturerId': lecturer.lecturerId,
+                'lecturerName': lecturer.lecturerName,
+                'designation': lecturer.designation,
+                'email': lecturer.email
+            }
+        return render(request, 'administrator/lecturer_edit.html',
+                      {'lecturer_entity': lecturer_entity})
 
 
 def lecturer_delete(request):
@@ -75,34 +94,4 @@ def lecturer_delete(request):
         lecturer.delete()
         return redirect(reverse('administrator:lecturer_management'))  # Redirect to the lecturer management page
     else:
-        return redirect(reverse('administrator:lecturer_management'))
-
-def lecturer_add(request):
-    return render(request, 'administrator/lecturer_add.html')
-
-def lecturer_add_post(request):
-    if request.method == 'POST':
-        # 获取表单数据
-        lecturer_name = request.POST.get('lecturerName')
-        designation = request.POST.get('designation')
-        email = request.POST.get('Email')
-        password = request.POST.get('Password')
-
-        # lecturerId will be the same as email name
-        lecturer_id = email.split('@')[0]
-        print(lecturer_id)
-
-        # Encrypt the password
-        password = encryptPassword(password)
-
-        # 创建讲师对象
-        lecturer = Lecturer(lecturerId=lecturer_id, lecturerName=lecturer_name, designation=designation, email=email, password=password)
-
-        # 保存到数据库
-        lecturer.save()
-
-        # 重定向到讲师列表或其他页面
-        return redirect(reverse('administrator:lecturer_management'))
-    else:
-        # 如果不是POST请求，则重定向到编辑页面或显示错误
         return redirect(reverse('administrator:lecturer_management'))
