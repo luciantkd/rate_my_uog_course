@@ -2,11 +2,14 @@ from django.shortcuts import render
 # Create your views here.
 from django.http import HttpResponse
 from student.forms import CourseFeedback
-from student.models import CourseFeedback as Course_Feedback_Model, StudentFeedbackLikes
+from student.models import CourseFeedback as Course_Feedback_Model, Student, StudentFeedbackLikes
 from rateMyUogCourse.models import CourseSearchTable
 from lecturer.models import Course, Lecturer, LecturerCourseAssignment
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
+
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 
 def save_feedback(request,course_id, guId):
     if request.method == 'POST':
@@ -123,11 +126,11 @@ def show_detailed_rating(request, course_Id, guId):
     feedback_ids = [feedback.feedbackId for feedback in detailed_feedback]
 
     if(guId != 'None'):
-         student_feedback_like_list = StudentFeedbackLikes.objects.filter(guid = guId, feedbackId__in = feedback_ids)
+         feedback_ids_list = list(StudentFeedbackLikes.objects.filter(guid=guId, feedbackId__in=feedback_ids).values_list('feedbackId', flat=True))
 
-         context_dict['studentFeedbackLike'] = student_feedback_like_list
+         context_dict['studentFeedbackLike'] = feedback_ids_list
+         print(feedback_ids_list)
 
-         context_dict['is_lecturer'] = True
 
     return render(request, "student/course_detail.html" , context = context_dict)
 
@@ -155,26 +158,31 @@ def report_feedback(request, feedback_id):
         return JsonResponse({'error': 'Invalid request'}, status=400)
 
 
-def like_feedback(feedback_id, guId):
-
-        try:
-
-            detailed_feedback = Course_Feedback_Model.objects.filter(feedbackId = feedback_id)
-
-            detailed_feedback.likes =  detailed_feedback.likes + 1
-
-            detailed_feedback.save()
-
-            studentFeedbackLike = StudentFeedbackLikes.objects.create(guid = guId, feedbackId = feedback_id)
-
-            studentFeedbackLike.save()
-
-        except Exception as e:
-            print(e)
 
 
 
-def dislike_feedback(feedback_id, guId):
+def like_feedback(request, feedback_id, guId):
+    try:
+        print('in like')
+
+        # Your existing code to increment likes and create StudentFeedbackLikes object
+        detailed_feedback = Course_Feedback_Model.objects.get(feedbackId=feedback_id)
+        detailed_feedback.likes += 1
+        detailed_feedback.save()
+
+        Student.objects.filter(guid = guId)
+
+        studentFeedbackLike = StudentFeedbackLikes.objects.create(guid=Student.objects.get(guid = guId), feedbackId=detailed_feedback)
+        studentFeedbackLike.save()
+
+        return JsonResponse({'success': True})  # Return a success response
+    except Exception as e:
+        print(e)
+        return JsonResponse({'success': False, 'error': str(e)}, status=500)  # Return an error response with status 500
+
+
+
+def dislike_feedback(request,feedback_id, guId):
     try:
 
             detailed_feedback = Course_Feedback_Model.objects.filter(feedbackId = feedback_id)

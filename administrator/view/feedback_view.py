@@ -66,6 +66,5 @@ def website_feedback_delete(request):
     feedback_entity = get_object_or_404(WebsiteFeedback, pk=feedback_id)
     if feedback_entity is not None:
         feedback_entity.delete()
-        return render(request, 'administrator/feedback_management.html', {'success': True})
-    else:
-        return render(request, 'administrator/feedback_management.html', {'success': False})
+        return redirect(reverse('administrator:website_feedback_management'))
+

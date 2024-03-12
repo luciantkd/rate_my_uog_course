@@ -337,4 +337,17 @@ select.row2{
 .rating-score .medium { background-color: yellow; }
 .rating-score .high-medium { background-color: yellowgreen; }
 .rating-score .high { background-color: green; }
-/* Continue defining as many as you need */
+
+.like-dislike-button.disabled {
+    background-color: var(--text-background);
+    border-color:var(--text-background)
+}
+.like-dislike-button {
+    padding: 5;
+    margin: 0;
+}
+.like-count {
+    vertical-align: middle;
+    color: black;
+    font-weight: bold;
+}
