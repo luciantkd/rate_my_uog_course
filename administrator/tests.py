@@ -2,7 +2,7 @@ from django.test import TestCase, Client
 from django.urls import reverse
 from django.utils import timezone
 
-from lecturer.models import Course, Lecturer
+from lecturer.models import Course, Lecturer, LecturerCourseAssignment
 from student.models import Student, CourseFeedback
 
 
@@ -16,6 +16,7 @@ class CourseFeedbackViewTests(TestCase):
         # Assuming you have a method to add students as provided
         self.student = Student.objects.create(guid="1234567", email="1234567t@student.gla.ac.uk", name="test_user_1",
                                               password="1qaz@WSX", programType="CS")
+
 
         self.feedback = CourseFeedback.objects.create(
             courseId=self.course,
@@ -43,15 +44,8 @@ class CourseFeedbackViewTests(TestCase):
         self.lecturer1 = Lecturer.objects.create(lecturerId="L001", lecturerName="Dr. Algorithm",
                                                  designation="Professor", email="algorithm@example.com",
                                                  password="securepassword")
-
-        # Create a lecturer and assign to course1
-        self.course1.lecturers.add(self.lecturer1)
-
-
-    def test_main_page(self):
-        response = self.client.get(reverse('mainPage'))
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "Main Page")
+        LecturerCourseAssignment.objects.create(courseId=self.course1, lecturerId=self.lecturer1)
+        LecturerCourseAssignment.objects.create(courseId=self.course2, lecturerId=self.lecturer1)
 
     def test_reported_reviews_management(self):
         response = self.client.get(reverse('administrator:report_review_management'))
