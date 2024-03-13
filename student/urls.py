@@ -11,5 +11,4 @@ urlpatterns = [
     path('save_feedback/<str:course_id>/<str:guId>', studentViews.save_feedback, name='save_feedback'),
     path('report_feedback/<int:feedback_id>/', studentViews.report_feedback, name='report_feedback'),
     path('like_feedback/<int:feedback_id>/<str:guId>', studentViews.like_feedback, name='like_feedback'),
-    path('dislike_feedback/<int:feedback_id>/<str:guId>', studentViews.dislike_feedback, name='dislike_feedback'),
 ]
