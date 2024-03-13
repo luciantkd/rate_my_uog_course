@@ -36,14 +36,10 @@ def save_feedback(request, course_id, guId):
 
             count_reviews = old_course_overview.reviews
 
-            if old_course_overview:
-
-                print(old_course_overview.overall, count_reviews)
+            if count_reviews!=0:
 
                 old_course_overview.overall = ((old_course_overview.overall * (
                             count_reviews - 1)) + form_overall) / count_reviews
-
-                print(old_course_overview.overall)
 
                 old_course_overview.difficulty = ((old_course_overview.difficulty * (
                             count_reviews - 1)) + form_difficulty) / count_reviews
@@ -71,27 +67,25 @@ def save_feedback(request, course_id, guId):
 
             else:
 
-                course = Course.objects.filter(courseId=course_id)
+                course_data_search = CourseSearchTable.objects.filter(courseId = course_id)
 
-                courseSearchTableRecord = CourseSearchTable.objects.create(
+                search_row = course_data_search[0]
 
-                    overall=form_overall,
+                search_row.overall = form_overall
 
-                    difficulty=form_difficulty,
+                search_row.difficulty = form_difficulty
 
-                    usefulness=form_usefulness,
+                search_row.usefulness = form_usefulness
 
-                    workload=form_workload,
+                search_row.professorRating = form_professor_rating
 
-                    professorRating=form_professor_rating,
+                search_row.wouldRecommend = form_would_recommend
 
-                    courseName=course.courseName,
+                search_row.workload = form_workload
 
-                    wouldRecommend=form_would_recommend,
+                search_row.reviews = 1
 
-                    courseId=course_id)
-
-                courseSearchTableRecord.save()
+                search_row.save()
 
             return JsonResponse({'success': True, 'message': 'Course review submitted successfully!'})
 
@@ -162,9 +156,6 @@ def report_feedback(request, feedback_id):
 
 def like_feedback(request, feedback_id, guId):
     try:
-        print('in like')
-
-        # Your existing code to increment likes and create StudentFeedbackLikes object
         detailed_feedback = Course_Feedback_Model.objects.get(feedbackId=feedback_id)
         detailed_feedback.likes += 1
         detailed_feedback.save()
@@ -181,18 +172,3 @@ def like_feedback(request, feedback_id, guId):
         return JsonResponse({'success': False, 'error': str(e)}, status=500)  # Return an error response with status 500
 
 
-def dislike_feedback(request, feedback_id, guId):
-    try:
-
-        detailed_feedback = Course_Feedback_Model.objects.filter(feedbackId=feedback_id)
-
-        detailed_feedback.likes = detailed_feedback.likes - 1
-
-        detailed_feedback.save()
-
-        studentFeedbackLike = StudentFeedbackLikes.objects.get(guid=guId, feedbackId=feedback_id)
-
-        studentFeedbackLike.delete()
-
-    except Exception as e:
-        print(e)
