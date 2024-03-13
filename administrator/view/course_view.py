@@ -89,9 +89,20 @@ def course_edit(request):
         # Reset and update lecturer assignments for the course
         course.lecturercourseassignment_set.all().delete()
         lecturer_names = [name.strip() for name in lecturer_names_input.split(',') if name.strip()]
-        for lecturer_name in lecturer_names:
-            lecturer, _ = Lecturer.objects.get_or_create(lecturerName=lecturer_name)
-            LecturerCourseAssignment.objects.create(lecturerId=lecturer, courseId=course)
+        try:
+            for lecturer_name in lecturer_names:
+                lecturer = Lecturer.objects.get(lecturerName=lecturer_name)
+                LecturerCourseAssignment.objects.create(lecturerId=lecturer, courseId=course)
+        except Lecturer.DoesNotExist:
+            messages.error(request, 'Lecturer not found: ' + lecturer_name)
+            return render(request, 'administrator/course_edit.html', {
+                'course': {
+                    'courseId': course_id,
+                    'courseName': course_name,
+                    'programType': program_type,
+                    'lecturerName': lecturer_names_input
+                }
+            })
 
         # search table, if exists, update, else create
         try:
