@@ -93,24 +93,23 @@ def course_edit(request):
             LecturerCourseAssignment.objects.create(lecturerId=lecturer, courseId=course)
 
         # search table, if exists, update, else create
-        course_search_table, created = CourseSearchTable.objects.update_or_create(courseId=course_id)
-        if created:
-            # 如果是新创建的记录，则设置所有需要的字段
-            course_search_table.courseId = course_id
+        try:
+            course_search_table = CourseSearchTable.objects.get(courseId=course)
             course_search_table.courseName = course_name
-            course_search_table.overall = 0
-            course_search_table.difficulty = 0
-            course_search_table.usefulness = 0
-            course_search_table.workload = 0
-            course_search_table.reviews = 0
-            course_search_table.wouldRecommend = 0
-            course_search_table.professorRating = 0
-        else:
-            course_search_table.courseName = course_name
-        course_search_table.save()
-
+            course_search_table.save()
+        except CourseSearchTable.DoesNotExist:
+            CourseSearchTable.objects.create(
+                courseId=course,
+                courseName=course_name,
+                overall=0,
+                difficulty=0,
+                usefulness=0,
+                workload=0,
+                reviews=0,
+                wouldRecommend=0,
+                professorRating=0
+            )
         return redirect(reverse('administrator:course_management'))
-
     else:
         course_data = {}
         if course_id:
