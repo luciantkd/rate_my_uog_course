@@ -89,12 +89,14 @@ def course_edit(request):
         # Reset and update lecturer assignments for the course
         course.lecturercourseassignment_set.all().delete()
         lecturer_names = [name.strip() for name in lecturer_names_input.split(',') if name.strip()]
-        try:
-            for lecturer_name in lecturer_names:
-                lecturer = Lecturer.objects.get(lecturerName=lecturer_name)
-                LecturerCourseAssignment.objects.create(lecturerId=lecturer, courseId=course)
-        except Lecturer.DoesNotExist:
-            messages.error(request, 'Lecturer not found: ' + lecturer_name)
+        not_found_lecturers = []
+
+        for lecturer_name in lecturer_names:
+            if not Lecturer.objects.filter(lecturerName=lecturer_name).exists():
+                not_found_lecturers.append(lecturer_name)
+
+        if not_found_lecturers:
+            messages.error(request, 'Lecturer not found: ' + ', '.join(not_found_lecturers))
             return render(request, 'administrator/course_edit.html', {
                 'course': {
                     'courseId': course_id,
@@ -104,12 +106,16 @@ def course_edit(request):
                 }
             })
 
+        for lecturer_name in lecturer_names:
+            lecturer = Lecturer.objects.get(lecturerName=lecturer_name)
+            LecturerCourseAssignment.objects.create(lecturerId=lecturer, courseId=course)
+
         # search table, if exists, update, else create
-        try:
+        if CourseSearchTable.objects.filter(courseId=course).exists():
             course_search_table = CourseSearchTable.objects.get(courseId=course)
             course_search_table.courseName = course_name
             course_search_table.save()
-        except CourseSearchTable.DoesNotExist:
+        else:
             CourseSearchTable.objects.create(
                 courseId=course,
                 courseName=course_name,
