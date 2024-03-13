@@ -17,7 +17,6 @@ class CourseFeedbackViewTests(TestCase):
         self.student = Student.objects.create(guid="1234567", email="1234567t@student.gla.ac.uk", name="test_user_1",
                                               password="1qaz@WSX", programType="CS")
 
-
         self.feedback = CourseFeedback.objects.create(
             courseId=self.course,
             guid=self.student,
@@ -53,7 +52,8 @@ class CourseFeedbackViewTests(TestCase):
         self.assertTrue('course_feedbacks' in response.context)
 
     def test_reported_review_detail(self):
-        response = self.client.get(reverse('administrator:report_review_detail'), {'feedback_id': self.feedback.feedbackId})
+        response = self.client.get(reverse('administrator:report_review_detail'),
+                                   {'feedback_id': self.feedback.feedbackId})
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, self.feedback.textFeedback)
 
@@ -108,4 +108,3 @@ class CourseFeedbackViewTests(TestCase):
         response = self.client.post(reverse('administrator:course_delete'), {'course_id': self.course1.courseId})
         self.assertEqual(response.status_code, 302)  # Expecting a redirect after deletion
         self.assertFalse(Course.objects.filter(courseId=self.course1.courseId).exists())
-

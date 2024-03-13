@@ -77,14 +77,14 @@ document.addEventListener('DOMContentLoaded', function () {
     const searchInput = document.getElementById('myInput');
     const searchButton = document.getElementById('searchButton');
     const filterSelect = document.getElementById('tableFilter');
-
-    // 将光标移动到输入框文本的末尾
+    
+    // move the cursor to the end of the text in the input box
     const value = searchInput.value;
     searchInput.focus();
     searchInput.value = '';
     searchInput.value = value;
-
-    // 处理搜索按钮点击
+    
+    // process search button click
     searchButton.addEventListener('click', function() {
         window.location.href = '?program=' + filterSelect.value + '&query=' + searchInput.value;
     });

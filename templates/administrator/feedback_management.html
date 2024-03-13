@@ -72,8 +72,6 @@
           <td><span class="star-rating" data-rating="{{ feedback.aesthetic }}"></span></td>
           <td>{{ feedback.feedbackTime|date:"d M Y" }}</td>
           <td>
-            {# <button class="btn btn-primary">Detail</button>#}
-            {# get method to redirect to detail page#}
             <a href="{% url 'administrator:website_feedback_detail'%}?feedback_id={{ feedback.feedbackId }}"
               class="btn btn-primary">Detail</a>
           </td>

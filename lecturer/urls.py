@@ -1,10 +1,10 @@
 from django.urls import path
-from lecturer import views
 
+from lecturer import views
 
 app_name = 'lecturer'
 
-urlpatterns =[
+urlpatterns = [
 
-path('course_rating_overview/<str:lecturerId>', views.lecturer_course_overview, name='course_overview'),
+    path('course_rating_overview/<str:lecturerId>', views.lecturer_course_overview, name='course_overview'),
 ]

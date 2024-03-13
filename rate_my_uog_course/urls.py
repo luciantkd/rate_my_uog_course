@@ -20,9 +20,9 @@ from rateMyUogCourse import views
 
 urlpatterns = [
     path('', views.mainPage, name='mainPage'),
-    path('rateMyUogCourse/',include('rateMyUogCourse.urls')),
-    path('administrator/',include('administrator.urls')),
-    path('lecturer/',include('lecturer.urls')),
-    path('student/',include('student.urls')),
+    path('rateMyUogCourse/', include('rateMyUogCourse.urls')),
+    path('administrator/', include('administrator.urls')),
+    path('lecturer/', include('lecturer.urls')),
+    path('student/', include('student.urls')),
     path('admin/', admin.site.urls),
 ]

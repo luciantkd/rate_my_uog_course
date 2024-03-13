@@ -2,6 +2,7 @@ from django import template
 
 register = template.Library()
 
+
 @register.filter(name='rating_color')
 def rating_color(value):
     """Returns a color class based on the value of the rating."""

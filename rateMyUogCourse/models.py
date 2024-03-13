@@ -1,5 +1,8 @@
 from django.db import models
+
 from lecturer.models import Course
+
+
 # Create your models here.
 
 class CourseSearchTable(models.Model):
@@ -15,16 +18,16 @@ class CourseSearchTable(models.Model):
 
     def __str__(self):
         return str(self.courseId)
-    
+
 
 class WebsiteFeedback(models.Model):
     # # feedbackId auto increment
-    feedbackId = models.AutoField(primary_key = True, unique = True)
-    feedbackTime = models.DateTimeField(auto_now_add = True)
+    feedbackId = models.AutoField(primary_key=True, unique=True)
+    feedbackTime = models.DateTimeField(auto_now_add=True)
     friendly = models.IntegerField()
     overall = models.IntegerField()
     aesthetic = models.IntegerField()
     comment = models.TextField(blank=True)
-    
+
     def __str__(self):
         return str(self.feedbackId)

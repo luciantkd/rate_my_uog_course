@@ -1,12 +1,10 @@
-from datetime import datetime
-from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
+from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 
-from administrator.models import Admin
-from lecturer.models import Course, Lecturer
+from lecturer.models import Course
 from student.models import CourseFeedback
-from rateMyUogCourse.models import WebsiteFeedback, CourseSearchTable
+
 
 def mainPage(request):
     """
@@ -16,6 +14,7 @@ def mainPage(request):
     :return: HttpResponse object with the text "Main Page".
     """
     return HttpResponse("Main Page")
+
 
 def reported_reviews_management(request):
     """
@@ -38,7 +37,9 @@ def reported_reviews_management(request):
             'programType': course.programType,
             'reported': feedback['reported'],
         })
-    return render(request, "administrator/reported_reviews_management.html", {'course_feedbacks': course_feedbacks_view})
+    return render(request, "administrator/reported_reviews_management.html",
+                  {'course_feedbacks': course_feedbacks_view})
+
 
 def reported_review_detail(request):
     """
@@ -54,6 +55,7 @@ def reported_review_detail(request):
     return render(request, 'administrator/admin_report_review_detail.html',
                   {'feedback_entity': feedback_entity, 'course_name': course_name})
 
+
 def reported_review_approve(request, feedback_id):
     """
     View function to approve (effectively delete) a reported review identified by its feedback_id.
@@ -66,6 +68,7 @@ def reported_review_approve(request, feedback_id):
     if feedback_entity:
         feedback_entity.delete()
     return redirect(reverse('administrator:report_review_management'))
+
 
 def reported_review_delete(request, feedback_id):
     """
@@ -80,8 +83,10 @@ def reported_review_delete(request, feedback_id):
     feedback.save()
     return redirect(reverse('administrator:report_review_management'))
 
+
 def base(request):
     return render(request, 'administrator:course_management')
+
 
 def logout(request):
     """

@@ -16,7 +16,6 @@
         <button type="button" class="btn btn-primary" id="searchBtn">Search</button>
     </div>
   <div class="filter-add-section">
-{#    <button type="button" class="btn btn-primary add-a-course">+ Add a Lecturer</button>#}
     <a href="{% url 'administrator:lecturer_edit' %}" class="btn btn-primary add-a-course">+ Add a Lecturer</a>
   </div>
   <div class="table-scroll">
@@ -37,12 +36,6 @@
           <td>{{ lecturer.designation }}</td>
           <td>{{ lecturer.email }}</td>
           <td class="buttons">
-{#            <form action="#" method="post">#}
-{#              {% csrf_token %}#}
-{#              <input type="hidden" name="lecturer_id" value="#">#}
-{#              <button type="submit" class="btn btn-primary">Edit</button>#}
-{#            </form>#}
-{#              using get method#}
             <a href="{% url 'administrator:lecturer_edit' %}?lecturer_id={{ lecturer.lecturerId }}" class="btn btn-primary">Edit</a>
             <form action="{% url 'administrator:lecturer_delete' %}" method="post">
               {% csrf_token %}

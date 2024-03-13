@@ -10,20 +10,6 @@
 {% block pagetitle %} Reported Reviews Management {% endblock %}
 
 {% block content %}
-{#<div>#}
-{#  <div class="search">#}
-{#    <input class="form-control" id="myInput" type="text" placeholder="Search a course here..">#}
-{#    <!-- Dropdown for filtering -->#}
-{#  </div>#}
-{#  <div class="filter-add-section">#}
-{#    <select class="form-control btn-secondary" id="tableFilter" placeholder="Course:">#}
-{#      <option value="" selected disabled>Select a Program</option>#}
-{#      <option class="dropdown-item" value="">All</a>#}
-{#      <option class="dropdown-item" value="IT+">IT+</a>#}
-{#      <option class="dropdown-item" value="CS+">CS+</a>#}
-{#        <!-- more options as needed -->#}
-{#    </select>#}
-{#  </div>#}
   <div class="table-scroll">
     <!-- Table to filter -->
     <table class="table" id="dataTable">
@@ -46,10 +32,6 @@
             <td>{{ feedback.programType }}</td>
           <td>{{ feedback.reported }}</td>
           <td class="buttons">
-{#            <form action="#" method="post">#}
-{#              <a href="#" class="btn btn-primary">Detail</a>#}
-{#            </form>#}
-{#              use get method to pass the feedback id to the url#}
             <a href="{% url 'administrator:report_review_detail'%}?feedback_id={{ feedback.feedbackId }}" class="btn btn-primary">Detail</a>
           </td>
         </tr>

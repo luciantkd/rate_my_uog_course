@@ -1,16 +1,17 @@
+from django.contrib import messages
 from django.db.models import Q
 from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
-
 from django.urls import reverse
-from django.contrib import messages
+
 from lecturer.models import Course, LecturerCourseAssignment, Lecturer
 from rateMyUogCourse.models import CourseSearchTable
 
 
 def course_management(request):
     """
-    Displays the course management page with a list of courses that can be filtered by program or searched by course name or ID.
+    Displays the course management page with a list of courses that can be filtered by program or searched by course
+    name or ID.
     Supports AJAX requests for dynamic content loading.
 
     :param request: HttpRequest object containing GET parameters for 'program', 'query', and 'search_text'.

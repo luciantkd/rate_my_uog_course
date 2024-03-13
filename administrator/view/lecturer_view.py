@@ -1,11 +1,10 @@
+from django.contrib import messages
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404, redirect
-
 from django.urls import reverse
 
 from lecturer.models import Lecturer
 from rateMyUogCourse.views import encryptPassword
-from django.contrib import messages
 
 
 def lecturer_management(request):
@@ -20,10 +19,12 @@ def lecturer_management(request):
         ).values('lecturerId', 'lecturerName', 'designation', 'email').order_by('lecturerId')
     else:
         # If no search query, retrieve all lecturers
-        lecturers = Lecturer.objects.all().values('lecturerId', 'lecturerName', 'designation', 'email').order_by('lecturerId')
+        lecturers = Lecturer.objects.all().values('lecturerId', 'lecturerName', 'designation', 'email').order_by(
+            'lecturerId')
 
     # Render and return the lecturer management template, passing the lecturers queryset
     return render(request, 'administrator/lecturer_management.html', {'lecturers': lecturers})
+
 
 def lecturer_edit(request):
     # Attempt to retrieve the lecturer ID from the request's GET parameters
@@ -96,6 +97,7 @@ def lecturer_edit(request):
             }
         # Render and return the lecturer edit template
         return render(request, 'administrator/lecturer_edit.html', {'lecturer_entity': lecturer_entity})
+
 
 def lecturer_delete(request):
     if request.method == "POST":

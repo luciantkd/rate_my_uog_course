@@ -46,8 +46,6 @@
         <textarea id="explanation" name="explanation" rows="4" cols="50" readonly>{{ feedback_entity.comment }}</textarea>
     </div>
     <div class="buttons-right">
-{#        <button type="button" class="btn btn-danger delete-button" style="background-color: red;">Delete</button>#}
-{#        using get method#}
         <a href="{% url 'administrator:website_feedback_delete' %}?feedback_id={{ feedback_entity.feedbackId }}" class="btn btn-danger delete-button" style="background-color: red;">Delete</a>
     </div>
 </form>
