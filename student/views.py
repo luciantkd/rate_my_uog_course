@@ -36,7 +36,7 @@ def save_feedback(request, course_id, guId):
 
             count_reviews = old_course_overview.reviews
 
-            if old_course_overview:
+            if count_reviews!=0:
 
                 print(old_course_overview.overall, count_reviews)
 
@@ -71,27 +71,25 @@ def save_feedback(request, course_id, guId):
 
             else:
 
+                course_data_search = CourseSearchTable.objects.filter(courseId = course_id)
+
                 course = Course.objects.filter(courseId=course_id)
 
-                courseSearchTableRecord = CourseSearchTable.objects.create(
+                search_row = course_data_search[0]
 
-                    overall=form_overall,
+                search_row.overall = form_overall
 
-                    difficulty=form_difficulty,
+                search_row.difficulty = form_difficulty
 
-                    usefulness=form_usefulness,
+                search_row.usefulness = form_usefulness
 
-                    workload=form_workload,
+                search_row.professorRating = form_professor_rating
 
-                    professorRating=form_professor_rating,
+                search_row.wouldRecommend = form_would_recommend
 
-                    courseName=course.courseName,
+                search_row.reviews = 1
 
-                    wouldRecommend=form_would_recommend,
-
-                    courseId=course_id)
-
-                courseSearchTableRecord.save()
+                search_row.save()
 
             return JsonResponse({'success': True, 'message': 'Course review submitted successfully!'})
 
