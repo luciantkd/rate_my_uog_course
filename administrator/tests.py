@@ -3,13 +3,18 @@ from django.urls import reverse
 from django.utils import timezone
 
 from lecturer.models import Course, Lecturer, LecturerCourseAssignment
+from rateMyUogCourse.models import CourseSearchTable
 from student.models import Student, CourseFeedback
 
 
 class CourseFeedbackViewTests(TestCase):
     def setUp(self):
         # Setup code here to create test records in the database
+        # admin login
         self.client = Client()
+        session = self.client.session
+        session['user_type'] = 'administrator'
+        session.save()
         self.course = Course.objects.create(courseId="CSC101", courseName="Intro to CS", programType="CS",
                                             semester=2023)
 
@@ -35,6 +40,18 @@ class CourseFeedbackViewTests(TestCase):
             approved=False,
             feedbackDateTime=timezone.now()
         )
+
+        self.search_table = CourseSearchTable.objects.create(
+            courseId=self.course,
+            courseName=self.course.courseName,
+            overall=5,
+            difficulty=3,
+            usefulness=4,
+            workload=3,
+            reviews=1,
+            wouldRecommend=1,
+            professorRating=4
+        )
         # Create some test data
         self.course1 = Course.objects.create(courseId="CS101", courseName="Intro to Computer Science", programType="CS",
                                              semester=2021)
@@ -45,6 +62,7 @@ class CourseFeedbackViewTests(TestCase):
                                                  password="securepassword")
         LecturerCourseAssignment.objects.create(courseId=self.course1, lecturerId=self.lecturer1)
         LecturerCourseAssignment.objects.create(courseId=self.course2, lecturerId=self.lecturer1)
+
 
     def test_reported_reviews_management(self):
         response = self.client.get(reverse('administrator:report_review_management'))

@@ -39,10 +39,18 @@ def course_management(request):
             'programType': course.programType,
             'lecturerNames': ', '.join(
                 course.lecturercourseassignment_set.all().values_list('lecturerId__lecturerName', flat=True)),
+            'reviews': 0,
             'search_text': search_text
         }
         for course in courses_list
     ]
+    # append review
+    for course in courses:
+        if CourseSearchTable.objects.filter(courseId=course['courseId']).exists():
+            course_search_table = CourseSearchTable.objects.get(courseId=course['courseId'])
+            course['reviews'] = course_search_table.reviews
+            print("course['reviews']", course['reviews'])
+
 
     if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
         return JsonResponse({'courses': courses}, safe=False)
