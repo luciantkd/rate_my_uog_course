@@ -3,8 +3,7 @@ from django.db import models
 from lecturer.models import Course
 
 
-# Create your models here.
-
+#Table for storing student data
 class Student(models.Model):
     guid = models.CharField(max_length=7, unique=True, primary_key=True)
     email = models.CharField(max_length=100)
@@ -15,7 +14,7 @@ class Student(models.Model):
     def __str__(self):
         return self.guid
 
-
+# Table for storing detailed course feedback
 class CourseFeedback(models.Model):
     feedbackId = models.AutoField(unique=True, primary_key=True)
     courseId = models.ForeignKey(Course, on_delete=models.CASCADE)
@@ -38,7 +37,7 @@ class CourseFeedback(models.Model):
     def __str__(self):
         return self.feedbackId
 
-
+# Table for Student Feedback Like relationship
 class StudentFeedbackLikes(models.Model):
     guid = models.ForeignKey(Student, on_delete=models.CASCADE)
     feedbackId = models.ForeignKey(CourseFeedback, on_delete=models.CASCADE)

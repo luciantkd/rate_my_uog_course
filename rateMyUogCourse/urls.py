@@ -4,6 +4,7 @@ from rateMyUogCourse import views
 
 app_name = 'rateMyUogCourse'
 
+#Common urls for all the users.
 urlpatterns = [
     path('', views.mainPage, name='mainPage'),
     path('login/', views.user_login, name='login'),

@@ -13,8 +13,10 @@ from rateMyUogCourse.models import CourseSearchTable
 from rate_my_uog_course.settings import RECAPTCHA_PRIVATE_KEY
 from student.models import Student
 
-
+#Home page of the Application
 def mainPage(request):
+
+    #Setting the session as visitor
     request.session['user_type'] = 'visitor'
     return render(request, 'rateMyUogCourse/homepage.html')
 
@@ -62,38 +64,59 @@ def user_login(request):
         email = request.POST.get('email').lower()
         password = request.POST.get('password')
 
+        #Check if the given email Id exists in student table
         if Student.objects.filter(email=email):
             user = Student.objects.filter(email=email)[0]
+
+            #Check the password for authentication
             if checkPassword(password, user.password):
+
+                #Set the session user type, id and email
                 request.session['user_email'] = user.email
                 request.session['user_type'] = 'student'
                 request.session['user_id'] = user.guid
-                # TODO: redirect to student page
+
+                #As it is successful login redirect them to student course overview  page
                 return redirect('student:search')
             else:
                 context_dict = {}
+                # If password doesnt match we send this message, we dont send as password incorrect,
+                # as if a attacker tries to login, they get to know that the email exists and only the password is wrong!
                 context_dict['errorMessage'] = 'Invalid login details'
                 return render(request, 'rateMyUogCourse/login.html', context_dict)
 
+        ##Check if the given email Id exists in Lecturer table
         elif Lecturer.objects.filter(lecturerId=email.split('@')[0]):
             user = Lecturer.objects.get(lecturerId=email.split('@')[0])
+
+            #Check the password for authentication
             if checkPassword(password, user.password):
+
+                 #Set the session user type, id and email
                 request.session['user_email'] = user.email
                 request.session['user_type'] = 'lecturer'
                 request.session['user_id'] = user.lecturerId
-                # TODO: redirect to lecturer page
+
+               #As it is successful login redirect them to lecturer course overview  page
                 return redirect('lecturer:course_overview', lecturerId=user.lecturerId)
             else:
                 context_dict = {}
+                # If password doesnt match we send this message, we dont send as password incorrect,
+                # as if a attacker tries to login, they get to know that the email exists and only the password is wrong!
+                context_dict['errorMessage'] = 'Invalid login details'
                 context_dict['errorMessage'] = 'Invalid login details'
                 return render(request, 'rateMyUogCourse/login.html', context_dict)
-
+            
+        ##Check if the given email Id exists in Admin table
         elif Admin.objects.filter(email=email):
             user = Admin.objects.filter(email=email)[0]
+
+            #Check the password for authentication
             if checkPassword(password, user.password):
                 request.session['user_email'] = user.email
                 request.session['user_type'] = 'administrator'
 
+                #As it is successful login redirect them to Admin course management page
                 return redirect(reverse('administrator:course_management'))
             else:
                 context_dict = {}
@@ -101,9 +124,11 @@ def user_login(request):
                 return render(request, 'rateMyUogCourse/login.html', context_dict)
 
         else:
-            # TODO: change this into error context or pop up block
+            # If password doesnt match we send this message, we dont send as password incorrect,
+            # as if a attacker tries to login, they get to know that the email exists and only the password is wrong!
             context_dict = {}
             context_dict['errorMessage'] = 'Invalid login details'
+
             return render(request, 'rateMyUogCourse/login.html', context_dict)
 
     return render(request, 'rateMyUogCourse/login.html')
@@ -162,21 +187,22 @@ def signup(request):
 
             else:
                 # if the password is not the same as confirmPassword
-                # TODO: change this into error context or pop up block
                 return render(request, 'rateMyUogCourse/signup.html')
 
     return render(request, 'rateMyUogCourse/signup.html')
 
-
+#Function for rendering feedback page
 def feedback(request):
     return render(request, 'rateMyUogCourse/feedbackPage.html')
 
-
+# Search function for the course overview page
 def search(request):
     course_name = request.POST.get('course_name')
     program_type = request.POST.get('program_type')
     context_dict = {}
+
     if bool(request.session):
+        # Adding the user type and id to the context dictionary
         if request.session.get('user_type') == 'student':
             context_dict['user_type'] = 'student'
             context_dict['user_id'] = request.session.get('user_id')
@@ -184,6 +210,7 @@ def search(request):
             context_dict['user_type'] = 'visitor'
     search_results = CourseSearchTable.objects.all()
 
+    #Filtering search based on the inputs from the user
     if (course_name == '' and (program_type == None or program_type == 'All')):
         search_results = CourseSearchTable.objects.all()
 
@@ -209,8 +236,9 @@ def search(request):
 
 
         except:
-            pass
+            print("Exception occured while performing search function")
 
+    #Adding the final search results to the context dictionary
     context_dict['search_results'] = search_results
 
     return render(request, 'rateMyUogCourse/course_rating_overview.html', context=context_dict)
@@ -221,9 +249,12 @@ def base_page(request):
     return render(request, 'base.html')
 
 
+#Function for saving the website feedback from any user
 def save_website_feedback(request):
     if request.method == 'POST':
         form = WebsiteFeedback(request.POST)
+
+        #check the if the form is valid, and save it!
         if form.is_valid():
             form.save()
             form_submitted = True
@@ -234,7 +265,11 @@ def save_website_feedback(request):
 
     return render(request, 'rateMyUogCourse/feedbackPage.html', {'form': form, 'form_submitted': form_submitted})
 
-
+#Function for logout
 def logout(request):
+
+    #Flusing all the sessions stored
     request.session.flush()
+
+    #Redirecting the user to main page
     return redirect(reverse('rateMyUogCourse:mainPage'))

@@ -5,6 +5,7 @@ from student import views as studentViews
 
 app_name = 'student'
 
+#Student related urls
 urlpatterns = [
     path('detail/<str:course_Id>/<str:guId>', studentViews.show_detailed_rating, name='show_detailed_rating'),
     path('searchCourses', views.search, name='search'),

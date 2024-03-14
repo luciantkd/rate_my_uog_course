@@ -3,8 +3,8 @@ from django.db import models
 from lecturer.models import Course
 
 
-# Create your models here.
 
+# Model for search table, which helps in storing the latest avergae details of all the courses
 class CourseSearchTable(models.Model):
     courseId = models.ForeignKey(Course, on_delete=models.CASCADE)
     courseName = models.CharField(max_length=200)
@@ -19,7 +19,7 @@ class CourseSearchTable(models.Model):
     def __str__(self):
         return str(self.courseId)
 
-
+#Model for storing the website feedback
 class WebsiteFeedback(models.Model):
     # # feedbackId auto increment
     feedbackId = models.AutoField(primary_key=True, unique=True,default = 1)

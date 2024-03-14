@@ -1,7 +1,7 @@
 from django.db import models
 
 
-# Create your models here.
+# Lecturer Model
 class Lecturer(models.Model):
     lecturerId = models.CharField(max_length=20, unique=True, primary_key=True)
     lecturerName = models.CharField(max_length=200)
@@ -12,7 +12,7 @@ class Lecturer(models.Model):
     def __str__(self):
         return self.lecturerId
 
-
+# Course Model
 class Course(models.Model):
     courseId = models.CharField(max_length=20, unique=True, primary_key=True)
     courseName = models.CharField(max_length=200)
@@ -22,7 +22,7 @@ class Course(models.Model):
     def __str__(self):
         return self.courseName
 
-
+# Course and lecturer relationship table
 class LecturerCourseAssignment(models.Model):
     courseId = models.ForeignKey(Course, on_delete=models.CASCADE)
     lecturerId = models.ForeignKey(Lecturer, on_delete=models.CASCADE)

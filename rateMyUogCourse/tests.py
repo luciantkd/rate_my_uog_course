@@ -38,7 +38,7 @@ class UserLoginTestCase(TestCase):
         request = self.factory.post(reverse('rateMyUogCourse:login'))
         response = user_login(request)
         self.assertEqual(response.status_code, 200)
-        # self.assertTemplateUsed(response, 'rateMyUogCourse/login.html')
+
         
     @patch('rateMyUogCourse.views.requests.post')
     def test_user_login_student(self, mock_post):

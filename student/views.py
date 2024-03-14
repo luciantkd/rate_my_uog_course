@@ -10,19 +10,17 @@ from student.forms import CourseFeedback
 from student.models import CourseFeedback as Course_Feedback_Model, Student, StudentFeedbackLikes
 
 
+#Main function, which takes the course feedbacks and save it.
 def save_feedback(request, course_id, guId):
     if request.method == 'POST':
         form = CourseFeedback(request.POST)
-        print(form)
-
-        for field_name, field_value in form.cleaned_data.items():
-            print(f"{field_name}: {field_value}")
-        print(form.errors)
 
         # Check if the form is valid
         if form.is_valid():
             # Since the form is valid, save the feedback data
             feedback = form.save()
+
+            #Getting the form data for futher calculation
             form_overall = form.cleaned_data['overall']
             form_difficulty = form.cleaned_data['difficulty']
             form_usefulness = form.cleaned_data['usefulness']
@@ -30,14 +28,17 @@ def save_feedback(request, course_id, guId):
             form_would_recommend = form.cleaned_data['recommendCourse']
             form_professor_rating = form.cleaned_data['lecturerRating']
 
-            old_course_overview_m = CourseSearchTable.objects.filter(courseId=course_id)
+            #Fetching the query set from the search table for the particular course
+            old_course_overview_q = CourseSearchTable.objects.filter(courseId=course_id)
 
-            old_course_overview = old_course_overview_m[0]
+            old_course_overview = old_course_overview_q[0]
 
             count_reviews = old_course_overview.reviews
 
+            #checking if there was any reviews already existing for the course
             if count_reviews!=0:
 
+                #Calculating the new averages
                 old_course_overview.overall = ((old_course_overview.overall * (
                             count_reviews - 1)) + form_overall) / count_reviews
 
@@ -63,10 +64,11 @@ def save_feedback(request, course_id, guId):
                     old_course_overview.wouldRecommend = int(
                         ((old_course_overview.wouldRecommend * (count_reviews - 1) / 100) / count_reviews) * 100)
 
+                #save the new row
                 old_course_overview.save()
 
             else:
-
+                #If no reviews were given earlier then add this as the first review
                 course_data_search = CourseSearchTable.objects.filter(courseId = course_id)
 
                 search_row = course_data_search[0]
@@ -90,34 +92,39 @@ def save_feedback(request, course_id, guId):
             return JsonResponse({'success': True, 'message': 'Course review submitted successfully!'})
 
 
+# Get the data for the detailed rating page
 def show_detailed_rating(request, course_Id, guId):
     context_dict = {}
 
+    #setting the session(could be student or lecturer)
     context_dict['user_type'] = request.session['user_type']
     context_dict['user_id'] = request.session['user_id']
     context_dict['course_id'] = course_Id
 
+    #Get the query set for the course 
     course_query_set = Course.objects.filter(courseId=course_Id)
     context_dict['course_name'] = course_query_set[0].courseName.lower().capitalize()
 
     context_dict['count_reviews'] = Course_Feedback_Model.objects.filter(courseId=course_Id).count()
 
+    #Fetch the lecturer if for this course
     lecturercourse_query_set = LecturerCourseAssignment.objects.filter(courseId=course_Id)
 
     lecturer_ids = [item.lecturerId for item in lecturercourse_query_set]
 
     context_dict['lecturer_query_sets'] = Lecturer.objects.filter(lecturerId__in=lecturer_ids)
 
-    print(context_dict['lecturer_query_sets'])
-
+    #Fetch the all the feedbacks for the course
     detailed_feedback = Course_Feedback_Model.objects.filter(courseId=course_Id)
 
     context_dict['detailed_feedback'] = detailed_feedback
 
+    #Get the averages for the particular course
     overall_course_detail = CourseSearchTable.objects.filter(courseId=course_Id)
 
     context_dict['overall_course_details'] = overall_course_detail[0]
 
+    #Get the feedback ids for which this particular student liked.
     feedback_ids = [feedback.feedbackId for feedback in detailed_feedback]
 
     if (guId != 'None'):
@@ -126,7 +133,6 @@ def show_detailed_rating(request, course_Id, guId):
                                                                                                     flat=True))
 
         context_dict['studentFeedbackLike'] = feedback_ids_list
-        print(feedback_ids_list)
 
     return render(request, "student/course_detail.html", context=context_dict)
 
@@ -135,10 +141,10 @@ def mainPage(request):
     return HttpResponse("Main Page")
 
 
+# Reports a feedback and saves it.
 def report_feedback(request, feedback_id):
     if request.method == 'POST':
         try:
-            # detailed_feedback = Course_Feedback_Model.objects.filter(feedbackId = feedback_id)
             detailed_feedback = get_object_or_404(Course_Feedback_Model, feedbackId=feedback_id)
 
             detailed_feedback.reported = detailed_feedback.reported + 1
@@ -153,7 +159,8 @@ def report_feedback(request, feedback_id):
     else:
         return JsonResponse({'error': 'Invalid request'}, status=400)
 
-
+#Increment the like for a feedback and also adds it in student feedback like table,
+#so that the same student shouldnt like the same feedback again.
 def like_feedback(request, feedback_id, guId):
     try:
         detailed_feedback = Course_Feedback_Model.objects.get(feedbackId=feedback_id)

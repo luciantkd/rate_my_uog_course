@@ -18,7 +18,7 @@ class ShowDetailedRatingTestCase(TestCase):
         self.courseSearchTable = CourseSearchTable.objects.create(courseId = self.course, courseName = self.course.courseName, 
         overall = 1, difficulty = 1, usefulness = 1, workload = 1, reviews = 1, wouldRecommend = True, professorRating = 1)
 
-
+    #Test case for shoW_detailed_rating function
     def test_show_detailed_rating(self):
         url = reverse('student:show_detailed_rating', kwargs={'course_Id': self.course.courseId,
                                                       'guId': 'testid'})
@@ -36,7 +36,7 @@ class ReportFeedbackTestCase(TestCase):
         self.feedback = CourseFeedback.objects.create(courseId=self.course, overall=4, difficulty=3,
                                                              usefulness=4, workload=3,
                                                              recommendCourse=True, lecturerRating=4, guid = self.student)
-
+    #Test case for the report feedback function
     def test_report_feedback(self):
         url = reverse('student:report_feedback', kwargs={'feedback_id': self.feedback.feedbackId})
         request = self.factory.post(url)
@@ -55,7 +55,8 @@ class LikeFeedbackTestCase(TestCase):
         self.feedback = CourseFeedback.objects.create(courseId=self.course, overall=4, difficulty=3,
                                                              usefulness=4, workload=3,
                                                              recommendCourse=True, lecturerRating=4, guid = self.student)
-
+ 
+    #Test case for like feedback function
     def test_like_feedback(self):
         url = reverse('student:like_feedback', kwargs={'feedback_id': self.feedback.feedbackId, 'guId': self.student.guid})
         request = self.factory.post(url)
