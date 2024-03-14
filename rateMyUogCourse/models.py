@@ -22,7 +22,7 @@ class CourseSearchTable(models.Model):
 
 class WebsiteFeedback(models.Model):
     # # feedbackId auto increment
-    feedbackId = models.AutoField(primary_key=True, unique=True)
+    feedbackId = models.AutoField(primary_key=True, unique=True,default = 1)
     feedbackTime = models.DateTimeField(auto_now_add=True)
     friendly = models.IntegerField()
     overall = models.IntegerField()
