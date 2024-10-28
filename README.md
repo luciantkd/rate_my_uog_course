@@ -8,7 +8,6 @@ A Django-based platform for students to rate and provide feedback on university 
 - [Features](#features)
 - [Technologies Used](#technologies-used)
 - [Getting Started](#getting-started)
-- [Environment Variables](#environment-variables)
 - [Usage](#usage)
 - [Contributing](#contributing)
 - [Contact](#contact)
