@@ -1,3 +1,51 @@
+# SQLite database file
 db.sqlite3
+
+# Python cache and compiled files
 __pycache__/
-*.pyc
+*.py[cod]
+
+# Environment variable file
+.env
+
+# Django migrations (excluding __init__.py)
+**/migrations/*
+!**/migrations/__init__.py
+
+# Static files
+/staticfiles/
+*.log
+
+# Media files (user-uploaded content)
+media/
+
+# Django stuff:
+*.log
+*.pot
+
+# Django debug toolbar cache files (optional)
+debug_toolbar/
+
+# IDE-specific directories
+.vscode/
+.idea/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Coverage reports
+htmlcov/
+.coverage
+*.cover
+
+# Pytest cache
+.pytest_cache/
+
+# Test database
+test_db.sqlite3
+
+# Others
+*.swp
+*.swo
+*.bak

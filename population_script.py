@@ -14,18 +14,18 @@ from rateMyUogCourse.views import encryptPassword
 def populate():
    
     # dummy data for Student
-
     students = [
-        {'guid': '1234567',
-         'email': '1234567t@student.gla.ac.uk',
+        {'guid': 'DUMMY_GUID_1',
+         'email': 'dummy_student1@student.gla.ac.uk',
          'name': 'test_user_1',
-         'password': '1qaz@WSX',
+         'password': '<REPLACE_WITH_PASSWORD>',
          'programType': 'CS'},
-        {'guid': '7654321',
-         'email': '7654321t@student.gla.ac.uk',
+        {'guid': 'DUMMY_GUID_2',
+         'email': 'dummy_student2@student.gla.ac.uk',
          'name': 'test_user_2',
-         'password': '!QAZ2wsx',
-         'programType': 'IT'} ]
+         'password': '<REPLACE_WITH_PASSWORD>',
+         'programType': 'IT'}
+    ]
          
     for student in students:
         s = add_student(student['guid'], student['email'], student['name'], student['password'], student['programType'])
@@ -118,9 +118,9 @@ def populate():
     lecturer = [
         {'lecturerId': 'test.lecturer',
          'lecturerName': 'test lecturer',
-         'email':'a.b@glasgow.ac.uk',
+         'email':'test_lecturer@glasgow.ac.uk',
          'designation': 'prof.',
-         'password': '1qaz@WSX3edc'
+         'password': '<REPLACE_WITH_PASSWORD>'
         }
     ]
     l = add_lecturer(lecturer[0]['lecturerId'], lecturer[0]['lecturerName'], lecturer[0]['designation'],encryptPassword(lecturer[0]['password']),lecturer[0]['email'])
@@ -147,7 +147,7 @@ def populate():
     aesthetic = websiteFeedback['aesthetic'], comment = websiteFeedback['comment'])
     
     # Admin user
-    admin = {'userName': 'administrator', 'password': '1qaz@WSX', 'email' : 'admin.admin@glasgow.ac.uk'}
+    admin = {'userName': 'administrator', 'password': '<REPLACE_WITH_PASSWORD>', 'email': 'dummy_admin@glasgow.ac.uk'}
     Admin.objects.create(userName = admin['userName'], password = encryptPassword(admin['password']), email = admin['email'])
             
 def add_student(guid, email, name, password, program):
